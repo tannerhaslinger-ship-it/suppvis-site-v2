@@ -3,457 +3,3727 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shop - SuppVis Curated Supplements</title>
+    <title>SuppVis Shop — Curated Supplements, Evidence-Backed</title>
+    <meta name="description" content="158 handpicked supplements backed by science. Every product SuppVis recommends, sourced from the cleanest brands.">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: #0A1628;
-            color: #F5F1E8;
-            line-height: 1.6;
+        :root {
+            --navy:#0A1628;--navy2:#0D1F38;--teal:#2DD4BF;--teal2:#14B8A6;
+            --cream:#F5F1E8;--slate:#94A3B8;--muted:#64748B;--green:#10B981;--amber:#F59E0B;
+            --on-teal:#0A1628;--bg-primary:#0A1628;--text-primary:#F5F1E8;--text-slate:#94A3B8;
+            --header-bg:rgba(10,22,40,0.9);--header-bg-scrolled:rgba(10,22,40,0.97);
+            --header-shadow:0 4px 20px rgba(0,0,0,0.3);
+            --card-bg:rgba(255,255,255,0.03);--card-border:rgba(255,255,255,0.07);
+            --input-bg:rgba(255,255,255,0.05);
         }
-        
-        /* Navigation Header */
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            padding: 20px 48px;
-            background: rgba(10, 22, 40, 0.95);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(45, 212, 191, 0.2);
+        [data-theme="light"]{
+            --navy:#EEF2F7;--cream:#0F172A;--slate:#475569;--muted:#64748B;
+            --bg-primary:#EEF2F7;--text-primary:#0F172A;--text-slate:#475569;
+            --header-bg:rgba(238,242,247,0.92);--header-bg-scrolled:rgba(238,242,247,0.98);
+            --header-shadow:0 4px 20px rgba(0,0,0,0.1);
+            --card-bg:rgba(255,255,255,0.75);--card-border:rgba(0,0,0,0.08);
+            --input-bg:rgba(255,255,255,0.85);
         }
-        
-        nav {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 24px;
-            font-weight: 700;
-            color: #F5F1E8;
-            text-decoration: none;
-            transition: transform 0.3s;
-        }
-        
-        .logo:hover {
-            transform: scale(1.05);
-        }
-        
-        .logo-icon {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, #2DD4BF, #14B8A6);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 20px;
-            box-shadow: 0 4px 12px rgba(45, 212, 191, 0.3);
-        }
-        
-        .nav-links {
-            display: flex;
-            gap: 40px;
-            list-style: none;
-            align-items: center;
-        }
-        
-        .nav-links a {
-            color: #94A3B8;
-            text-decoration: none;
-            font-size: 16px;
-            font-weight: 500;
-            transition: color 0.3s;
-            position: relative;
-        }
-        
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: #2DD4BF;
-            transition: width 0.3s;
-        }
-        
-        .nav-links a:hover,
-        .nav-links a.active {
-            color: #2DD4BF;
-        }
-        
-        .nav-links a:hover::after,
-        .nav-links a.active::after {
-            width: 100%;
-        }
-        
-        .hero { 
-            text-align: center; 
-            padding: 140px 24px 80px; 
-            background: linear-gradient(180deg, #0F2744 0%, #0A1628 100%);
-        }
-        h1 { 
-            font-size: 52px; 
-            margin-bottom: 24px;
-            background: linear-gradient(135deg, #F5F1E8, #2DD4BF);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .subtitle { font-size: 20px; color: #94A3B8; margin-bottom: 40px; }
-        .trust-badges {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin: 40px 0;
-        }
-        .badge {
-            padding: 12px 24px;
-            background: rgba(45, 212, 191, 0.1);
-            border: 1px solid rgba(45, 212, 191, 0.3);
-            border-radius: 12px;
-            color: #2DD4BF;
-            font-weight: 600;
-        }
-        .container { max-width: 1400px; margin: 0 auto; padding: 0 24px 80px; }
-        .filters {
-            display: flex;
-            gap: 12px;
-            margin: 40px 0;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        .filter-btn {
-            padding: 12px 24px;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(45, 212, 191, 0.3);
-            border-radius: 24px;
-            color: #94A3B8;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .filter-btn:hover, .filter-btn.active {
-            background: #2DD4BF;
-            color: #0A1628;
-        }
-        .products {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 32px;
-            margin-top: 40px;
-        }
-        .product {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(45, 212, 191, 0.2);
-            border-radius: 20px;
-            padding: 32px;
-            transition: all 0.3s;
-        }
-        .product:hover {
-            transform: translateY(-8px);
-            border-color: rgba(45, 212, 191, 0.4);
-            box-shadow: 0 20px 60px rgba(45, 212, 191, 0.2);
-        }
-        .product-image { 
-            width: 100%; 
-            height: 200px; 
-            object-fit: contain; 
-            margin: 20px 0;
-            background: rgba(255,255,255,0.02);
-            border-radius: 12px;
-            padding: 20px;
-        }
-        .product-badge {
-            display: inline-block;
-            padding: 6px 12px;
-            background: rgba(45, 212, 191, 0.2);
-            border-radius: 6px;
-            font-size: 11px;
-            font-weight: 700;
-            color: #2DD4BF;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 16px;
-        }
-        .product-badge.bestseller {
-            background: rgba(245, 158, 11, 0.2);
-            color: #F59E0B;
-        }
-        .product-badge.top-rated {
-            background: rgba(16, 185, 129, 0.2);
-            color: #10B981;
-        }
-        .product h3 { font-size: 22px; margin-bottom: 8px; }
-        .product .brand { color: #64748B; font-size: 14px; margin-bottom: 16px; }
-        .product .description { color: #94A3B8; font-size: 15px; margin-bottom: 20px; }
-        .product ul { list-style: none; margin-bottom: 20px; }
-        .product li { 
-            padding: 6px 0; 
-            color: #94A3B8; 
-            font-size: 14px;
-        }
-        .product li::before { content: '✓ '; color: #10B981; font-weight: bold; }
-        .product-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-top: 20px;
-            border-top: 1px solid rgba(45, 212, 191, 0.2);
-        }
-        .price { font-size: 24px; font-weight: 700; color: #2DD4BF; }
-        .rating { color: #F59E0B; }
-        .buy-btn {
-            width: 100%;
-            padding: 14px;
-            background: linear-gradient(135deg, #2DD4BF, #14B8A6);
-            border: none;
-            border-radius: 10px;
-            color: #0A1628;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            margin-top: 16px;
-        }
-        .buy-btn:hover { box-shadow: 0 8px 24px rgba(45, 212, 191, 0.4); }
-        @media (max-width: 768px) {
-            h1 { font-size: 36px; }
-            .products { grid-template-columns: 1fr; }
-            header { padding: 16px 24px; }
-            .logo { font-size: 20px; }
-            .logo-icon { width: 32px; height: 32px; font-size: 16px; }
-            .nav-links { gap: 24px; font-size: 14px; }
+        *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+        html{scroll-behavior:smooth}
+        body{font-family:"DM Sans",sans-serif;background:var(--bg-primary);color:var(--text-primary);min-height:100vh;overflow-x:hidden;transition:background .35s,color .35s}
+        .animated-gradient{position:fixed;inset:0;z-index:0;background:linear-gradient(-45deg,#0A1628,#0F2744,#0A1628,#142B48);background-size:400% 400%;animation:gradientShift 15s ease infinite}
+        @keyframes gradientShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+        [data-theme="light"] .animated-gradient{background:linear-gradient(-45deg,#EEF2F7,#F0F4F8,#EEF2F7,#E8EEF5)!important}
+        header{position:fixed;top:0;left:0;right:0;z-index:1000;padding:20px 48px;background:var(--header-bg);backdrop-filter:blur(20px);border-bottom:1px solid rgba(45,212,191,0.1);transition:all .3s}
+        header.scrolled{padding:12px 48px;background:var(--header-bg-scrolled);box-shadow:var(--header-shadow)}
+        nav{max-width:1400px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+        .logo{display:flex;align-items:center;gap:12px;font-family:"Syne",sans-serif;font-size:24px;font-weight:700;color:var(--cream);text-decoration:none;transition:transform .3s}
+        .logo:hover{transform:scale(1.05)}
+        .logo-icon{--logo-detail:#0A1628;width:40px;height:40px;flex-shrink:0}
+        [data-theme="light"] .logo-icon{--logo-detail:#EEF2F7}
+        .nav-links{display:flex;gap:40px;list-style:none;align-items:center}
+        .nav-links a{color:var(--slate);text-decoration:none;font-size:16px;font-weight:500;transition:color .3s;position:relative}
+        .nav-links a::after{content:"";position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--teal);transition:width .3s}
+        .nav-links a:hover,.nav-links a.active{color:var(--teal)}
+        .nav-links a:hover::after,.nav-links a.active::after{width:100%}
+        .nav-cta{background:linear-gradient(135deg,var(--teal),var(--teal2));color:var(--on-teal);padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:600;font-size:15px;transition:transform .2s,box-shadow .2s;display:inline-flex;align-items:center;gap:8px;border:none;cursor:pointer;font-family:inherit}
+        .nav-cta:hover{transform:translateY(-2px);box-shadow:0 0 20px rgba(45,212,191,0.4)}
+        .mobile-menu-toggle{display:none;background:none;border:none;color:var(--teal);font-size:28px;cursor:pointer;padding:8px}
+        .theme-toggle{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:50%;width:38px;height:38px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--slate);transition:color .3s,border-color .3s,background .35s;flex-shrink:0}
+        .theme-toggle:hover{color:var(--teal);border-color:rgba(45,212,191,0.35)}
+        .theme-toggle svg{width:17px;height:17px}
+        .theme-toggle .icon-sun{display:none}.theme-toggle .icon-moon{display:block}
+        [data-theme="light"] .theme-toggle .icon-sun{display:block}[data-theme="light"] .theme-toggle .icon-moon{display:none}
+        [data-theme="light"] .theme-toggle{background:rgba(0,0,0,0.04);border-color:rgba(0,0,0,0.12);color:#475569}
+        .page{position:relative;z-index:10;padding-top:88px}
+        .cta-banner{background:linear-gradient(135deg,rgba(45,212,191,0.1),rgba(20,184,166,0.06));border-bottom:1px solid rgba(45,212,191,0.15);padding:20px 48px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+        .cta-banner-left{display:flex;align-items:center;gap:16px}
+        .cta-banner-icon{width:44px;height:44px;border-radius:12px;background:rgba(45,212,191,0.15);border:1px solid rgba(45,212,191,0.3);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+        .cta-banner-text strong{font-family:"Syne",sans-serif;font-size:16px;font-weight:700;color:var(--cream);display:block;margin-bottom:2px}
+        .cta-banner-text span{font-size:14px;color:var(--slate)}
+        .cta-banner-btn{background:linear-gradient(135deg,var(--teal),var(--teal2));color:var(--navy);padding:12px 24px;border-radius:10px;text-decoration:none;font-weight:700;font-size:14px;font-family:"Syne",sans-serif;white-space:nowrap;transition:all .2s;display:inline-flex;align-items:center;gap:8px}
+        .cta-banner-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(45,212,191,0.4)}
+        .shop-header{max-width:1280px;margin:0 auto;padding:52px 32px 32px;text-align:center}
+        .shop-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(45,212,191,0.08);border:1px solid rgba(45,212,191,0.2);border-radius:30px;padding:6px 16px;margin-bottom:16px;font-family:"DM Mono",monospace;font-size:11px;color:var(--teal);text-transform:uppercase;letter-spacing:1px}
+        .shop-title{font-family:"Syne",sans-serif;font-size:clamp(32px,4vw,52px);font-weight:800;letter-spacing:-0.02em;line-height:1.1;margin-bottom:14px;background:linear-gradient(135deg,var(--cream) 0%,#C8E6E3 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        [data-theme="light"] .shop-title{background:linear-gradient(135deg,#0F172A 0%,#0D9488 100%)!important;-webkit-background-clip:text!important;background-clip:text!important;-webkit-text-fill-color:transparent!important}
+        .shop-subtitle{font-size:17px;color:var(--slate);max-width:560px;line-height:1.7;margin:0 auto}
+        .shop-stats{display:flex;justify-content:center;gap:32px;margin-top:24px;flex-wrap:wrap}
+        .shop-stat{text-align:center}
+        .shop-stat-num{font-family:"Syne",sans-serif;font-size:28px;font-weight:800;color:var(--teal)}
+        .shop-stat-label{font-size:12px;color:var(--muted);font-family:"DM Mono",monospace;text-transform:uppercase;letter-spacing:0.5px}
+        .disclosure{max-width:1280px;margin:0 auto;padding:0 32px 24px;font-size:12px;color:var(--muted);display:flex;align-items:center;justify-content:center;gap:8px}
+        .disclosure::before{content:"\2139";font-size:13px;color:var(--teal);opacity:.6}
+        .controls{max-width:1280px;margin:0 auto;padding:0 32px 28px;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+        .search-box{flex:1;min-width:200px;max-width:340px;position:relative}
+        .search-box input{width:100%;padding:10px 16px 10px 40px;background:var(--input-bg);border:1px solid rgba(255,255,255,0.1);border-radius:10px;color:var(--cream);font-family:"DM Sans",sans-serif;font-size:14px;outline:none;transition:border-color .2s}
+        .search-box input:focus{border-color:rgba(45,212,191,0.4)}
+        .search-box input::placeholder{color:var(--muted)}
+        .search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--muted);pointer-events:none}
+        .filter-bar{display:flex;gap:8px;flex-wrap:wrap;flex:1}
+        .filter-btn{padding:8px 16px;border-radius:30px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.09);color:var(--slate);font-size:13px;font-weight:500;cursor:pointer;transition:all .2s;font-family:"DM Sans",sans-serif;white-space:nowrap}
+        .filter-btn:hover{border-color:rgba(45,212,191,0.3);color:var(--teal)}
+        .filter-btn.active{background:rgba(45,212,191,0.12);border-color:rgba(45,212,191,0.4);color:var(--teal);font-weight:600}
+        .tier-filter{display:flex;gap:6px}
+        .tier-btn{padding:6px 14px;border-radius:20px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.09);color:var(--muted);font-size:12px;cursor:pointer;transition:all .2s;font-family:"DM Mono",monospace}
+        .tier-btn:hover{border-color:rgba(45,212,191,0.3);color:var(--teal)}
+        .tier-btn.active{background:rgba(45,212,191,0.1);border-color:rgba(45,212,191,0.35);color:var(--teal)}
+        .results-bar{max-width:1280px;margin:0 auto;padding:0 32px 20px;display:flex;align-items:center;justify-content:space-between}
+        .results-count{font-size:13px;color:var(--muted);font-family:"DM Mono",monospace}
+        .section-label{max-width:1280px;margin:0 auto;padding:0 32px 16px;display:flex;align-items:center;gap:16px}
+        .section-label h2{font-family:"Syne",sans-serif;font-size:20px;font-weight:700;color:var(--cream)}
+        .section-line{flex:1;height:1px;background:rgba(255,255,255,0.07)}
+        .section-count{font-family:"DM Mono",monospace;font-size:11px;color:var(--muted);background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:3px 10px}
+        .product-grid{max-width:1280px;margin:0 auto;padding:0 32px 40px;display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+        .product-card{background:var(--card-bg);border:1px solid rgba(255,255,255,0.08);border-radius:20px;overflow:hidden;transition:all .3s;position:relative;display:flex;flex-direction:column}
+        .product-card:hover{border-color:rgba(45,212,191,0.3);transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,0.3),0 0 0 1px rgba(45,212,191,0.1)}
+        .product-card-top{padding:24px 24px 16px;display:flex;gap:14px;align-items:flex-start;border-bottom:1px solid rgba(255,255,255,0.06)}
+        .product-img{width:64px;height:64px;border-radius:12px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:28px;background:rgba(45,212,191,0.08);border:1px solid rgba(45,212,191,0.15)}
+        .product-img img{width:60px;height:60px;object-fit:contain;border-radius:10px}
+        .product-meta{flex:1;min-width:0}
+        .product-supp-name{font-family:"DM Mono",monospace;font-size:10px;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;font-weight:500;color:var(--teal)}
+        .product-name{font-family:"Syne",sans-serif;font-size:14px;font-weight:700;color:var(--cream);line-height:1.3;margin-bottom:3px}
+        .product-brand{font-size:12px;color:var(--muted);margin-bottom:8px}
+        .product-badges{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+        .badge{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:5px;font-family:"DM Mono",monospace;font-size:10px;font-weight:500}
+        .badge-premium{background:rgba(45,212,191,0.1);color:var(--teal);border:1px solid rgba(45,212,191,0.2)}
+        .badge-value{background:rgba(16,185,129,0.1);color:#34D399;border:1px solid rgba(16,185,129,0.2)}
+        .badge-budget{background:rgba(245,158,11,0.1);color:var(--amber);border:1px solid rgba(245,158,11,0.2)}
+        .badge-verified{background:rgba(16,185,129,0.1);color:#34D399;border:1px solid rgba(16,185,129,0.2)}
+        .product-education{padding:0 24px;max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s ease}
+        .product-education.open{max-height:260px;padding:16px 24px 0}
+        .edu-content{font-size:13px;color:var(--slate);line-height:1.7;border-left:2px solid rgba(45,212,191,0.25);padding-left:12px;margin-bottom:12px}
+        .edu-content strong{color:var(--cream);font-weight:500}
+        .key-facts{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:4px}
+        .key-fact{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:5px;padding:3px 8px;font-family:"DM Mono",monospace;font-size:10px;color:var(--muted)}
+        .product-card-footer{padding:14px 24px 18px;margin-top:auto;display:flex;flex-direction:column;gap:8px}
+        .product-price{font-family:"DM Mono",monospace;font-size:13px;color:var(--teal);font-weight:500}
+        .product-dose{font-size:11px;color:var(--muted)}
+        .learn-toggle{background:none;border:none;cursor:pointer;font-size:12px;color:var(--teal);font-family:"DM Sans",sans-serif;display:flex;align-items:center;gap:5px;padding:0;transition:opacity .2s;font-weight:500}
+        .learn-toggle:hover{opacity:.75}
+        .learn-arrow{transition:transform .3s;display:inline-block;font-size:10px}
+        .learn-toggle.open .learn-arrow{transform:rotate(180deg)}
+        .buy-btn{display:flex;align-items:center;justify-content:center;gap:6px;padding:11px 16px;border-radius:10px;background:linear-gradient(135deg,var(--teal),var(--teal2));color:var(--navy);font-family:"Syne",sans-serif;font-size:13px;font-weight:700;text-decoration:none;transition:all .2s}
+        .buy-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(45,212,191,0.4)}
+        .amazon-note{font-size:10px;color:var(--muted);text-align:center;font-family:"DM Mono",monospace}
+        .no-results{text-align:center;padding:80px 24px;color:var(--slate)}
+        .no-results h3{font-family:"Syne",sans-serif;font-size:22px;font-weight:700;margin-bottom:12px;color:var(--cream)}
+        .bottom-cta{max-width:800px;margin:0 auto;padding:0 32px 80px;text-align:center}
+        .bottom-cta-card{background:rgba(45,212,191,0.05);border:1px solid rgba(45,212,191,0.18);border-radius:24px;padding:52px 40px;position:relative;overflow:hidden}
+        .bottom-cta-card h2{font-family:"Syne",sans-serif;font-size:28px;font-weight:800;margin-bottom:14px;color:var(--cream)}
+        .bottom-cta-card p{font-size:16px;color:var(--slate);margin-bottom:28px;line-height:1.7}
+        .bottom-cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+        .btn-primary{background:linear-gradient(135deg,var(--teal),var(--teal2));color:var(--navy);padding:15px 32px;border-radius:12px;text-decoration:none;font-weight:700;font-size:16px;font-family:"Syne",sans-serif;transition:all .2s;display:inline-flex;align-items:center;gap:8px}
+        .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(45,212,191,0.45)}
+        .btn-secondary{background:transparent;color:var(--teal);border:2px solid var(--teal);padding:13px 30px;border-radius:12px;text-decoration:none;font-weight:600;font-size:16px;font-family:"Syne",sans-serif;transition:all .2s}
+        .btn-secondary:hover{background:rgba(45,212,191,0.1)}
+        @media(max-width:1024px){.product-grid{grid-template-columns:repeat(2,1fr)}}
+        @media(max-width:768px){
+            header{padding:14px 20px}.nav-links{display:none}.mobile-menu-toggle{display:block}
+            .controls,.shop-header,.product-grid,.disclosure,.results-bar,.section-label,.bottom-cta{padding-left:16px;padding-right:16px}
+            .product-grid{grid-template-columns:1fr}
+            .cta-banner{padding:16px 20px}
         }
     </style>
 </head>
 <body>
-    <!-- Header Navigation -->
-    <header>
-        <nav>
-            <a href="suppvis-complete-website.html" class="logo">
-                <div class="logo-icon">S</div>
-                <span>SuppVis</span>
+<div class="animated-gradient"></div>
+<header id="header">
+    <nav>
+        <a href="index.html" class="logo">
+            <svg class="logo-icon" viewBox="0 0 2048 1963" xmlns="http://www.w3.org/2000/svg"><path transform="translate(778,178)" d="m0 0h41l33 2 29 3 39 7 36 8 26 8 25 9 18 8 5 1 29-12 25-9 28-8 39-8 38-6 36-3h42l34 2 37 5 31 6 26 7 36 12 31 13 25 12 23 12 19 12 36 25 11 9 14 12 12 11 8 7 16 16 9 11 12 14 11 13 12 17 15 24 13 22 8 15 12 27 10 27 9 27 8 29 6 24 18 13 14 11 11 9 15 14 10 10 7 8 15 15 11 14 14 18 16 23 12 20 13 24 15 33 11 28 7 19 7 26 5 25 3 20 3 38v68l-2 27-4 30-7 37-9 31-12 32-12 27-10 19-7 13-10 16-12 17-10 13-13 16-9 10-22 22-8 7-7 7-11 9-19 14-12 8-14 9-10 40-9 29-10 28-11 27-15 33-8 16-12 19-10 15-10 13-11 13-12 14-14 15-7 7-8 7-7 7-11 9-14 12-18 13-15 10-17 12-16 9-15 8-23 11-32 14-18 7-30 9-27 7-36 7-36 4-30 2h-32l-40-3-35-5-38-8-26-7-26-9-23-10-4-2h-6l-23 10-30 10-33 9-35 7-29 4-29 3-16 1h-30l-41-3-30-4-36-7-28-7-33-11-30-13-25-12-22-11-19-12-16-11-20-14-14-11-11-9-15-13-7-7-6-5v-2h-2l-7-8-9-9-9-11-11-13-15-20-13-21-12-20-9-17-10-23-12-31-13-36-8-28-6-27-5-5-35-24-11-9-14-12-10-10-8-7-10-9-9-10-13-17-12-15-17-26-12-21-13-27-11-25-10-28-7-25-6-27-6-35-3-30-1-19v-22l2-35 4-38 5-26 7-30 9-29 8-22 18-39 12-22 10-17 10-15 16-21 12-16 9-10 31-31 8-7 13-11 19-13 15-11 3-2 5-24 7-26 11-32 13-34 14-34 8-17 13-21 10-16 16-21 8-10 12-14 16-17 9-9 8-7 7-7 11-9 15-12 18-13 27-18 17-10 28-14 27-12 24-9 25-8 36-9 48-8zm250 129-10 7-18 12-23 16-13 11-10 9-11 9-11 10-11 9-8 8-8 7-13 12-11 9-16 13-15 12-16 11-20 13-24 14-21 12-15 8-28 12-20 8-42 15-43 14-102 28-37 11-36 12-28 10-21 9-17 9 2 35 4 33 8 45 9 39 16 59 7 30 6 37 2 18 2 35v51l-2 30-4 33-7 36-8 32-15 55-8 34-7 41-3 27-1 14v19l10 6 21 10 30 11 36 12 40 12 70 19 31 9 43 14 41 16 24 10 28 13 19 10 28 17 18 11 14 10 15 11 14 11 17 14 15 13 12 11 10 10 8 7 16 15 8 7 15 14 11 9 21 16 17 12 12 9 4 1 11-8 12-8 18-13 19-14 13-12 8-7 13-12 8-7 10-9 18-18 8-7 13-11 14-11 14-12 15-11 15-10 19-12 26-15 18-10 22-10 36-15 37-14 29-10 25-8 67-19 62-18 43-14 33-13 19-9 6-4v-17l-2-29-5-35-8-42-16-58-8-31-6-27-4-26-3-27-2-33v-34l2-37 3-28 7-42 6-27 18-69 8-36 7-43 4-37 1-12v-11l-5-4-16-8-21-9-23-8-36-12-33-10-82-22-35-10-40-13-41-15-37-15-23-11-22-12-26-15-25-16-26-20-16-13-11-9-24-22-8-8-11-9-16-15-14-12-9-8-18-13-19-13-13-9z" fill="currentColor"/><path transform="translate(1008,615)" d="m0 0h33l25 2 25 4 25 7 21 8 23 12 20 12 14 11 18 18 18 22 10 18 10 25 5 19 2 11v5l-25 5-66 11h-3l-9-26-8-16-7-10-8-10-8-7-12-9-16-9-15-6-23-5-20-2h-23l-24 3-23 6-19 9-13 9-10 9-8 9-8 14-5 12-3 14-1 9v9l3 17 5 13 7 13 9 10 10 9 13 8 16 8 24 9 36 12 29 9 53 15 36 12 20 8 21 10 16 10 19 14 11 9 8 8 10 13 12 19 10 21 6 19 4 22 2 23v14l-2 19-6 29-7 21-12 25-9 14-10 13-9 10-11 11-13 10-17 12-17 9-29 12-24 7-31 6-27 3-31 1-27-2-30-4-34-8-26-9-21-10-19-12-21-16-13-11-11-12-10-14-10-15-9-16-8-17-7-21-6-25-1-12 80-16 19-3 7 28 7 19 9 17 12 16 9 10 10 10 13 9 17 9 22 8 27 6 23 2h16l25-3 22-5 15-5 17-8 12-8 10-9 8-10 8-13 5-10 4-13 2-11v-30l-4-18-8-16-9-12-13-13-15-10-25-12-36-12-56-16-52-15-35-12-18-8-16-8-17-11-16-12-13-11-9-10-9-13-9-16-7-18-5-18-3-20-1-16v-14l2-25 5-25 7-21 9-20 12-18 12-14 16-16 13-10 15-10 22-12 16-7 21-7 27-6 22-3z" fill="currentColor"/><g fill="var(--logo-detail)"><path transform="translate(198,850)" d="m0 0 9 2 27 8 74 23 41 12 5 2 2 6 4 25 2 20v14h-27l-96-3-21-1-41-1-3-2 3-28 6-29 7-25z"/><path transform="translate(1850,1016)" d="m0 0h35l1 1v10l-3 31-6 31-8 30-3 7-10-2-48-15-71-20-30-8-3-9-3-26-1-11v-13l11-1 79-3z"/><path transform="translate(174,1018)" d="m0 0h30l109 3 49 2 1 4-3 32-3 19-2 5-25 6-63 14-64 16-10 2-6-18-6-25-5-30-2-18z"/><path transform="translate(1859,850)" d="m0 0 3 3 10 30 7 28 5 29 1 13-3 1-107 4-44 2h-30v-11l3-30 4-22 10-4 41-12 48-15 42-13z"/></g></svg>
+            <span>SuppVis</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="suppvis-about.html">About</a></li>
+            <li><a href="suppvis-ai-chat.html">SuppVis AI</a></li>
+            <li><a href="suppvis-shop.html" class="active">Shop</a></li>
+            <li><a href="suppvis-blog.html">Blog</a></li>
+            <li><a href="suppvis-waitlist.html">Waitlist</a></li>
+        </ul>
+        <div style="display:flex;align-items:center;gap:12px;">
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg>
+            </button>
+            <a href="suppvis-ai-chat.html" class="nav-cta">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                Ask SuppVis AI
             </a>
-            <ul class="nav-links">
-                <li><a href="suppvis-complete-website.html">Home</a></li>
-                <li><a href="suppvis-about.html">About Us</a></li>
-                <li><a href="suppvis-ai-chat.html">SuppVis AI</a></li>
-                <li><a href="suppvis-shop.html" class="active">Shop</a></li>
-                <li><a href="suppvis-blog.html">Blog</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <div class="hero">
-        <h1>Curated for Science. Not Profit.</h1>
-        <p class="subtitle">Every supplement is conflict-checked, third-party tested, and dosed at clinical levels.</p>
-        <div class="trust-badges">
-            <div class="badge">✓ Conflict-Checked</div>
-            <div class="badge">🔬 Third-Party Tested</div>
-            <div class="badge">⚖️ Clinical Dosing</div>
+        </div>
+        <button class="mobile-menu-toggle" id="mobileMenuToggle">&#9776;</button>
+    </nav>
+</header>
+<div class="page">
+    <div class="cta-banner">
+        <div class="cta-banner-left">
+            <div class="cta-banner-icon">&#129516;</div>
+            <div class="cta-banner-text">
+                <strong>Get a personalized supplement recommendation</strong>
+                <span>Tell SuppVis AI your goals &mdash; get a custom stack built around your body in seconds.</span>
+            </div>
+        </div>
+        <a href="suppvis-ai-chat.html" class="cta-banner-btn">Get My Personalized Stack <svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M10 3L9 4L14 9H3V11H14L9 16L10 17L17 10L10 3Z" fill="currentColor"/></svg></a>
+    </div>
+    <div class="shop-header">
+        <div class="shop-eyebrow">&#10003; SuppVis Verified</div>
+        <h1 class="shop-title">The Curated Shop</h1>
+        <p class="shop-subtitle">Every product is handpicked for purity, bioavailability, and clinical backing. No proprietary blends. No underdosed formulas. No brand bias.</p>
+        <div class="shop-stats">
+            <div class="shop-stat"><div class="shop-stat-num">158</div><div class="shop-stat-label">Products</div></div>
+            <div class="shop-stat"><div class="shop-stat-num">46+</div><div class="shop-stat-label">Supplements</div></div>
+            <div class="shop-stat"><div class="shop-stat-num">10+</div><div class="shop-stat-label">Trusted Brands</div></div>
         </div>
     </div>
-
-    <div class="container">
-        <div class="filters">
-            <button class="filter-btn active" onclick="filterProducts('all')">All Products</button>
-            <button class="filter-btn" onclick="filterProducts('sleep')">😴 Sleep</button>
-            <button class="filter-btn" onclick="filterProducts('energy')">⚡ Energy</button>
-            <button class="filter-btn" onclick="filterProducts('focus')">🎯 Focus</button>
-            <button class="filter-btn" onclick="filterProducts('stress')">🧘 Stress</button>
+    <div class="disclosure">Affiliate disclosure: SuppVis earns a small commission on purchases at no extra cost to you. This never influences which products we recommend &mdash; only science does.</div>
+    <div class="controls">
+        <div class="search-box">
+            <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+            <input type="text" id="searchInput" placeholder="Search supplements...">
         </div>
-
-        <div class="products">
-            <div class="product" data-category="sleep">
-                <span class="product-badge bestseller">Bestseller</span>
-                <img src="https://www.thorne.com/dw/image/v2/BFXV_PRD/on/demandware.static/-/Sites-thorne-master-catalog/default/dw3a3e3f3e/images/large/MG025_2.jpg" alt="Thorne Magnesium Glycinate" class="product-image">
-                <h3>Magnesium Glycinate 400mg</h3>
-                <p class="brand">Thorne Research</p>
-                <p class="description">Highly bioavailable for deep sleep and muscle recovery.</p>
-                <ul>
-                    <li>Supports restorative sleep</li>
-                    <li>Reduces muscle tension</li>
-                    <li>Gentle on digestion</li>
-                </ul>
-                <div class="product-footer">
-                    <span class="price">$34</span>
-                    <span class="rating">★★★★★ 4.8</span>
-                </div>
-                <button class="buy-btn">View Product</button>
-            </div>
-
-            <div class="product" data-category="energy">
-                <span class="product-badge top-rated">Top Rated</span>
-                <img src="https://www.nordicnaturals.com/dw/image/v2/BBKJ_PRD/on/demandware.static/-/Sites-nordic-master-catalog/default/dw0e3b3e8c/hi-res/UO2D-60_1.png" alt="Nordic Naturals Omega-3" class="product-image">
-                <h3>Omega-3 Fish Oil 2000mg</h3>
-                <p class="brand">Nordic Naturals</p>
-                <p class="description">High-potency EPA+DHA for brain and heart health.</p>
-                <ul>
-                    <li>2000mg EPA+DHA per serving</li>
-                    <li>Molecularly distilled</li>
-                    <li>No fishy aftertaste</li>
-                </ul>
-                <div class="product-footer">
-                    <span class="price">$42</span>
-                    <span class="rating">★★★★★ 4.9</span>
-                </div>
-                <button class="buy-btn">View Product</button>
-            </div>
-
-            <div class="product" data-category="stress">
-                <span class="product-badge">SuppVis Verified</span>
-                <img src="https://cdn.nootropicsdepot.com/images/ashwagandha-ksm-66-extract-capsules-600mg.png" alt="Ashwagandha KSM-66" class="product-image">
-                <h3>Ashwagandha KSM-66 600mg</h3>
-                <p class="brand">Nootropics Depot</p>
-                <p class="description">Clinical-strength adaptogen for stress resilience.</p>
-                <ul>
-                    <li>Reduces cortisol by 27%</li>
-                    <li>Improves stress response</li>
-                    <li>Full-spectrum extract</li>
-                </ul>
-                <div class="product-footer">
-                    <span class="price">$28</span>
-                    <span class="rating">★★★★★ 4.7</span>
-                </div>
-                <button class="buy-btn">View Product</button>
-            </div>
-
-            <div class="product" data-category="energy">
-                <img src="https://m.media-amazon.com/images/I/61V8YmPO8LL._AC_SL1500_.jpg" alt="Sports Research Vitamin D3+K2" class="product-image">
-                <h3>Vitamin D3 + K2 5000 IU</h3>
-                <p class="brand">Sports Research</p>
-                <p class="description">Optimal D3 with K2 for bone and immune health.</p>
-                <ul>
-                    <li>5000 IU D3 + 100mcg K2</li>
-                    <li>Supports immunity</li>
-                    <li>Directs calcium to bones</li>
-                </ul>
-                <div class="product-footer">
-                    <span class="price">$26</span>
-                    <span class="rating">★★★★☆ 4.6</span>
-                </div>
-                <button class="buy-btn">View Product</button>
-            </div>
-
-            <div class="product" data-category="focus">
-                <img src="https://m.media-amazon.com/images/I/71P8Ys8LHPL._AC_SL1500_.jpg" alt="NOW Foods L-Theanine" class="product-image">
-                <h3>L-Theanine 200mg</h3>
-                <p class="brand">NOW Foods</p>
-                <p class="description">Promotes calm focus without drowsiness.</p>
-                <ul>
-                    <li>Reduces anxiety</li>
-                    <li>Enhances focus</li>
-                    <li>Synergistic with caffeine</li>
-                </ul>
-                <div class="product-footer">
-                    <span class="price">$18</span>
-                    <span class="rating">★★★★★ 4.8</span>
-                </div>
-                <button class="buy-btn">View Product</button>
-            </div>
-
-            <div class="product" data-category="focus">
-                <img src="https://m.media-amazon.com/images/I/51yDv7TZSXL._AC_SL1500_.jpg" alt="Optimum Nutrition Creatine" class="product-image">
-                <h3>Creatine Monohydrate 5g</h3>
-                <p class="brand">Optimum Nutrition</p>
-                <p class="description">For strength, power, and cognitive function.</p>
-                <ul>
-                    <li>5g pure creatine</li>
-                    <li>Supports strength output</li>
-                    <li>Most researched supplement</li>
-                </ul>
-                <div class="product-footer">
-                    <span class="price">$24</span>
-                    <span class="rating">★★★★★ 4.9</span>
-                </div>
-                <button class="buy-btn">View Product</button>
-            </div>
-
-            <div class="product" data-category="sleep">
-                <img src="https://m.media-amazon.com/images/I/71lhQZKuOzL._AC_SL1500_.jpg" alt="Life Extension Melatonin" class="product-image">
-                <h3>Melatonin 300mcg (Low Dose)</h3>
-                <p class="brand">Life Extension</p>
-                <p class="description">Ultra-low dose for natural sleep onset without grogginess.</p>
-                <ul>
-                    <li>Optimal 300mcg low dose</li>
-                    <li>Supports circadian rhythm</li>
-                    <li>No morning grogginess</li>
-                </ul>
-                <div class="product-footer">
-                    <span class="price">$12</span>
-                    <span class="rating">★★★★☆ 4.5</span>
-                </div>
-                <button class="buy-btn">View Product</button>
-            </div>
-
-            <div class="product" data-category="energy">
-                <img src="https://m.media-amazon.com/images/I/71OFyL1WvyL._AC_SL1500_.jpg" alt="Thorne Zinc Picolinate" class="product-image">
-                <h3>Zinc Picolinate 30mg</h3>
-                <p class="brand">Thorne Research</p>
-                <p class="description">Highly absorbable zinc for immune support and recovery.</p>
-                <ul>
-                    <li>Superior picolinate form</li>
-                    <li>Supports immune function</li>
-                    <li>Aids muscle recovery</li>
-                </ul>
-                <div class="product-footer">
-                    <span class="price">$22</span>
-                    <span class="rating">★★★★★ 4.7</span>
-                </div>
-                <button class="buy-btn">View Product</button>
-            </div>
-
-            <div class="product" data-category="focus">
-                <img src="https://m.media-amazon.com/images/I/71YJ9fG7OhL._AC_SL1500_.jpg" alt="Pure Encapsulations Vitamin C" class="product-image">
-                <h3>Vitamin C 1000mg</h3>
-                <p class="brand">Pure Encapsulations</p>
-                <p class="description">High-potency vitamin C with bioflavonoids for immunity.</p>
-                <ul>
-                    <li>1000mg buffered vitamin C</li>
-                    <li>Enhanced with bioflavonoids</li>
-                    <li>Supports immune system</li>
-                </ul>
-                <div class="product-footer">
-                    <span class="price">$32</span>
-                    <span class="rating">★★★★★ 4.8</span>
-                </div>
-                <button class="buy-btn">View Product</button>
-            </div>
+        <div class="filter-bar" id="filterBar">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="Mineral">Minerals</button>
+            <button class="filter-btn" data-filter="Vitamin">Vitamins</button>
+            <button class="filter-btn" data-filter="Adaptogen">Adaptogens</button>
+            <button class="filter-btn" data-filter="Herb">Herbs</button>
+            <button class="filter-btn" data-filter="Amino Acid">Amino Acids</button>
+            <button class="filter-btn" data-filter="Omega / Fatty Acid">Omegas</button>
+            <button class="filter-btn" data-filter="Probiotic / Gut">Gut Health</button>
+            <button class="filter-btn" data-filter="Supplement">Supplements</button>
         </div>
-
-        <div style="text-align: center; margin: 60px 0; padding: 40px; background: rgba(45, 212, 191, 0.05); border-radius: 16px; border: 1px solid rgba(45, 212, 191, 0.2);">
-            <h3 style="color: #2DD4BF; margin-bottom: 16px;">📱 Get AI-Powered Recommendations</h3>
-            <p style="color: #94A3B8;">Download the SuppVis app for personalized product suggestions based on your goals and stack.</p>
+        <div class="tier-filter" id="tierFilter">
+            <button class="tier-btn active" data-tier="all">All Tiers</button>
+            <button class="tier-btn" data-tier="premium">Premium</button>
+            <button class="tier-btn" data-tier="value">Value</button>
+            <button class="tier-btn" data-tier="budget">Budget</button>
         </div>
     </div>
+    <div class="results-bar"><span class="results-count" id="resultsCount">158 products</span></div>
+    <div id="shopContent"></div>
+    <div class="bottom-cta">
+        <div class="bottom-cta-card">
+            <h2>Not sure what you actually need?</h2>
+            <p>Stop buying supplements based on guesswork. SuppVis AI analyzes your goals, current stack, and health profile to tell you exactly what to take, when to take it, and what to avoid.</p>
+            <div class="bottom-cta-btns">
+                <a href="suppvis-ai-chat.html" class="btn-primary">&#129504; Build My Stack with AI</a>
+                <a href="suppvis-waitlist.html" class="btn-secondary">Join the Waitlist</a>
+            </div>
+        </div>
+    </div>
+</div>
 
-    <script>
-        function filterProducts(category) {
-            const products = document.querySelectorAll('.product');
-            const buttons = document.querySelectorAll('.filter-btn');
-            
-            buttons.forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-            
-            products.forEach(product => {
-                if (category === 'all' || product.dataset.category === category) {
-                    product.style.display = 'block';
-                } else {
-                    product.style.display = 'none';
-                }
-            });
-        }
-    </script>
+
+<script>
+const PRODUCTS = [
+  {
+    "id": "thorne-magnesium-glycinate",
+    "supplementName": "Magnesium Glycinate",
+    "brand": "Thorne",
+    "productName": "Magnesium Glycinate 90ct",
+    "asin": "B0F5XYHRPV",
+    "affiliateTag": "suppvis-20",
+    "price": 25.0,
+    "servings": 90,
+    "dosePerServing": "200mg elemental",
+    "form": "Bisglycinate",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Mineral"
+    ],
+    "keyBenefit": "Best absorbed form for sleep and stress",
+    "imageEmoji": "🧲",
+    "imageUrl": "https://m.media-amazon.com/images/I/71BwFPGbYaL._AC_SL300_.jpg",
+    "formNote": "Glycinate absorbs 80%+ vs 4% for oxide — the form makes all the difference"
+  },
+  {
+    "id": "jarrow-magnesium-glycinate",
+    "supplementName": "Magnesium Glycinate",
+    "brand": "Jarrow Formulas",
+    "productName": "Jarrow Formulas Magnesium Glycinate 360mg 90ct",
+    "asin": "B0DGYQ9W2P",
+    "affiliateTag": "suppvis-20",
+    "price": 22.0,
+    "servings": 90,
+    "dosePerServing": "360mg elemental",
+    "form": "Glycinate",
+    "tier": "value",
+    "thirdPartyTested": false,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Mineral"
+    ],
+    "keyBenefit": "High-dose glycinate at a better price point",
+    "imageEmoji": "🧲",
+    "imageUrl": "https://m.media-amazon.com/images/I/71ydrdWLNPL._AC_SL300_.jpg"
+  },
+  {
+    "id": "jarrow-magmind",
+    "supplementName": "Magnesium L-Threonate",
+    "brand": "Jarrow Formulas",
+    "productName": "MagMind with L-Theanine & Rhodiola 60ct",
+    "asin": "B0CCFB2D9D",
+    "affiliateTag": "suppvis-20",
+    "price": 33.54,
+    "servings": 30,
+    "dosePerServing": "Mag L-Threonate + L-Theanine + Rhodiola",
+    "form": "L-Threonate blend",
+    "tier": "premium",
+    "thirdPartyTested": false,
+    "noProprietaryBlend": false,
+    "categories": [
+      "Mineral"
+    ],
+    "keyBenefit": "Brain-targeted magnesium with built-in stress support",
+    "imageEmoji": "🧠",
+    "imageUrl": "https://m.media-amazon.com/images/I/71L4mugqEBL._AC_SL300_.jpg",
+    "formNote": "L-Threonate is the only form shown to cross the blood-brain barrier"
+  },
+  {
+    "id": "momentous-magnesium-threonate",
+    "supplementName": "Magnesium L-Threonate",
+    "brand": "Momentous",
+    "productName": "Magtein Magnesium L-Threonate 30ct",
+    "asin": "B09WWK4R2C",
+    "affiliateTag": "suppvis-20",
+    "price": 49.95,
+    "servings": 30,
+    "dosePerServing": "145mg Magtein",
+    "form": "L-Threonate",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Mineral"
+    ],
+    "keyBenefit": "NSF Certified brain-targeted magnesium — Huberman stack",
+    "imageEmoji": "🧠",
+    "imageUrl": "https://m.media-amazon.com/images/I/711HhZ3O6uL._AC_SL300_.jpg"
+  },
+  {
+    "id": "ag1-omega3",
+    "supplementName": "Omega-3",
+    "brand": "AG1",
+    "productName": "AG1 Omega-3 Fish Oil 90ct",
+    "asin": "B0F1DXG2T9",
+    "affiliateTag": "suppvis-20",
+    "price": 34.99,
+    "servings": 45,
+    "dosePerServing": "2000mg EPA+DHA",
+    "form": "Softgel",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Omega / Fatty Acid"
+    ],
+    "keyBenefit": "NSF Certified, sport-certified high-potency omega-3",
+    "imageEmoji": "🐟",
+    "imageUrl": "https://m.media-amazon.com/images/I/519YWCSOzmL._AC_SL300_.jpg"
+  },
+  {
+    "id": "nordic-naturals-omega3",
+    "supplementName": "Omega-3",
+    "brand": "Nordic Naturals",
+    "productName": "Ultimate Omega 90ct",
+    "asin": "B0739KKHWL",
+    "affiliateTag": "suppvis-20",
+    "price": 33.74,
+    "servings": 45,
+    "dosePerServing": "1280mg EPA+DHA",
+    "form": "Triglyceride softgel",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Omega / Fatty Acid"
+    ],
+    "keyBenefit": "Triglyceride form for 70% better absorption than ethyl ester",
+    "imageEmoji": "🐟",
+    "imageUrl": "https://m.media-amazon.com/images/I/61NIfEDqazL._AC_SL300_.jpg",
+    "formNote": "Triglyceride form absorbs 70% better than most cheap fish oils"
+  },
+  {
+    "id": "life-extension-omega3",
+    "supplementName": "Omega-3",
+    "brand": "Life Extension",
+    "productName": "Super Omega-3 120ct",
+    "asin": "B01N3JS2IG",
+    "affiliateTag": "suppvis-20",
+    "price": 31.99,
+    "servings": 60,
+    "dosePerServing": "EPA+DHA + sesame lignans",
+    "form": "Enteric-coated softgel",
+    "tier": "value",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Omega / Fatty Acid"
+    ],
+    "keyBenefit": "Enteric coated to prevent fish burps, high value",
+    "imageEmoji": "🐟",
+    "imageUrl": "https://m.media-amazon.com/images/I/71JPZ2haO1L._AC_SL300_.jpg"
+  },
+  {
+    "id": "momentous-omega3",
+    "supplementName": "Omega-3",
+    "brand": "Momentous",
+    "productName": "Omega-3 1600mg 30ct",
+    "asin": "B092LLQ9DJ",
+    "affiliateTag": "suppvis-20",
+    "price": 39.95,
+    "servings": 30,
+    "dosePerServing": "1600mg EPA+DHA",
+    "form": "Softgel",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Omega / Fatty Acid"
+    ],
+    "keyBenefit": "NSF Certified for Sport — high dose in fewer capsules",
+    "imageEmoji": "🐟",
+    "imageUrl": "https://m.media-amazon.com/images/I/7171Isjmi0L._AC_SL300_.jpg"
+  },
+  {
+    "id": "thorne-advanced-dha",
+    "supplementName": "Omega-3",
+    "brand": "Thorne",
+    "productName": "Advanced DHA 60ct",
+    "asin": "B0BDMXTCKJ",
+    "affiliateTag": "suppvis-20",
+    "price": 30.0,
+    "servings": 30,
+    "dosePerServing": "High DHA triglyceride form",
+    "form": "Triglyceride softgel",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Omega / Fatty Acid"
+    ],
+    "keyBenefit": "DHA-dominant formula for brain and nerve health",
+    "imageEmoji": "🐟",
+    "imageUrl": "https://m.media-amazon.com/images/I/417PXgVEzTL._AC_SL300_.jpg"
+  },
+  {
+    "id": "thorne-vitamin-d-k2",
+    "supplementName": "Vitamin D3 + K2",
+    "brand": "Thorne",
+    "productName": "Vitamin D/K2 Liquid drops",
+    "asin": "B0038NF8MG",
+    "affiliateTag": "suppvis-20",
+    "price": 34.0,
+    "servings": 600,
+    "dosePerServing": "1000 IU D3 + 200mcg K2",
+    "form": "Liquid drops",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Vitamin"
+    ],
+    "keyBenefit": "D3 + K2 combo directs calcium to bones not arteries",
+    "imageEmoji": "☀️",
+    "imageUrl": "https://m.media-amazon.com/images/I/616peIEfAaL._AC_SL300_.jpg",
+    "formNote": "K2 MK-7 is essential with high-dose D3 — prevents calcium depositing in arteries"
+  },
+  {
+    "id": "ag1-vitamin-d-k2",
+    "supplementName": "Vitamin D3 + K2",
+    "brand": "AG1",
+    "productName": "AG1 Vitamin D3 K2 Drops",
+    "asin": "B0CPBL4538",
+    "affiliateTag": "suppvis-20",
+    "price": 29.99,
+    "servings": 30,
+    "dosePerServing": "D3 + K2 MK-7",
+    "form": "Liquid drops",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": false,
+    "categories": [
+      "Vitamin"
+    ],
+    "keyBenefit": "AG1 liquid D3 + K2 — fat-soluble vitamins in highly bioavailable drop form",
+    "imageEmoji": "☀️",
+    "imageUrl": "https://m.media-amazon.com/images/I/4140oPndTnL._AC_.jpg",
+    "formNote": "K2 MK-7 directs calcium to bones not arteries — essential pairing with D3"
+  },
+  {
+    "id": "thorne-ashwagandha-shoden",
+    "supplementName": "Ashwagandha",
+    "brand": "Thorne",
+    "productName": "Ashwagandha (Shoden) 30ct",
+    "asin": "B0FFQPKH7Z",
+    "affiliateTag": "suppvis-20",
+    "price": 22.0,
+    "servings": 30,
+    "dosePerServing": "Shoden concentrated extract",
+    "form": "Shoden Extract",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Adaptogen"
+    ],
+    "keyBenefit": "Highest potency ashwagandha extract — most concentrated form available",
+    "imageEmoji": "🌿",
+    "imageUrl": "https://m.media-amazon.com/images/I/71KrhXxfN5L._AC_SL300_.jpg",
+    "formNote": "Shoden is 35% withanolide glycosides — far more potent than standard KSM-66"
+  },
+  {
+    "id": "jarrow-ashwagandha",
+    "supplementName": "Ashwagandha",
+    "brand": "Jarrow Formulas",
+    "productName": "Ashwagandha 300mg 120ct",
+    "asin": "B0013OQEO8",
+    "affiliateTag": "suppvis-20",
+    "price": 17.99,
+    "servings": 120,
+    "dosePerServing": "300mg",
+    "form": "Root Extract",
+    "tier": "value",
+    "thirdPartyTested": false,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Adaptogen"
+    ],
+    "keyBenefit": "Affordable high-count ashwagandha for daily use",
+    "imageEmoji": "🌿",
+    "imageUrl": "https://m.media-amazon.com/images/I/71i-9gwXQkL._AC_SL300_.jpg"
+  },
+  {
+    "id": "momentous-ashwagandha",
+    "supplementName": "Ashwagandha",
+    "brand": "Momentous",
+    "productName": "Ashwagandha NooGandha 300mg 60ct",
+    "asin": "B0D7NQMMTS",
+    "affiliateTag": "suppvis-20",
+    "price": 24.94,
+    "servings": 60,
+    "dosePerServing": "300mg NooGandha",
+    "form": "NooGandha Extract",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Adaptogen"
+    ],
+    "keyBenefit": "Cognitive-focused ashwagandha — NSF Certified, Huberman endorsed",
+    "imageEmoji": "🌿",
+    "imageUrl": "https://m.media-amazon.com/images/I/71i-xLgwi+L._AC_SL300_.jpg"
+  },
+  {
+    "id": "now-ashwagandha",
+    "supplementName": "Ashwagandha",
+    "brand": "NOW Foods",
+    "productName": "Ashwagandha 450mg 90ct",
+    "asin": "B0013OQIJY",
+    "affiliateTag": "suppvis-20",
+    "price": 7.99,
+    "servings": 90,
+    "dosePerServing": "450mg standardized",
+    "form": "Standardized Extract",
+    "tier": "budget",
+    "thirdPartyTested": false,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Adaptogen"
+    ],
+    "keyBenefit": "Best value ashwagandha for budget-conscious users",
+    "imageEmoji": "🌿",
+    "imageUrl": "https://m.media-amazon.com/images/I/712kxxBs-jL._AC_SL300_.jpg"
+  },
+  {
+    "id": "thorne-zinc-30mg",
+    "supplementName": "Zinc Picolinate",
+    "brand": "Thorne",
+    "productName": "Zinc Picolinate 30mg 60ct",
+    "asin": "B0012ZQPKG",
+    "affiliateTag": "suppvis-20",
+    "price": 20.0,
+    "servings": 60,
+    "dosePerServing": "30mg",
+    "form": "Picolinate",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Mineral"
+    ],
+    "keyBenefit": "Highest absorption zinc — picolinate form preferred",
+    "imageEmoji": "⚡",
+    "imageUrl": "https://m.media-amazon.com/images/I/61WemwKfzIL._AC_SL300_.jpg",
+    "formNote": "Picolinate absorbs 3x better than zinc oxide or sulfate"
+  },
+  {
+    "id": "momentous-zinc",
+    "supplementName": "Zinc Picolinate",
+    "brand": "Momentous",
+    "productName": "Zinc Picolinate 15mg 60ct",
+    "asin": "B0C15ZX681",
+    "affiliateTag": "suppvis-20",
+    "price": 18.95,
+    "servings": 60,
+    "dosePerServing": "15mg",
+    "form": "Picolinate",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Mineral"
+    ],
+    "keyBenefit": "NSF Certified maintenance dose — ideal for daily use",
+    "imageEmoji": "⚡",
+    "imageUrl": "https://m.media-amazon.com/images/I/61HJg3WQ1JL._AC_SL300_.jpg"
+  },
+  {
+    "id": "pure-encapsulations-zinc-30",
+    "supplementName": "Zinc",
+    "brand": "Pure Encapsulations",
+    "productName": "Zinc Picolinate 30mg 60ct",
+    "asin": "B00083B1DY",
+    "affiliateTag": "suppvis-20",
+    "price": 16.0,
+    "servings": 60,
+    "dosePerServing": "30mg",
+    "form": "Picolinate",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Mineral"
+    ],
+    "keyBenefit": "Hypoallergenic pharmaceutical grade zinc",
+    "imageEmoji": "⚡",
+    "imageUrl": "https://m.media-amazon.com/images/I/71zT64UexTL._AC_SL300_.jpg"
+  },
+  {
+    "id": "thorne-zinc-15mg",
+    "supplementName": "Zinc Picolinate",
+    "brand": "Thorne",
+    "productName": "Zinc Picolinate 15mg 60ct",
+    "asin": "B0797NSHQX",
+    "affiliateTag": "suppvis-20",
+    "price": 15.0,
+    "servings": 60,
+    "dosePerServing": "15mg",
+    "form": "Picolinate",
+    "tier": "value",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Mineral"
+    ],
+    "keyBenefit": "Lower dose for maintenance — ideal alongside a multivitamin",
+    "imageEmoji": "⚡",
+    "imageUrl": "https://m.media-amazon.com/images/I/61umF3J2M2L._AC_SL300_.jpg"
+  },
+  {
+    "id": "pure-encapsulations-zinc-15",
+    "supplementName": "Zinc",
+    "brand": "Pure Encapsulations",
+    "productName": "Zinc Picolinate 15mg 180ct",
+    "asin": "B0017JIH7G",
+    "affiliateTag": "suppvis-20",
+    "price": 34.5,
+    "servings": 180,
+    "dosePerServing": "15mg",
+    "form": "Picolinate",
+    "tier": "value",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Mineral"
+    ],
+    "keyBenefit": "Best value per serving for pharmaceutical grade zinc",
+    "imageEmoji": "⚡",
+    "imageUrl": "https://m.media-amazon.com/images/I/71ao80PHY9L._AC_SL300_.jpg"
+  },
+  {
+    "id": "thorne-vitamin-c",
+    "supplementName": "Vitamin C",
+    "brand": "Thorne",
+    "productName": "Vitamin C with Bioflavonoids 500mg 90ct",
+    "asin": "B09FYFM7N3",
+    "affiliateTag": "suppvis-20",
+    "price": 23.0,
+    "servings": 90,
+    "dosePerServing": "500mg + citrus bioflavonoids",
+    "form": "Ascorbic Acid + Bioflavonoids",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Vitamin"
+    ],
+    "keyBenefit": "Bioflavonoids increase Vitamin C absorption and potency",
+    "imageEmoji": "🍊",
+    "imageUrl": "https://m.media-amazon.com/images/I/61NqKHVeZXL._AC_SL300_.jpg"
+  },
+  {
+    "id": "life-extension-vitamin-c-quercetin",
+    "supplementName": "Vitamin C",
+    "brand": "Life Extension",
+    "productName": "Vitamin C + Bio-Quercetin 250ct",
+    "asin": "B07KVX6B5N",
+    "affiliateTag": "suppvis-20",
+    "price": 22.5,
+    "servings": 250,
+    "dosePerServing": "Vitamin C + Quercetin phytosome",
+    "form": "With Quercetin",
+    "tier": "value",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Vitamin"
+    ],
+    "keyBenefit": "Quercetin synergizes with C for enhanced immune and heart support",
+    "imageEmoji": "🍊",
+    "imageUrl": "https://m.media-amazon.com/images/I/7149LKnKu4L._AC_SL300_.jpg"
+  },
+  {
+    "id": "pure-encapsulations-liposomal-c",
+    "supplementName": "Vitamin C",
+    "brand": "Pure Encapsulations",
+    "productName": "Liposomal Vitamin C 120ct",
+    "asin": "B0CQ6FQWCL",
+    "affiliateTag": "suppvis-20",
+    "price": 36.0,
+    "servings": 60,
+    "dosePerServing": "Liposomal Vitamin C",
+    "form": "Liposomal",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Vitamin"
+    ],
+    "keyBenefit": "Liposomal delivery absorbs like an IV — 90%+ bioavailability",
+    "imageEmoji": "🍊",
+    "imageUrl": "https://m.media-amazon.com/images/I/71VjBD0d72L._AC_SL300_.jpg",
+    "formNote": "Liposomal form delivers 6-8x more Vitamin C to cells than standard tablets"
+  },
+  {
+    "id": "thorne-floramend",
+    "supplementName": "Probiotics",
+    "brand": "Thorne",
+    "productName": "FloraMend Prime Probiotic 30ct",
+    "asin": "B0072POOHG",
+    "affiliateTag": "suppvis-20",
+    "price": 56.0,
+    "servings": 30,
+    "dosePerServing": "Multi-strain blend",
+    "form": "Delayed-release capsule",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Probiotic / Gut"
+    ],
+    "keyBenefit": "Shelf stable with proven survivability to the gut",
+    "imageEmoji": "🦠",
+    "imageUrl": "https://m.media-amazon.com/images/I/71-tysKQBdL._AC_SL300_.jpg"
+  },
+  {
+    "id": "pure-encapsulations-probiotic",
+    "supplementName": "Probiotics",
+    "brand": "Pure Encapsulations",
+    "productName": "Probiotic G.I. 60ct",
+    "asin": "B003GCGM0Q",
+    "affiliateTag": "suppvis-20",
+    "price": 46.0,
+    "servings": 60,
+    "dosePerServing": "Multi-strain Lactobacillus + Bifidobacterium",
+    "form": "Capsule",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Probiotic / Gut"
+    ],
+    "keyBenefit": "Hypoallergenic formula with clinically studied strains",
+    "imageEmoji": "🦠",
+    "imageUrl": "https://m.media-amazon.com/images/I/71i80OQVD1L._AC_SL300_.jpg"
+  },
+  {
+    "id": "seed-ds01",
+    "supplementName": "Probiotics",
+    "brand": "Seed",
+    "productName": "DS-01 Daily Synbiotic 60ct",
+    "asin": "B0CMJR4XGR",
+    "affiliateTag": "suppvis-20",
+    "price": 59.99,
+    "servings": 30,
+    "dosePerServing": "53.6B AFU + prebiotic",
+    "form": "Nested capsule synbiotic",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Probiotic / Gut"
+    ],
+    "keyBenefit": "Pre + probiotic combo — most studied direct-to-consumer synbiotic",
+    "imageEmoji": "🦠",
+    "imageUrl": "https://m.media-amazon.com/images/I/719X3gcKyEL._AC_SL300_.jpg",
+    "formNote": "Outer capsule feeds the inner capsule protecting bacteria through stomach acid"
+  },
+  {
+    "id": "now-probiotic-10",
+    "supplementName": "Probiotics",
+    "brand": "NOW Foods",
+    "productName": "Probiotic-10 25 Billion 50ct",
+    "asin": "B002S1U7RU",
+    "affiliateTag": "suppvis-20",
+    "price": 25.15,
+    "servings": 50,
+    "dosePerServing": "25 billion CFU, 10 strains",
+    "form": "Capsule",
+    "tier": "value",
+    "thirdPartyTested": false,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Probiotic / Gut"
+    ],
+    "keyBenefit": "Diverse 10-strain formula at excellent value",
+    "imageEmoji": "🦠",
+    "imageUrl": "https://m.media-amazon.com/images/I/71JCpx3qBsL._AC_SL300_.jpg"
+  },
+  {
+    "id": "momentous-collagen",
+    "supplementName": "Collagen",
+    "brand": "Momentous",
+    "productName": "Collagen Peptides with Fortigel",
+    "asin": "B0BQ1KBX3Q",
+    "affiliateTag": "suppvis-20",
+    "price": 51.95,
+    "servings": 20,
+    "dosePerServing": "15g Fortigel + Vitamin C",
+    "form": "Hydrolyzed powder",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Amino Acid"
+    ],
+    "keyBenefit": "Fortigel has the most clinical evidence for joint cartilage specifically",
+    "imageEmoji": "✨",
+    "imageUrl": "https://m.media-amazon.com/images/I/71bW6Jj6SPL._AC_SL300_.jpg",
+    "formNote": "Must be taken with Vitamin C for collagen synthesis — this formula includes it"
+  },
+  {
+    "id": "pure-encapsulations-collagen-js",
+    "supplementName": "Collagen",
+    "brand": "Pure Encapsulations",
+    "productName": "Collagen JS 120ct",
+    "asin": "B0017135NA",
+    "affiliateTag": "suppvis-20",
+    "price": 80.8,
+    "servings": 60,
+    "dosePerServing": "1000mg BioCell Collagen",
+    "form": "Hydrolyzed BioCell",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Amino Acid"
+    ],
+    "keyBenefit": "Skin and joint focused — BioCell form has strong absorption data",
+    "imageEmoji": "✨",
+    "imageUrl": "https://m.media-amazon.com/images/I/71x9dEbU5BL._AC_SL300_.jpg"
+  },
+  {
+    "id": "thorne-collagen-fit",
+    "supplementName": "Collagen",
+    "brand": "Thorne",
+    "productName": "Collagen Fit with Nicotinamide Riboside 30ct",
+    "asin": "B0B7K9Y1FD",
+    "affiliateTag": "suppvis-20",
+    "price": 56.0,
+    "servings": 30,
+    "dosePerServing": "15g collagen + NR",
+    "form": "Powder",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Amino Acid"
+    ],
+    "keyBenefit": "Collagen + NR longevity combo — unique formulation",
+    "imageEmoji": "✨",
+    "imageUrl": "https://m.media-amazon.com/images/I/71g5okWRDyL._AC_SL300_.jpg"
+  },
+  {
+    "id": "pure-encapsulations-hair-skin-nails",
+    "supplementName": "Collagen",
+    "brand": "Pure Encapsulations",
+    "productName": "Hair/Skin/Nails Ultra 60ct",
+    "asin": "B0063X0JL8",
+    "affiliateTag": "suppvis-20",
+    "price": 51.5,
+    "servings": 30,
+    "dosePerServing": "Biotin + Collagen blend",
+    "form": "Capsule blend",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Amino Acid"
+    ],
+    "keyBenefit": "Complete beauty supplement — biotin, collagen, and elastin support",
+    "imageEmoji": "✨",
+    "imageUrl": "https://m.media-amazon.com/images/I/71gxTMBtU3L._AC_SL300_.jpg"
+  },
+  {
+    "id": "vital-proteins-collagen",
+    "supplementName": "Collagen",
+    "brand": "Vital Proteins",
+    "productName": "Collagen Peptides Powder",
+    "asin": "B09RQBHRCT",
+    "affiliateTag": "suppvis-20",
+    "price": 19.5,
+    "servings": 14,
+    "dosePerServing": "20g hydrolyzed peptides",
+    "form": "Hydrolyzed Peptides",
+    "tier": "value",
+    "thirdPartyTested": false,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Amino Acid"
+    ],
+    "keyBenefit": "Most recognized collagen brand — Costco's top seller for a reason",
+    "imageEmoji": "✨",
+    "imageUrl": "https://m.media-amazon.com/images/I/71QZNoHaxdL._AC_SL300_.jpg"
+  },
+  {
+    "id": "now-lions-mane",
+    "supplementName": "Lion's Mane",
+    "brand": "NOW Foods",
+    "productName": "Lion's Mane 500mg 60ct",
+    "asin": "B09V3BS25N",
+    "affiliateTag": "suppvis-20",
+    "price": 15.1,
+    "servings": 60,
+    "dosePerServing": "500mg organic",
+    "form": "Organic mushroom",
+    "tier": "value",
+    "thirdPartyTested": false,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Adaptogen"
+    ],
+    "keyBenefit": "Made with organic mushrooms — solid entry point for cognition support",
+    "imageEmoji": "🧠",
+    "imageUrl": "https://m.media-amazon.com/images/I/71dXSFkXzOL._AC_SL300_.jpg"
+  },
+  {
+    "id": "om-lions-mane",
+    "supplementName": "Lion's Mane",
+    "brand": "Om Mushroom",
+    "productName": "Lion's Mane 180ct",
+    "asin": "B08DK3XC9D",
+    "affiliateTag": "suppvis-20",
+    "price": 26.95,
+    "servings": 60,
+    "dosePerServing": "2000mg blend",
+    "form": "Fruiting body + mycelium",
+    "tier": "premium",
+    "thirdPartyTested": false,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Adaptogen"
+    ],
+    "keyBenefit": "High volume capsule with both fruiting body and mycelium",
+    "imageEmoji": "🧠",
+    "imageUrl": "https://m.media-amazon.com/images/I/61V1gAgCx-L._AC_SL300_.jpg"
+  },
+  {
+    "id": "thorne-ginseng-plus",
+    "supplementName": "Lion's Mane",
+    "brand": "Thorne",
+    "productName": "Ginseng Plus with Lion's Mane 60ct",
+    "asin": "B0DJMSCVHR",
+    "affiliateTag": "suppvis-20",
+    "price": 48.0,
+    "servings": 60,
+    "dosePerServing": "Ginseng + Lion's Mane + Greek Mountain Tea",
+    "form": "Blend capsule",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": false,
+    "categories": [
+      "Adaptogen"
+    ],
+    "keyBenefit": "Energy + cognition stack — ginseng and Lion's Mane together",
+    "imageEmoji": "🧠",
+    "imageUrl": "https://m.media-amazon.com/images/I/719a3ul1OrL._AC_SL300_.jpg"
+  },
+  {
+    "id": "real-mushrooms-lions-mane",
+    "supplementName": "Lion's Mane",
+    "brand": "Real Mushrooms",
+    "productName": "Lion's Mane 120ct",
+    "asin": "B078SZX3ML",
+    "affiliateTag": "suppvis-20",
+    "price": 34.95,
+    "servings": 60,
+    "dosePerServing": "1000mg fruiting body",
+    "form": "Fruiting body extract",
+    "tier": "premium",
+    "thirdPartyTested": false,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Adaptogen"
+    ],
+    "keyBenefit": "100% fruiting body — no mycelium on grain filler",
+    "imageEmoji": "🧠",
+    "imageUrl": "https://m.media-amazon.com/images/I/61-8R5Srn2L._AC_SL300_.jpg",
+    "formNote": "Fruiting body extract is 4-8x more potent than mycelium-on-grain products"
+  },
+  {
+    "id": "life-extension-rhodiola",
+    "supplementName": "Rhodiola",
+    "brand": "Life Extension",
+    "productName": "Rhodiola Extract 250mg 60ct",
+    "asin": "B000M6Y70G",
+    "affiliateTag": "suppvis-20",
+    "price": 13.5,
+    "servings": 60,
+    "dosePerServing": "250mg (3% rosavins)",
+    "form": "Standardized 3% rosavins",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Adaptogen"
+    ],
+    "keyBenefit": "Standardized rosavins at clinical dose — proven anti-fatigue adaptogen",
+    "imageEmoji": "🌸",
+    "imageUrl": "https://m.media-amazon.com/images/I/71Ina237HGL._AC_SL300_.jpg",
+    "formNote": "Must be standardized to 3% rosavins — unstandardized products are unreliable"
+  },
+  {
+    "id": "thorne-rhodiola",
+    "supplementName": "Rhodiola",
+    "brand": "Thorne",
+    "productName": "Rhodiola 60ct",
+    "asin": "B0009DTKJU",
+    "affiliateTag": "suppvis-20",
+    "price": 24.0,
+    "servings": 60,
+    "dosePerServing": "Standardized Rhodiola rosea",
+    "form": "Standardized extract",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Adaptogen"
+    ],
+    "keyBenefit": "Third-party certified Rhodiola for stress and mental focus",
+    "imageEmoji": "🌸",
+    "imageUrl": "https://m.media-amazon.com/images/I/612nzJj+lGL._AC_SL300_.jpg"
+  },
+  {
+    "id": "now-rhodiola",
+    "supplementName": "Rhodiola",
+    "brand": "NOW Foods",
+    "productName": "Rhodiola 500mg 60ct",
+    "asin": "B005P0U7TY",
+    "affiliateTag": "suppvis-20",
+    "price": 19.65,
+    "servings": 60,
+    "dosePerServing": "500mg (3% rosavins)",
+    "form": "Standardized 3% rosavins",
+    "tier": "value",
+    "thirdPartyTested": false,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Adaptogen"
+    ],
+    "keyBenefit": "Double dose standardized Rhodiola at budget price",
+    "imageEmoji": "🌸",
+    "imageUrl": "https://m.media-amazon.com/images/I/71BxWeDtnQL._AC_SL300_.jpg"
+  },
+  {
+    "id": "pure-encapsulations-rhodiola",
+    "supplementName": "Rhodiola",
+    "brand": "Pure Encapsulations",
+    "productName": "Rhodiola Rosea 180ct",
+    "asin": "B0016RO0N4",
+    "affiliateTag": "suppvis-20",
+    "price": 42.5,
+    "servings": 180,
+    "dosePerServing": "Standardized Rhodiola",
+    "form": "Standardized extract",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Adaptogen"
+    ],
+    "keyBenefit": "Best value per serving for hypoallergenic Rhodiola",
+    "imageEmoji": "🌸",
+    "imageUrl": "https://m.media-amazon.com/images/I/71gAPtW8GrL._AC_SL300_.jpg"
+  },
+  {
+    "id": "momentous-rhodiola",
+    "supplementName": "Rhodiola",
+    "brand": "Momentous",
+    "productName": "Rhodiola Rosea 60ct",
+    "asin": "B0BX4RJC4P",
+    "affiliateTag": "suppvis-20",
+    "price": 19.95,
+    "servings": 60,
+    "dosePerServing": "Standardized Rhodiola root extract",
+    "form": "Standardized extract",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Adaptogen"
+    ],
+    "keyBenefit": "NSF Certified — Huberman protocol Rhodiola",
+    "imageEmoji": "🌸",
+    "imageUrl": "https://m.media-amazon.com/images/I/61jU5qklPlL._AC_SL300_.jpg"
+  },
+  {
+    "id": "thorne-berberine",
+    "supplementName": "Berberine",
+    "brand": "Thorne",
+    "productName": "Berberine-500 60ct",
+    "asin": "B009LI7VRC",
+    "affiliateTag": "suppvis-20",
+    "price": 44.0,
+    "servings": 60,
+    "dosePerServing": "500mg",
+    "form": "HCl",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Herb"
+    ],
+    "keyBenefit": "Clinical dose with strong metabolic and gut evidence",
+    "imageEmoji": "🌱",
+    "imageUrl": "https://m.media-amazon.com/images/I/710CGlMIhbL._AC_SL300_.jpg",
+    "formNote": "Take with meals — berberine has a short half-life, best split 2-3x daily"
+  },
+  {
+    "id": "momentous-berberine",
+    "supplementName": "Berberine",
+    "brand": "Momentous",
+    "productName": "Berberine",
+    "asin": "B0FZML2YSY",
+    "affiliateTag": "suppvis-20",
+    "price": 49.95,
+    "servings": 30,
+    "dosePerServing": "Bioavailable Berberine",
+    "form": "Enhanced bioavailability",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Herb"
+    ],
+    "keyBenefit": "NSF Certified berberine with enhanced bioavailability formula",
+    "imageEmoji": "🌱",
+    "imageUrl": "https://m.media-amazon.com/images/I/71w7wWqUR-L._AC_SL300_.jpg"
+  },
+  {
+    "id": "thorne-creatine",
+    "supplementName": "Creatine",
+    "brand": "Thorne",
+    "productName": "Creatine Monohydrate 90ct",
+    "asin": "B07978VPPH",
+    "affiliateTag": "suppvis-20",
+    "price": 44.0,
+    "servings": 90,
+    "dosePerServing": "5g monohydrate",
+    "form": "Monohydrate",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Amino Acid"
+    ],
+    "keyBenefit": "NSF Certified for Sport — most researched supplement ever",
+    "imageEmoji": "💪",
+    "imageUrl": "https://m.media-amazon.com/images/I/71-lmdLaYmL._AC_SL300_.jpg",
+    "formNote": "Monohydrate is the only form with 1000+ studies — fancy forms offer no advantage"
+  },
+  {
+    "id": "momentous-creatine",
+    "supplementName": "Creatine",
+    "brand": "Momentous",
+    "productName": "Creatine Monohydrate Creapure 90ct",
+    "asin": "B085Z9P87K",
+    "affiliateTag": "suppvis-20",
+    "price": 39.95,
+    "servings": 90,
+    "dosePerServing": "5g Creapure monohydrate",
+    "form": "Creapure monohydrate",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Amino Acid"
+    ],
+    "keyBenefit": "Creapure — German-made purest creatine, NSF Certified",
+    "imageEmoji": "💪",
+    "imageUrl": "https://m.media-amazon.com/images/I/71VzpNZOvwL._AC_SL300_.jpg"
+  },
+  {
+    "id": "thorne-coq10",
+    "supplementName": "CoQ10",
+    "brand": "Thorne",
+    "productName": "CoQ10 100mg 60ct",
+    "asin": "B005ZFWHMO",
+    "affiliateTag": "suppvis-20",
+    "price": 53.0,
+    "servings": 60,
+    "dosePerServing": "100mg ubiquinone",
+    "form": "Ubiquinone softgel",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Supplement"
+    ],
+    "keyBenefit": "Optimally absorbed ubiquinone for heart and cellular energy",
+    "imageEmoji": "❤️",
+    "imageUrl": "https://m.media-amazon.com/images/I/71o6-bTBqDL._AC_SL300_.jpg",
+    "formNote": "If over 40, consider Ubiquinol form — conversion from Ubiquinone declines with age"
+  },
+  {
+    "id": "pure-encapsulations-coq10",
+    "supplementName": "CoQ10",
+    "brand": "Pure Encapsulations",
+    "productName": "CoQ10 120mg 60ct",
+    "asin": "B0064R62BO",
+    "affiliateTag": "suppvis-20",
+    "price": 69.5,
+    "servings": 60,
+    "dosePerServing": "120mg ubiquinone",
+    "form": "Ubiquinone",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Supplement"
+    ],
+    "keyBenefit": "Hypoallergenic pharmaceutical grade CoQ10",
+    "imageEmoji": "❤️",
+    "imageUrl": "https://m.media-amazon.com/images/I/71uiArTWjUL._AC_SL300_.jpg"
+  },
+  {
+    "id": "now-coq10",
+    "supplementName": "CoQ10",
+    "brand": "NOW Foods",
+    "productName": "CoQ10 200mg 60ct",
+    "asin": "B001B4NEM0",
+    "affiliateTag": "suppvis-20",
+    "price": 21.45,
+    "servings": 60,
+    "dosePerServing": "200mg",
+    "form": "Ubiquinone capsule",
+    "tier": "value",
+    "thirdPartyTested": false,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Supplement"
+    ],
+    "keyBenefit": "Double dose at half the price — great value",
+    "imageEmoji": "❤️",
+    "imageUrl": "https://m.media-amazon.com/images/I/71g4nNenvvL._AC_SL300_.jpg"
+  },
+  {
+    "id": "pure-encapsulations-nac",
+    "supplementName": "NAC",
+    "brand": "Pure Encapsulations",
+    "productName": "NAC 600mg 90ct",
+    "asin": "B00OA6NLG0",
+    "affiliateTag": "suppvis-20",
+    "price": 39.5,
+    "servings": 90,
+    "dosePerServing": "600mg",
+    "form": "N-Acetyl-L-Cysteine",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Amino Acid"
+    ],
+    "keyBenefit": "Glutathione precursor for detox, lung, and immune support",
+    "imageEmoji": "🛡️",
+    "imageUrl": "https://m.media-amazon.com/images/I/71ReEwL5WOL._AC_SL300_.jpg"
+  },
+  {
+    "id": "thorne-nac",
+    "supplementName": "NAC",
+    "brand": "Thorne",
+    "productName": "NAC 180ct",
+    "asin": "B0FQM1CVV9",
+    "affiliateTag": "suppvis-20",
+    "price": 63.0,
+    "servings": 180,
+    "dosePerServing": "N-Acetylcysteine",
+    "form": "N-Acetylcysteine",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Amino Acid"
+    ],
+    "keyBenefit": "Third-party certified NAC — high count for daily use",
+    "imageEmoji": "🛡️",
+    "imageUrl": "https://m.media-amazon.com/images/I/71nJz1OQZ9L._AC_SL300_.jpg"
+  },
+  {
+    "id": "life-extension-nac",
+    "supplementName": "NAC",
+    "brand": "Life Extension",
+    "productName": "NAC 600mg 150ct",
+    "asin": "B07KR3LZNJ",
+    "affiliateTag": "suppvis-20",
+    "price": 28.95,
+    "servings": 150,
+    "dosePerServing": "600mg",
+    "form": "N-Acetyl-L-Cysteine",
+    "tier": "value",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Amino Acid"
+    ],
+    "keyBenefit": "Best value per serving for clinical-grade NAC",
+    "imageEmoji": "🛡️",
+    "imageUrl": "https://m.media-amazon.com/images/I/61yHnalNZSL._AC_SL300_.jpg"
+  },
+  {
+    "id": "now-nac-selenium",
+    "supplementName": "NAC",
+    "brand": "NOW Foods",
+    "productName": "NAC 600mg with Selenium 250ct",
+    "asin": "B0013OUQ3S",
+    "affiliateTag": "suppvis-20",
+    "price": 21.85,
+    "servings": 250,
+    "dosePerServing": "600mg NAC + Selenium",
+    "form": "N-Acetyl Cysteine + Selenium",
+    "tier": "value",
+    "thirdPartyTested": false,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Amino Acid"
+    ],
+    "keyBenefit": "Selenium enhances NAC glutathione production — smart combo",
+    "imageEmoji": "🛡️",
+    "imageUrl": "https://m.media-amazon.com/images/I/71DQCGJZ5-L._AC_SL300_.jpg"
+  },
+  {
+    "id": "pure-encapsulations-b-complex",
+    "supplementName": "B-Complex",
+    "brand": "Pure Encapsulations",
+    "productName": "B-Complex Plus 120ct",
+    "asin": "B00JYFN6DU",
+    "affiliateTag": "suppvis-20",
+    "price": 42.0,
+    "servings": 120,
+    "dosePerServing": "Full methylated B spectrum",
+    "form": "Methylated",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Vitamin"
+    ],
+    "keyBenefit": "Active methylated forms — essential if you have MTHFR variants",
+    "imageEmoji": "⚡",
+    "imageUrl": "https://m.media-amazon.com/images/I/71yaBy2mB4L._AC_SL300_.jpg",
+    "formNote": "40% of people have MTHFR variants that prevent absorbing non-methylated B vitamins"
+  },
+  {
+    "id": "thorne-basic-b",
+    "supplementName": "B-Complex",
+    "brand": "Thorne",
+    "productName": "Basic B Complex 60ct",
+    "asin": "B00HST919C",
+    "affiliateTag": "suppvis-20",
+    "price": 27.0,
+    "servings": 60,
+    "dosePerServing": "Active B vitamins + Choline",
+    "form": "Methylated with Choline",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Vitamin"
+    ],
+    "keyBenefit": "Active B vitamins plus choline for brain and energy",
+    "imageEmoji": "⚡",
+    "imageUrl": "https://m.media-amazon.com/images/I/71Pf0ucnxiL._AC_SL300_.jpg"
+  },
+  {
+    "id": "thorne-stress-b",
+    "supplementName": "B-Complex",
+    "brand": "Thorne",
+    "productName": "Stress B-Complex 60ct",
+    "asin": "B0797DVMF3",
+    "affiliateTag": "suppvis-20",
+    "price": 26.0,
+    "servings": 60,
+    "dosePerServing": "Extra B5 for adrenal support",
+    "form": "High B5 formula",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Vitamin"
+    ],
+    "keyBenefit": "Extra B5 targets adrenal fatigue and cortisol support",
+    "imageEmoji": "⚡",
+    "imageUrl": "https://m.media-amazon.com/images/I/71GHJZnV8+L._AC_SL300_.jpg"
+  },
+  {
+    "id": "life-extension-b-complex",
+    "supplementName": "B-Complex",
+    "brand": "Life Extension",
+    "productName": "BioActive Complete B-Complex 60ct",
+    "asin": "B00DHTQNQ6",
+    "affiliateTag": "suppvis-20",
+    "price": 9.0,
+    "servings": 60,
+    "dosePerServing": "Bioactive B complex",
+    "form": "Bioactive",
+    "tier": "value",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Vitamin"
+    ],
+    "keyBenefit": "Best value bioactive B complex from a trusted brand",
+    "imageEmoji": "⚡",
+    "imageUrl": "https://m.media-amazon.com/images/I/71EAKTri6IL._AC_SL300_.jpg"
+  },
+  {
+    "id": "thorne-curcumin-phytosome",
+    "supplementName": "Curcumin",
+    "brand": "Thorne",
+    "productName": "Curcumin Phytosome 500mg (Meriva) 60ct",
+    "asin": "B01D8V0962",
+    "affiliateTag": "suppvis-20",
+    "price": 49.0,
+    "servings": 60,
+    "dosePerServing": "500mg Meriva",
+    "form": "Meriva Phytosome",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Herb"
+    ],
+    "keyBenefit": "Meriva phytosome — 29x better absorbed than standard curcumin",
+    "imageEmoji": "🌿",
+    "imageUrl": "https://m.media-amazon.com/images/I/7191sL+0YRL._AC_SL300_.jpg",
+    "formNote": "Curcumin alone has near-zero absorption — phytosome or piperine forms are essential"
+  },
+  {
+    "id": "pure-encapsulations-curcumin-bioperine",
+    "supplementName": "Curcumin",
+    "brand": "Pure Encapsulations",
+    "productName": "Curcumin 500mg with Bioperine 120ct",
+    "asin": "B0016LS28E",
+    "affiliateTag": "suppvis-20",
+    "price": 82.6,
+    "servings": 120,
+    "dosePerServing": "500mg + Bioperine",
+    "form": "With Bioperine",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Herb"
+    ],
+    "keyBenefit": "Piperine increases curcumin absorption by 2000%",
+    "imageEmoji": "🌿",
+    "imageUrl": "https://m.media-amazon.com/images/I/714fgn45KjL._AC_SL300_.jpg"
+  },
+  {
+    "id": "pure-encapsulations-curcumin",
+    "supplementName": "Curcumin",
+    "brand": "Pure Encapsulations",
+    "productName": "Curcumin 500mg 60ct",
+    "asin": "B0064RX49C",
+    "affiliateTag": "suppvis-20",
+    "price": 33.5,
+    "servings": 60,
+    "dosePerServing": "500mg",
+    "form": "Standard extract",
+    "tier": "value",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Herb"
+    ],
+    "keyBenefit": "Pharmaceutical grade turmeric extract — pair with fat or piperine",
+    "imageEmoji": "🌿",
+    "imageUrl": "https://m.media-amazon.com/images/I/71Pd2eWKOqL._AC_SL300_.jpg"
+  },
+  {
+    "id": "life-extension-curcumin",
+    "supplementName": "Curcumin",
+    "brand": "Life Extension",
+    "productName": "Curcumin Elite 90ct",
+    "asin": "B0848KT6PH",
+    "affiliateTag": "suppvis-20",
+    "price": 35.97,
+    "servings": 90,
+    "dosePerServing": "Enhanced absorption turmeric",
+    "form": "Fenugreek enhanced",
+    "tier": "value",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Herb"
+    ],
+    "keyBenefit": "Fenugreek complex boosts absorption at budget price",
+    "imageEmoji": "🌿",
+    "imageUrl": "https://m.media-amazon.com/images/I/61lwvrgvnPL._AC_SL300_.jpg"
+  },
+  {
+    "id": "integrative-curcumax",
+    "supplementName": "Curcumin",
+    "brand": "Integrative Therapeutics",
+    "productName": "Curcumax Pro 60ct",
+    "asin": "B005F7KUIA",
+    "affiliateTag": "suppvis-20",
+    "price": 49.25,
+    "servings": 30,
+    "dosePerServing": "500mg BCM-95",
+    "form": "BCM-95 bioavailable",
+    "tier": "premium",
+    "thirdPartyTested": false,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Herb"
+    ],
+    "keyBenefit": "BCM-95 form — 6x more bioavailable than standard curcumin",
+    "imageEmoji": "🌿",
+    "imageUrl": "https://m.media-amazon.com/images/I/51-DF7-fkWL._AC_SL300_.jpg"
+  },
+  {
+    "id": "thorne-plant-protein",
+    "supplementName": "Protein Powder",
+    "brand": "Thorne",
+    "productName": "Plant Protein Vanilla 20ct",
+    "asin": "B0G2TJ3Y2J",
+    "affiliateTag": "suppvis-20",
+    "price": 49.0,
+    "servings": 20,
+    "dosePerServing": "22g pea, rice, chia",
+    "form": "Vegan powder",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Supplement"
+    ],
+    "keyBenefit": "NSF Certified complete amino acid vegan protein",
+    "imageEmoji": "💪",
+    "imageUrl": "https://m.media-amazon.com/images/I/61rNOiVSlDL._AC_SL300_.jpg"
+  },
+  {
+    "id": "momentous-whey-isolate",
+    "supplementName": "Protein Powder",
+    "brand": "Momentous",
+    "productName": "Essential Whey Isolate Chocolate 25ct",
+    "asin": "B09F21D98X",
+    "affiliateTag": "suppvis-20",
+    "price": 59.95,
+    "servings": 25,
+    "dosePerServing": "20g grass-fed whey isolate",
+    "form": "Whey isolate",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Supplement"
+    ],
+    "keyBenefit": "NSF Certified grass-fed isolate — cleanest whey available",
+    "imageEmoji": "💪",
+    "imageUrl": "https://m.media-amazon.com/images/I/71s-NYVo6eL._AC_SL300_.jpg"
+  },
+  {
+    "id": "thorne-whey-isolate",
+    "supplementName": "Protein Powder",
+    "brand": "Thorne",
+    "productName": "Whey Protein Isolate Vanilla 30ct",
+    "asin": "B0797B27FW",
+    "affiliateTag": "suppvis-20",
+    "price": 65.0,
+    "servings": 30,
+    "dosePerServing": "21g whey isolate",
+    "form": "Whey isolate",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Supplement"
+    ],
+    "keyBenefit": "NSF Certified for Sport — easy to digest whey isolate",
+    "imageEmoji": "💪",
+    "imageUrl": "https://m.media-amazon.com/images/I/61HetEUxtFL._AC_SL300_.jpg"
+  },
+  {
+    "id": "momentous-recovery-whey",
+    "supplementName": "Protein Powder",
+    "brand": "Momentous",
+    "productName": "Recovery Whey Chocolate 15ct",
+    "asin": "B09F1LG9KQ",
+    "affiliateTag": "suppvis-20",
+    "price": 54.5,
+    "servings": 15,
+    "dosePerServing": "20g post-workout isolate",
+    "form": "Whey isolate",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Supplement"
+    ],
+    "keyBenefit": "Post-workout focused formula — NSF Certified trial size",
+    "imageEmoji": "💪",
+    "imageUrl": "https://m.media-amazon.com/images/I/718I9OEerIL._AC_SL300_.jpg"
+  },
+  {
+    "id": "promix-whey-isolate",
+    "supplementName": "Protein Powder",
+    "brand": "ProMix",
+    "productName": "Whey Isolate Chocolate 5lb",
+    "asin": "B06XS1RXW2",
+    "affiliateTag": "suppvis-20",
+    "price": 129.99,
+    "servings": 70,
+    "dosePerServing": "25g grass-fed isolate",
+    "form": "Whey isolate",
+    "tier": "value",
+    "thirdPartyTested": false,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Supplement"
+    ],
+    "keyBenefit": "Best cost per serving — bulk grass-fed whey isolate",
+    "imageEmoji": "💪",
+    "imageUrl": "https://m.media-amazon.com/images/I/71uD40jBS2L._AC_SL300_.jpg"
+  },
+  {
+    "id": "garden-of-life-sport-whey",
+    "supplementName": "Protein Powder",
+    "brand": "Garden of Life",
+    "productName": "SPORT Certified Whey Chocolate 20ct",
+    "asin": "B01MQRNWDF",
+    "affiliateTag": "suppvis-20",
+    "price": 41.06,
+    "servings": 20,
+    "dosePerServing": "24g + probiotics",
+    "form": "Whey isolate + probiotics",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Supplement"
+    ],
+    "keyBenefit": "NSF Certified Sport whey with added probiotics for gut recovery",
+    "imageEmoji": "💪",
+    "imageUrl": "https://m.media-amazon.com/images/I/71SRvVtERDL._AC_SL300_.jpg"
+  },
+  {
+    "id": "garden-of-life-vegan-sport",
+    "supplementName": "Protein Powder",
+    "brand": "Garden of Life",
+    "productName": "Organic Vegan Sport Protein Vanilla 19ct",
+    "asin": "B01N7DTD98",
+    "affiliateTag": "suppvis-20",
+    "price": 40.84,
+    "servings": 19,
+    "dosePerServing": "30g plant protein",
+    "form": "Vegan powder",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Supplement"
+    ],
+    "keyBenefit": "NSF Certified 30g vegan protein — highest plant protein dose available",
+    "imageEmoji": "💪",
+    "imageUrl": "https://m.media-amazon.com/images/I/719QNQS-3hL._AC_SL300_.jpg"
+  },
+  {
+    "id": "garden-of-life-vegan-vanilla",
+    "supplementName": "Protein Powder",
+    "brand": "Garden of Life",
+    "productName": "Vegan Protein Vanilla 1.5lb",
+    "asin": "B007SYT7LO",
+    "affiliateTag": "suppvis-20",
+    "price": 35.69,
+    "servings": 14,
+    "dosePerServing": "Plant protein with enzymes",
+    "form": "Vegan powder",
+    "tier": "value",
+    "thirdPartyTested": false,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Supplement"
+    ],
+    "keyBenefit": "Affordable vegan protein with digestive enzymes included",
+    "imageEmoji": "💪",
+    "imageUrl": "https://m.media-amazon.com/images/I/71Z-bNukjKL._AC_SL300_.jpg"
+  },
+  {
+    "id": "thorne-beta-alanine",
+    "supplementName": "Beta-Alanine",
+    "brand": "Thorne",
+    "productName": "Beta Alanine Sustained Release 120ct",
+    "asin": "B06XKWQ5NW",
+    "affiliateTag": "suppvis-20",
+    "price": 46.0,
+    "servings": 60,
+    "dosePerServing": "800mg SR per tablet",
+    "form": "Sustained release tablet",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Amino Acid"
+    ],
+    "keyBenefit": "SR formula eliminates tingling — full clinical dose for endurance",
+    "imageEmoji": "💪",
+    "imageUrl": "https://m.media-amazon.com/images/I/61fTPnUBt7L._AC_SL300_.jpg",
+    "formNote": "Sustained release form prevents the paresthesia (tingling) from standard beta-alanine"
+  },
+  {
+    "id": "thorne-l-glutamine-powder",
+    "supplementName": "L-Glutamine",
+    "brand": "Thorne",
+    "productName": "L-Glutamine Powder 90ct",
+    "asin": "B000FGWDL8",
+    "affiliateTag": "suppvis-20",
+    "price": 67.0,
+    "servings": 90,
+    "dosePerServing": "5g powder",
+    "form": "Powder",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Amino Acid"
+    ],
+    "keyBenefit": "NSF Certified gut lining repair and muscle recovery support",
+    "imageEmoji": "🌱",
+    "imageUrl": "https://m.media-amazon.com/images/I/61LhR9zKbgL._AC_SL300_.jpg"
+  },
+  {
+    "id": "pure-encapsulations-l-glutamine",
+    "supplementName": "L-Glutamine",
+    "brand": "Pure Encapsulations",
+    "productName": "L-Glutamine 500mg 90ct",
+    "asin": "B000VYZG0O",
+    "affiliateTag": "suppvis-20",
+    "price": 24.5,
+    "servings": 90,
+    "dosePerServing": "500mg capsule",
+    "form": "Capsule",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Amino Acid"
+    ],
+    "keyBenefit": "Hypoallergenic gut lining support — easy capsule format",
+    "imageEmoji": "🌱",
+    "imageUrl": "https://m.media-amazon.com/images/I/71hqVQm0Z4L._AC_SL300_.jpg"
+  },
+  {
+    "id": "pure-encapsulations-l-glutamine-powder",
+    "supplementName": "L-Glutamine",
+    "brand": "Pure Encapsulations",
+    "productName": "L-Glutamine Powder 8oz",
+    "asin": "B01N6E26ZX",
+    "affiliateTag": "suppvis-20",
+    "price": 55.0,
+    "servings": 45,
+    "dosePerServing": "5g powder",
+    "form": "Powder",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Amino Acid"
+    ],
+    "keyBenefit": "Bulk powder for high-dose gut healing protocols",
+    "imageEmoji": "🌱",
+    "imageUrl": "https://m.media-amazon.com/images/I/817gHkzbg8L._AC_SL300_.jpg"
+  },
+  {
+    "id": "thorne-l-glutamine-caps",
+    "supplementName": "L-Glutamine",
+    "brand": "Thorne",
+    "productName": "L-Glutamine Capsules 90ct",
+    "asin": "B0797N816M",
+    "affiliateTag": "suppvis-20",
+    "price": 26.0,
+    "servings": 90,
+    "dosePerServing": "500mg capsule",
+    "form": "Capsule",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Amino Acid"
+    ],
+    "keyBenefit": "NSF Certified capsule form — convenient daily gut support",
+    "imageEmoji": "🌱",
+    "imageUrl": "https://m.media-amazon.com/images/I/610zPXZYeWL._AC_SL300_.jpg"
+  },
+  {
+    "id": "thorne-daily-electrolytes",
+    "supplementName": "Electrolytes",
+    "brand": "Thorne",
+    "productName": "Daily Electrolytes 30ct",
+    "asin": "B0DVXD2WBB",
+    "affiliateTag": "suppvis-20",
+    "price": 40.0,
+    "servings": 30,
+    "dosePerServing": "Zero sugar electrolyte mix",
+    "form": "Stick pack powder",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Supplement"
+    ],
+    "keyBenefit": "NSF Certified zero sugar electrolytes for daily hydration",
+    "imageEmoji": "💧",
+    "imageUrl": "https://m.media-amazon.com/images/I/81KxHzlCW5L._AC_SL300_.jpg"
+  },
+  {
+    "id": "promix-electrolytes",
+    "supplementName": "Electrolytes",
+    "brand": "ProMix",
+    "productName": "Electrolytes Lemon Lime 30ct",
+    "asin": "B0D5VF5QRB",
+    "affiliateTag": "suppvis-20",
+    "price": 42.99,
+    "servings": 30,
+    "dosePerServing": "Himalayan salt electrolyte blend",
+    "form": "Powder packet",
+    "tier": "value",
+    "thirdPartyTested": false,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Supplement"
+    ],
+    "keyBenefit": "Clean ingredients, no stevia, no artificial sweeteners",
+    "imageEmoji": "💧",
+    "imageUrl": "https://m.media-amazon.com/images/I/61m7-A8xleL._AC_SL300_.jpg"
+  },
+  {
+    "id": "lmnt-citrus-salt",
+    "supplementName": "Electrolytes",
+    "brand": "LMNT",
+    "productName": "Zero Sugar Electrolytes Citrus Salt 30ct",
+    "asin": "B07TT8B1JJ",
+    "affiliateTag": "suppvis-20",
+    "price": 44.97,
+    "servings": 30,
+    "dosePerServing": "1000mg Na, 200mg K, 60mg Mg",
+    "form": "Drink mix",
+    "tier": "premium",
+    "thirdPartyTested": false,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Supplement"
+    ],
+    "keyBenefit": "Science-backed high sodium formula — used by Huberman",
+    "imageEmoji": "💧",
+    "imageUrl": "https://m.media-amazon.com/images/I/71Jk1OXuboL._AC_SL300_.jpg",
+    "formNote": "High sodium is intentional — most people are chronically under-salted"
+  },
+  {
+    "id": "thorne-catalyte",
+    "supplementName": "Electrolytes",
+    "brand": "Thorne",
+    "productName": "Catalyte Lemon Lime",
+    "asin": "B07VS6XSN7",
+    "affiliateTag": "suppvis-20",
+    "price": 34.0,
+    "servings": 30,
+    "dosePerServing": "Full electrolyte + B vitamin complex",
+    "form": "Powder",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Supplement"
+    ],
+    "keyBenefit": "Electrolyte replenishment + B vitamins for energy restoration",
+    "imageEmoji": "💧",
+    "imageUrl": "https://m.media-amazon.com/images/I/71XV-ppeaKL._AC_SL300_.jpg"
+  },
+  {
+    "id": "thorne-l-theanine",
+    "supplementName": "L-Theanine",
+    "brand": "Thorne",
+    "productName": "L-Theanine 200mg 90ct",
+    "asin": "B0797BLW59",
+    "affiliateTag": "suppvis-20",
+    "price": 68.0,
+    "servings": 90,
+    "dosePerServing": "200mg",
+    "form": "Capsule",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Amino Acid"
+    ],
+    "keyBenefit": "Calm focus without drowsiness — perfect coffee companion",
+    "imageEmoji": "🍵",
+    "imageUrl": "https://m.media-amazon.com/images/I/61xwHQ+l8tL._AC_SL300_.jpg"
+  },
+  {
+    "id": "pure-encapsulations-l-theanine",
+    "supplementName": "L-Theanine",
+    "brand": "Pure Encapsulations",
+    "productName": "L-Theanine 60ct",
+    "asin": "B0016CXZJO",
+    "affiliateTag": "suppvis-20",
+    "price": 65.5,
+    "servings": 60,
+    "dosePerServing": "200mg",
+    "form": "Capsule",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Amino Acid"
+    ],
+    "keyBenefit": "Hypoallergenic L-Theanine for daily stress and relaxation support",
+    "imageEmoji": "🍵",
+    "imageUrl": "https://m.media-amazon.com/images/I/71fuFWRW54L._AC_SL300_.jpg"
+  },
+  {
+    "id": "integrative-l-theanine",
+    "supplementName": "L-Theanine",
+    "brand": "Integrative Therapeutics",
+    "productName": "L-Theanine Suntheanine 60ct",
+    "asin": "B0036H0CV6",
+    "affiliateTag": "suppvis-20",
+    "price": 22.0,
+    "servings": 30,
+    "dosePerServing": "Suntheanine patented L-Theanine",
+    "form": "Suntheanine",
+    "tier": "premium",
+    "thirdPartyTested": false,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Amino Acid"
+    ],
+    "keyBenefit": "Suntheanine — the most studied, patented pure L-Theanine form",
+    "imageEmoji": "🍵",
+    "imageUrl": "https://m.media-amazon.com/images/I/51gLwqdS1RL._AC_SL300_.jpg"
+  },
+  {
+    "id": "life-extension-l-theanine",
+    "supplementName": "L-Theanine",
+    "brand": "Life Extension",
+    "productName": "L-Theanine 200mg 60ct",
+    "asin": "B00BSH7LXS",
+    "affiliateTag": "suppvis-20",
+    "price": 18.0,
+    "servings": 60,
+    "dosePerServing": "200mg",
+    "form": "Capsule",
+    "tier": "value",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Amino Acid"
+    ],
+    "keyBenefit": "Best value L-Theanine at clinical 200mg dose",
+    "imageEmoji": "🍵",
+    "imageUrl": "https://m.media-amazon.com/images/I/71dpvBT8FrL._AC_SL300_.jpg"
+  },
+  {
+    "id": "integrative-5htp",
+    "supplementName": "5-HTP",
+    "brand": "Integrative Therapeutics",
+    "productName": "5-HTP 60ct",
+    "asin": "B0017U6R18",
+    "affiliateTag": "suppvis-20",
+    "price": 24.0,
+    "servings": 60,
+    "dosePerServing": "100mg 5-Hydroxytryptophan",
+    "form": "Capsule",
+    "tier": "premium",
+    "thirdPartyTested": false,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Amino Acid"
+    ],
+    "keyBenefit": "Serotonin precursor for mood, sleep, and appetite balance",
+    "imageEmoji": "😊",
+    "imageUrl": "https://m.media-amazon.com/images/I/61GuuKvqKsL._AC_SL300_.jpg",
+    "formNote": "Take at night — 5-HTP supports serotonin which converts to melatonin"
+  },
+  {
+    "id": "thorne-5htp",
+    "supplementName": "5-HTP",
+    "brand": "Thorne",
+    "productName": "5-HTP with B6 90ct",
+    "asin": "B00GDXHBS2",
+    "affiliateTag": "suppvis-20",
+    "price": 39.0,
+    "servings": 90,
+    "dosePerServing": "5-HTP + Vitamin B6",
+    "form": "With B6 cofactor",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Amino Acid"
+    ],
+    "keyBenefit": "B6 cofactor included — essential for 5-HTP to convert to serotonin",
+    "imageEmoji": "😊",
+    "imageUrl": "https://m.media-amazon.com/images/I/71jQ0DQ81HL._AC_SL300_.jpg"
+  },
+  {
+    "id": "pure-encapsulations-5htp",
+    "supplementName": "5-HTP",
+    "brand": "Pure Encapsulations",
+    "productName": "5-HTP 100mg 60ct",
+    "asin": "B0016BVGCS",
+    "affiliateTag": "suppvis-20",
+    "price": 61.0,
+    "servings": 60,
+    "dosePerServing": "100mg",
+    "form": "Capsule",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Amino Acid"
+    ],
+    "keyBenefit": "Hypoallergenic 5-HTP for mood and sleep regulation",
+    "imageEmoji": "😊",
+    "imageUrl": "https://m.media-amazon.com/images/I/71GkdpaM6ZL._AC_SL300_.jpg"
+  },
+  {
+    "id": "now-5htp",
+    "supplementName": "5-HTP",
+    "brand": "NOW Foods",
+    "productName": "5-HTP 100mg 120ct",
+    "asin": "B0013OQI1W",
+    "affiliateTag": "suppvis-20",
+    "price": 16.79,
+    "servings": 120,
+    "dosePerServing": "100mg",
+    "form": "Veg capsule",
+    "tier": "value",
+    "thirdPartyTested": false,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Amino Acid"
+    ],
+    "keyBenefit": "Best value 5-HTP for consistent daily mood support",
+    "imageEmoji": "😊",
+    "imageUrl": "https://m.media-amazon.com/images/I/710yijdX45L._AC_SL300_.jpg"
+  },
+  {
+    "id": "pure-encapsulations-bacopa",
+    "supplementName": "Bacopa",
+    "brand": "Pure Encapsulations",
+    "productName": "Bacopa Monnieri 180ct",
+    "asin": "B0016LL9IY",
+    "affiliateTag": "suppvis-20",
+    "price": 55.0,
+    "servings": 180,
+    "dosePerServing": "Standardized Bacopa",
+    "form": "Standardized extract",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Adaptogen"
+    ],
+    "keyBenefit": "Memory and learning support — takes 8-12 weeks for full effect",
+    "imageEmoji": "🧠",
+    "imageUrl": "https://m.media-amazon.com/images/I/71B6uQIsT4L._AC_SL300_.jpg",
+    "formNote": "Bacopa requires consistent 8-12 week use before peak cognitive effects emerge"
+  },
+  {
+    "id": "now-bacopa",
+    "supplementName": "Bacopa",
+    "brand": "NOW Foods",
+    "productName": "Bacopa Extract 450mg 90ct",
+    "asin": "B07RFZ8TX2",
+    "affiliateTag": "suppvis-20",
+    "price": 22.76,
+    "servings": 90,
+    "dosePerServing": "450mg standardized",
+    "form": "Standardized extract",
+    "tier": "value",
+    "thirdPartyTested": false,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Adaptogen"
+    ],
+    "keyBenefit": "Affordable entry point for Bacopa cognitive support",
+    "imageEmoji": "🧠",
+    "imageUrl": "https://m.media-amazon.com/images/I/714khNp+bVL._AC_SL300_.jpg"
+  },
+  {
+    "id": "integrative-ps",
+    "supplementName": "Phosphatidylserine",
+    "brand": "Integrative Therapeutics",
+    "productName": "Phosphatidylserine 60ct",
+    "asin": "B0058BM5AE",
+    "affiliateTag": "suppvis-20",
+    "price": 49.25,
+    "servings": 60,
+    "dosePerServing": "100mg",
+    "form": "Softgel",
+    "tier": "premium",
+    "thirdPartyTested": false,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Supplement"
+    ],
+    "keyBenefit": "Cortisol regulation and memory support — FDA qualified claim",
+    "imageEmoji": "🧠",
+    "imageUrl": "https://m.media-amazon.com/images/I/51H5wao0igL._AC_SL300_.jpg"
+  },
+  {
+    "id": "pure-encapsulations-ps100",
+    "supplementName": "Phosphatidylserine",
+    "brand": "Pure Encapsulations",
+    "productName": "PS 100 Phosphatidylserine 60ct",
+    "asin": "B001680S1G",
+    "affiliateTag": "suppvis-20",
+    "price": 81.0,
+    "servings": 60,
+    "dosePerServing": "100mg",
+    "form": "Softgel",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Supplement"
+    ],
+    "keyBenefit": "Hypoallergenic PS for cognitive performance and stress resilience",
+    "imageEmoji": "🧠",
+    "imageUrl": "https://m.media-amazon.com/images/I/71UvogG6f0L._AC_SL300_.jpg"
+  },
+  {
+    "id": "thorne-phosphatidylserine",
+    "supplementName": "Phosphatidylserine",
+    "brand": "Thorne",
+    "productName": "Phosphatidylserine 60ct",
+    "asin": "B000FGZG4O",
+    "affiliateTag": "suppvis-20",
+    "price": 68.0,
+    "servings": 60,
+    "dosePerServing": "100mg",
+    "form": "Capsule",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Supplement"
+    ],
+    "keyBenefit": "Third-party certified PS — reduces cortisol during stress",
+    "imageEmoji": "🧠",
+    "imageUrl": "https://m.media-amazon.com/images/I/61DyspPmgAL._AC_SL300_.jpg"
+  },
+  {
+    "id": "life-extension-ps",
+    "supplementName": "Phosphatidylserine",
+    "brand": "Life Extension",
+    "productName": "PS Caps 100ct",
+    "asin": "B00B0X8B48",
+    "affiliateTag": "suppvis-20",
+    "price": 36.0,
+    "servings": 100,
+    "dosePerServing": "100mg",
+    "form": "Capsule",
+    "tier": "value",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Supplement"
+    ],
+    "keyBenefit": "Best value per serving for clinical-dose phosphatidylserine",
+    "imageEmoji": "🧠",
+    "imageUrl": "https://m.media-amazon.com/images/I/71pKTzBwThL._AC_SL300_.jpg"
+  },
+  {
+    "id": "momentous-alpha-gpc",
+    "supplementName": "Alpha-GPC",
+    "brand": "Momentous",
+    "productName": "Alpha GPC 60ct",
+    "asin": "B09WWS8K5X",
+    "affiliateTag": "suppvis-20",
+    "price": 42.95,
+    "servings": 60,
+    "dosePerServing": "300mg",
+    "form": "Capsule",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Supplement"
+    ],
+    "keyBenefit": "NSF Certified — Huberman stack choline source for focus and power",
+    "imageEmoji": "🧠",
+    "imageUrl": "https://m.media-amazon.com/images/I/61gV6FQoayL._AC_SL300_.jpg"
+  },
+  {
+    "id": "now-alpha-gpc",
+    "supplementName": "Alpha-GPC",
+    "brand": "NOW Foods",
+    "productName": "Alpha GPC 300mg 60ct",
+    "asin": "B001RYKA3U",
+    "affiliateTag": "suppvis-20",
+    "price": 23.62,
+    "servings": 60,
+    "dosePerServing": "300mg",
+    "form": "Veg capsule",
+    "tier": "value",
+    "thirdPartyTested": false,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Supplement"
+    ],
+    "keyBenefit": "Most bioavailable choline source for memory and focus at budget price",
+    "imageEmoji": "🧠",
+    "imageUrl": "https://m.media-amazon.com/images/I/71PH59-+H-L._AC_SL300_.jpg"
+  },
+  {
+    "id": "life-extension-cognitex",
+    "supplementName": "Alpha-GPC",
+    "brand": "Life Extension",
+    "productName": "Cognitex Basics 30ct",
+    "asin": "B07KN1DZ37",
+    "affiliateTag": "suppvis-20",
+    "price": 21.6,
+    "servings": 30,
+    "dosePerServing": "Alpha-GPC + Phosphatidylserine blend",
+    "form": "Multi-nutrient softgel",
+    "tier": "value",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": false,
+    "categories": [
+      "Supplement"
+    ],
+    "keyBenefit": "Cognition combo — Alpha-GPC + PS in one capsule",
+    "imageEmoji": "🧠",
+    "imageUrl": "https://m.media-amazon.com/images/I/71EwSaYLR6L._AC_SL300_.jpg"
+  },
+  {
+    "id": "tru-niagen-nr",
+    "supplementName": "Nicotinamide Riboside",
+    "brand": "Tru Niagen",
+    "productName": "Nicotinamide Riboside 300mg 30ct",
+    "asin": "B07TK5K5TQ",
+    "affiliateTag": "suppvis-20",
+    "price": 49.0,
+    "servings": 30,
+    "dosePerServing": "300mg Niagen NR",
+    "form": "NR capsule",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Supplement"
+    ],
+    "keyBenefit": "Patented NR — the most clinically studied NAD+ precursor",
+    "imageEmoji": "🧬",
+    "imageUrl": "https://m.media-amazon.com/images/I/71oLqs+u-EL._AC_SL300_.jpg",
+    "formNote": "NR is the only form shown in human trials to significantly raise NAD+ levels"
+  },
+  {
+    "id": "integrative-resveratrol",
+    "supplementName": "Resveratrol",
+    "brand": "Integrative Therapeutics",
+    "productName": "Resveratrol Ultra HP 60ct",
+    "asin": "B00379LX0C",
+    "affiliateTag": "suppvis-20",
+    "price": 49.5,
+    "servings": 60,
+    "dosePerServing": "Trans-resveratrol + quercetin",
+    "form": "Non-soy softgel",
+    "tier": "premium",
+    "thirdPartyTested": false,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Supplement"
+    ],
+    "keyBenefit": "Trans-resveratrol — the active form that activates longevity pathways",
+    "imageEmoji": "🧬",
+    "imageUrl": "https://m.media-amazon.com/images/I/51br3jHxuPL._AC_SL300_.jpg"
+  },
+  {
+    "id": "pure-encapsulations-resveratrol-40",
+    "supplementName": "Resveratrol",
+    "brand": "Pure Encapsulations",
+    "productName": "Resveratrol 40mg 120ct",
+    "asin": "B008S90RCQ",
+    "affiliateTag": "suppvis-20",
+    "price": 49.0,
+    "servings": 120,
+    "dosePerServing": "40mg trans-resveratrol",
+    "form": "Capsule",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Supplement"
+    ],
+    "keyBenefit": "Hypoallergenic trans-resveratrol for cardiovascular longevity",
+    "imageEmoji": "🧬",
+    "imageUrl": "https://m.media-amazon.com/images/I/71crRlL+c2L._AC_SL300_.jpg"
+  },
+  {
+    "id": "pure-encapsulations-resveratrol-extra",
+    "supplementName": "Resveratrol",
+    "brand": "Pure Encapsulations",
+    "productName": "Resveratrol EXTRA 100mg 120ct",
+    "asin": "B0078VYLCM",
+    "affiliateTag": "suppvis-20",
+    "price": 88.5,
+    "servings": 120,
+    "dosePerServing": "100mg trans-resveratrol",
+    "form": "High dose capsule",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Supplement"
+    ],
+    "keyBenefit": "Higher dose trans-resveratrol closer to research protocols",
+    "imageEmoji": "🧬",
+    "imageUrl": "https://m.media-amazon.com/images/I/71EMKNKUbDL._AC_SL300_.jpg"
+  },
+  {
+    "id": "thorne-resveracel",
+    "supplementName": "Resveratrol",
+    "brand": "Thorne",
+    "productName": "ResveraCel with NR + Quercetin 60ct",
+    "asin": "B097Z5387H",
+    "affiliateTag": "suppvis-20",
+    "price": 60.0,
+    "servings": 30,
+    "dosePerServing": "NR + Resveratrol + Quercetin",
+    "form": "Longevity blend",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": false,
+    "categories": [
+      "Supplement"
+    ],
+    "keyBenefit": "NAD+ precursor + resveratrol + quercetin — complete longevity stack",
+    "imageEmoji": "🧬",
+    "imageUrl": "https://m.media-amazon.com/images/I/71nRllNMiwL._AC_SL300_.jpg"
+  },
+  {
+    "id": "life-extension-resveratrol",
+    "supplementName": "Resveratrol",
+    "brand": "Life Extension",
+    "productName": "Optimized Resveratrol 90ct",
+    "asin": "B07THFZW2Y",
+    "affiliateTag": "suppvis-20",
+    "price": 48.97,
+    "servings": 90,
+    "dosePerServing": "Trans-resveratrol + quercetin",
+    "form": "Capsule",
+    "tier": "value",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": false,
+    "categories": [
+      "Supplement"
+    ],
+    "keyBenefit": "Best value resveratrol + quercetin longevity combo",
+    "imageEmoji": "🧬",
+    "imageUrl": "https://m.media-amazon.com/images/I/61i9BMWD6xL._AC_SL300_.jpg"
+  },
+  {
+    "id": "thorne-quercetin",
+    "supplementName": "Quercetin",
+    "brand": "Thorne",
+    "productName": "Quercetin Phytosome 60ct",
+    "asin": "B0797DQTVZ",
+    "affiliateTag": "suppvis-20",
+    "price": 46.0,
+    "servings": 60,
+    "dosePerServing": "Quercetin phytosome",
+    "form": "Phytosome",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Supplement"
+    ],
+    "keyBenefit": "Phytosome form absorbs 20x better than standard quercetin",
+    "imageEmoji": "🌿",
+    "imageUrl": "https://m.media-amazon.com/images/I/71aVcjDhxaL._AC_SL300_.jpg"
+  },
+  {
+    "id": "pure-encapsulations-quercetin",
+    "supplementName": "Quercetin",
+    "brand": "Pure Encapsulations",
+    "productName": "Quercetin 500mg 120ct",
+    "asin": "B0016J2K16",
+    "affiliateTag": "suppvis-20",
+    "price": 50.5,
+    "servings": 120,
+    "dosePerServing": "500mg",
+    "form": "Capsule",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Supplement"
+    ],
+    "keyBenefit": "Pharmaceutical grade quercetin for immune and cardiovascular support",
+    "imageEmoji": "🌿",
+    "imageUrl": "https://m.media-amazon.com/images/I/71-Fs+QgGML._AC_SL300_.jpg"
+  },
+  {
+    "id": "vital-nutrients-quercetin",
+    "supplementName": "Quercetin",
+    "brand": "Vital Nutrients",
+    "productName": "Quercetin 500mg 100ct",
+    "asin": "B000LNQ2RG",
+    "affiliateTag": "suppvis-20",
+    "price": 33.99,
+    "servings": 100,
+    "dosePerServing": "500mg",
+    "form": "Capsule",
+    "tier": "value",
+    "thirdPartyTested": false,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Supplement"
+    ],
+    "keyBenefit": "Vegan quercetin with bioflavonoids for sinus and immune support",
+    "imageEmoji": "🌿",
+    "imageUrl": "https://m.media-amazon.com/images/I/61DUDwSXMvL._AC_SL300_.jpg"
+  },
+  {
+    "id": "now-quercetin-bromelain",
+    "supplementName": "Quercetin",
+    "brand": "NOW Foods",
+    "productName": "Quercetin + Bromelain 120ct",
+    "asin": "B0013OSQ5I",
+    "affiliateTag": "suppvis-20",
+    "price": 24.26,
+    "servings": 120,
+    "dosePerServing": "Quercetin + Bromelain enzyme",
+    "form": "Capsule blend",
+    "tier": "value",
+    "thirdPartyTested": false,
+    "noProprietaryBlend": false,
+    "categories": [
+      "Supplement"
+    ],
+    "keyBenefit": "Bromelain enhances quercetin absorption — smart affordable combo",
+    "imageEmoji": "🌿",
+    "imageUrl": "https://m.media-amazon.com/images/I/71TDbOLMHiL._AC_SL300_.jpg"
+  },
+  {
+    "id": "life-extension-astaxanthin",
+    "supplementName": "Astaxanthin",
+    "brand": "Life Extension",
+    "productName": "Astaxanthin with Phospholipids 30ct",
+    "asin": "B00N9CMTV4",
+    "affiliateTag": "suppvis-20",
+    "price": 12.0,
+    "servings": 30,
+    "dosePerServing": "Astaxanthin + phospholipids",
+    "form": "Softgel",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Supplement"
+    ],
+    "keyBenefit": "Phospholipids dramatically increase astaxanthin absorption",
+    "imageEmoji": "🦐",
+    "imageUrl": "https://m.media-amazon.com/images/I/71vc4KEwWxL._AC_SL300_.jpg"
+  },
+  {
+    "id": "now-astaxanthin",
+    "supplementName": "Astaxanthin",
+    "brand": "NOW Foods",
+    "productName": "Astaxanthin 4mg 60ct",
+    "asin": "B0013OVXA8",
+    "affiliateTag": "suppvis-20",
+    "price": 11.6,
+    "servings": 60,
+    "dosePerServing": "4mg",
+    "form": "Softgel",
+    "tier": "value",
+    "thirdPartyTested": false,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Supplement"
+    ],
+    "keyBenefit": "Most powerful natural antioxidant — 6000x stronger than Vitamin C",
+    "imageEmoji": "🦐",
+    "imageUrl": "https://m.media-amazon.com/images/I/71NnJj+Gq9L._AC_SL300_.jpg"
+  },
+  {
+    "id": "pure-encapsulations-digestive-enzymes",
+    "supplementName": "Digestive Enzymes",
+    "brand": "Pure Encapsulations",
+    "productName": "Digestive Enzymes Ultra 180ct",
+    "asin": "B0016X8Y0S",
+    "affiliateTag": "suppvis-20",
+    "price": 66.5,
+    "servings": 90,
+    "dosePerServing": "Broad spectrum enzymes",
+    "form": "Vegetarian capsule",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Probiotic / Gut"
+    ],
+    "keyBenefit": "Full spectrum digestive support — proteins, fats, carbs, fiber, dairy",
+    "imageEmoji": "🦠",
+    "imageUrl": "https://m.media-amazon.com/images/I/71ZRt55K0fL._AC_SL300_.jpg"
+  },
+  {
+    "id": "integrative-panplex",
+    "supplementName": "Digestive Enzymes",
+    "brand": "Integrative Therapeutics",
+    "productName": "Panplex 2-Phase 180ct",
+    "asin": "B001TLH5IO",
+    "affiliateTag": "suppvis-20",
+    "price": 49.0,
+    "servings": 90,
+    "dosePerServing": "Acid phase + alkaline phase enzymes",
+    "form": "Two-phase tablet",
+    "tier": "premium",
+    "thirdPartyTested": false,
+    "noProprietaryBlend": false,
+    "categories": [
+      "Probiotic / Gut"
+    ],
+    "keyBenefit": "Two-phase design — works in both stomach and small intestine",
+    "imageEmoji": "🦠",
+    "imageUrl": "https://m.media-amazon.com/images/I/51sUBbUbvXL._AC_SL300_.jpg"
+  },
+  {
+    "id": "now-super-enzymes",
+    "supplementName": "Digestive Enzymes",
+    "brand": "NOW Foods",
+    "productName": "Super Enzymes 90ct",
+    "asin": "B0001T0GAE",
+    "affiliateTag": "suppvis-20",
+    "price": 13.6,
+    "servings": 90,
+    "dosePerServing": "Bromelain + pancreatin + papain",
+    "form": "Capsule blend",
+    "tier": "value",
+    "thirdPartyTested": false,
+    "noProprietaryBlend": false,
+    "categories": [
+      "Probiotic / Gut"
+    ],
+    "keyBenefit": "Best value digestive enzyme blend with proven enzymes",
+    "imageEmoji": "🦠",
+    "imageUrl": "https://m.media-amazon.com/images/I/71BCwOsl4vL._AC_SL300_.jpg"
+  },
+  {
+    "id": "thorne-advanced-digestive",
+    "supplementName": "Digestive Enzymes",
+    "brand": "Thorne",
+    "productName": "Advanced Digestive Enzymes 180ct",
+    "asin": "B000VYQJ8W",
+    "affiliateTag": "suppvis-20",
+    "price": 87.0,
+    "servings": 180,
+    "dosePerServing": "Pepsin + ox bile + pancreatin",
+    "form": "Capsule",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Probiotic / Gut"
+    ],
+    "keyBenefit": "NSF Certified — includes ox bile for fat digestion support",
+    "imageEmoji": "🦠",
+    "imageUrl": "https://m.media-amazon.com/images/I/711E6JR0coL._SL300_.jpg"
+  },
+  {
+    "id": "thorne-fibermend",
+    "supplementName": "Psyllium Husk",
+    "brand": "Thorne",
+    "productName": "FiberMend Prebiotic 30ct",
+    "asin": "B00BGJ7EBC",
+    "affiliateTag": "suppvis-20",
+    "price": 45.0,
+    "servings": 30,
+    "dosePerServing": "Prebiotic fiber blend",
+    "form": "Powder",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": false,
+    "categories": [
+      "Probiotic / Gut"
+    ],
+    "keyBenefit": "NSF Certified prebiotic fiber with antioxidants for gut health",
+    "imageEmoji": "🌾",
+    "imageUrl": "https://m.media-amazon.com/images/I/71slOCeu61L._AC_SL300_.jpg"
+  },
+  {
+    "id": "now-psyllium-powder",
+    "supplementName": "Psyllium Husk",
+    "brand": "NOW Foods",
+    "productName": "Psyllium Husk Powder 12oz",
+    "asin": "B007729DSE",
+    "affiliateTag": "suppvis-20",
+    "price": 11.3,
+    "servings": 68,
+    "dosePerServing": "5g soluble fiber",
+    "form": "Powder",
+    "tier": "value",
+    "thirdPartyTested": false,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Probiotic / Gut"
+    ],
+    "keyBenefit": "Non-GMO pure psyllium — best value for daily fiber intake",
+    "imageEmoji": "🌾",
+    "imageUrl": "https://m.media-amazon.com/images/I/71O3AqhHTzL._AC_SL300_.jpg"
+  },
+  {
+    "id": "now-psyllium-caps",
+    "supplementName": "Psyllium Husk",
+    "brand": "NOW Foods",
+    "productName": "Psyllium Husk Caps 500mg 200ct",
+    "asin": "B005P0XUAM",
+    "affiliateTag": "suppvis-20",
+    "price": 11.0,
+    "servings": 50,
+    "dosePerServing": "2000mg (4 caps)",
+    "form": "Capsule",
+    "tier": "value",
+    "thirdPartyTested": false,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Probiotic / Gut"
+    ],
+    "keyBenefit": "Convenient capsule form — no mixing required",
+    "imageEmoji": "🌾",
+    "imageUrl": "https://m.media-amazon.com/images/I/71Xg4PvMsZL._AC_SL300_.jpg"
+  },
+  {
+    "id": "bodybio-butyrate",
+    "supplementName": "Butyrate",
+    "brand": "BodyBio",
+    "productName": "Sodium Butyrate",
+    "asin": "B0058A9SF0",
+    "affiliateTag": "suppvis-20",
+    "price": 36.99,
+    "servings": 30,
+    "dosePerServing": "Sodium butyrate",
+    "form": "Capsule",
+    "tier": "premium",
+    "thirdPartyTested": false,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Probiotic / Gut"
+    ],
+    "keyBenefit": "Postbiotic that feeds colon cells directly — leaky gut repair",
+    "imageEmoji": "🦠",
+    "imageUrl": "https://m.media-amazon.com/images/I/615RUfqkPjL._AC_SL300_.jpg"
+  },
+  {
+    "id": "pure-encapsulations-sunbutyrate",
+    "supplementName": "Butyrate",
+    "brand": "Pure Encapsulations",
+    "productName": "SunButyrate-TG Liquid",
+    "asin": "B07W645FMS",
+    "affiliateTag": "suppvis-20",
+    "price": 42.5,
+    "servings": 45,
+    "dosePerServing": "Tributyrin liquid",
+    "form": "Liquid tributyrin",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Probiotic / Gut"
+    ],
+    "keyBenefit": "Tributyrin is better absorbed than sodium butyrate — reaches colon intact",
+    "imageEmoji": "🦠",
+    "imageUrl": "https://m.media-amazon.com/images/I/71xb6YZzOuL._AC_SL300_.jpg"
+  },
+  {
+    "id": "thorne-enteromend",
+    "supplementName": "Butyrate",
+    "brand": "Thorne",
+    "productName": "EnteroMend 30ct",
+    "asin": "B07978JYLN",
+    "affiliateTag": "suppvis-20",
+    "price": 50.0,
+    "servings": 30,
+    "dosePerServing": "Botanical GI support blend",
+    "form": "Powder",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": false,
+    "categories": [
+      "Probiotic / Gut"
+    ],
+    "keyBenefit": "NSF Certified botanical gut repair — IBS and leaky gut support",
+    "imageEmoji": "🦠",
+    "imageUrl": "https://m.media-amazon.com/images/I/61zNkw5ScsL._AC_SL300_.jpg"
+  },
+  {
+    "id": "pure-encapsulations-dhea-10",
+    "supplementName": "DHEA",
+    "brand": "Pure Encapsulations",
+    "productName": "DHEA 10mg 180ct",
+    "asin": "B0015VY4JQ",
+    "affiliateTag": "suppvis-20",
+    "price": 38.0,
+    "servings": 180,
+    "dosePerServing": "10mg micronized",
+    "form": "Micronized capsule",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Supplement"
+    ],
+    "keyBenefit": "Micronized for better absorption — low dose for women and sensitive users",
+    "imageEmoji": "⚖️",
+    "imageUrl": "https://m.media-amazon.com/images/I/71IN9XPWRAL._AC_SL300_.jpg",
+    "formNote": "DHEA is a precursor hormone — start low (10mg) and monitor levels with your doctor"
+  },
+  {
+    "id": "vital-nutrients-dhea-50",
+    "supplementName": "DHEA",
+    "brand": "Vital Nutrients",
+    "productName": "DHEA 50mg 60ct",
+    "asin": "B0095MUL8A",
+    "affiliateTag": "suppvis-20",
+    "price": 24.99,
+    "servings": 60,
+    "dosePerServing": "50mg micronized",
+    "form": "Micronized capsule",
+    "tier": "premium",
+    "thirdPartyTested": false,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Supplement"
+    ],
+    "keyBenefit": "Higher dose DHEA for men over 40 — check levels before using",
+    "imageEmoji": "⚖️",
+    "imageUrl": "https://m.media-amazon.com/images/I/61TcW70g-DL._AC_SL300_.jpg"
+  },
+  {
+    "id": "life-extension-dhea-25",
+    "supplementName": "DHEA",
+    "brand": "Life Extension",
+    "productName": "DHEA 25mg 100ct",
+    "asin": "B000PC318Q",
+    "affiliateTag": "suppvis-20",
+    "price": 14.0,
+    "servings": 100,
+    "dosePerServing": "25mg sublingual",
+    "form": "Dissolve-in-mouth tablet",
+    "tier": "value",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Supplement"
+    ],
+    "keyBenefit": "Sublingual delivery increases absorption — best value DHEA",
+    "imageEmoji": "⚖️",
+    "imageUrl": "https://m.media-amazon.com/images/I/71plWrpqu0L._AC_SL300_.jpg"
+  },
+  {
+    "id": "gaia-beet-maca",
+    "supplementName": "Maca",
+    "brand": "Gaia Herbs PRO",
+    "productName": "Fermented Beet & Maca 60ct",
+    "asin": "B0B6JVMCVY",
+    "affiliateTag": "suppvis-20",
+    "price": 46.0,
+    "servings": 30,
+    "dosePerServing": "Fermented beet + maca root",
+    "form": "Fermented capsule",
+    "tier": "premium",
+    "thirdPartyTested": false,
+    "noProprietaryBlend": false,
+    "categories": [
+      "Adaptogen"
+    ],
+    "keyBenefit": "Fermented beet + maca for energy, circulation, and hormone balance",
+    "imageEmoji": "🌱",
+    "imageUrl": "https://m.media-amazon.com/images/I/71wLR7-kY8L._AC_SL300_.jpg"
+  },
+  {
+    "id": "now-maca",
+    "supplementName": "Maca",
+    "brand": "NOW Foods",
+    "productName": "Maca 750mg 90ct",
+    "asin": "B003O1NUMC",
+    "affiliateTag": "suppvis-20",
+    "price": 13.95,
+    "servings": 90,
+    "dosePerServing": "750mg raw maca",
+    "form": "Raw capsule",
+    "tier": "value",
+    "thirdPartyTested": false,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Adaptogen"
+    ],
+    "keyBenefit": "High dose raw maca for libido and hormonal vitality",
+    "imageEmoji": "🌱",
+    "imageUrl": "https://m.media-amazon.com/images/I/71XtF3cPs1L._AC_SL300_.jpg"
+  },
+  {
+    "id": "pure-encapsulations-maca",
+    "supplementName": "Maca",
+    "brand": "Pure Encapsulations",
+    "productName": "Maca-3 60ct",
+    "asin": "B00164RV0Q",
+    "affiliateTag": "suppvis-20",
+    "price": 48.5,
+    "servings": 30,
+    "dosePerServing": "Triple maca blend",
+    "form": "Concentrated extract",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Adaptogen"
+    ],
+    "keyBenefit": "Triple maca blend — black, red, and yellow for comprehensive hormonal support",
+    "imageEmoji": "🌱",
+    "imageUrl": "https://m.media-amazon.com/images/I/71Ebjfvyn5L._AC_SL300_.jpg"
+  },
+  {
+    "id": "now-dim",
+    "supplementName": "DIM",
+    "brand": "NOW Foods",
+    "productName": "DIM 200 + Calcium D-Glucarate 90ct",
+    "asin": "B07FCXFLXQ",
+    "affiliateTag": "suppvis-20",
+    "price": 17.4,
+    "servings": 45,
+    "dosePerServing": "200mg DIM + CDG",
+    "form": "Capsule blend",
+    "tier": "value",
+    "thirdPartyTested": false,
+    "noProprietaryBlend": false,
+    "categories": [
+      "Supplement"
+    ],
+    "keyBenefit": "Estrogen metabolite balance — DIM + CDG detox pathway combo",
+    "imageEmoji": "⚖️",
+    "imageUrl": "https://m.media-amazon.com/images/I/71ROySLgnZL._AC_SL300_.jpg"
+  },
+  {
+    "id": "integrative-indolplex-dim",
+    "supplementName": "DIM",
+    "brand": "Integrative Therapeutics",
+    "productName": "Indolplex 240mg DIM 60ct",
+    "asin": "B0036H20ZM",
+    "affiliateTag": "suppvis-20",
+    "price": 50.25,
+    "servings": 30,
+    "dosePerServing": "240mg bioavailable DIM",
+    "form": "Bioavailable capsule",
+    "tier": "premium",
+    "thirdPartyTested": false,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Supplement"
+    ],
+    "keyBenefit": "Bioavailable DIM specifically for estrogen metabolism support",
+    "imageEmoji": "⚖️",
+    "imageUrl": "https://m.media-amazon.com/images/I/51fzThbY2QL._AC_SL300_.jpg"
+  },
+  {
+    "id": "pure-encapsulations-dim-detox",
+    "supplementName": "DIM",
+    "brand": "Pure Encapsulations",
+    "productName": "DIM Detox 60ct",
+    "asin": "B0063X0J0O",
+    "affiliateTag": "suppvis-20",
+    "price": 58.0,
+    "servings": 30,
+    "dosePerServing": "DIM + detox support blend",
+    "form": "Capsule blend",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": false,
+    "categories": [
+      "Supplement"
+    ],
+    "keyBenefit": "DIM with liver detox support for comprehensive estrogen clearance",
+    "imageEmoji": "⚖️",
+    "imageUrl": "https://m.media-amazon.com/images/I/710WUBmBszL._AC_SL300_.jpg"
+  },
+  {
+    "id": "pure-encapsulations-dimpro",
+    "supplementName": "DIM",
+    "brand": "Pure Encapsulations",
+    "productName": "DIMPRO 100 60ct",
+    "asin": "B0015XD8X2",
+    "affiliateTag": "suppvis-20",
+    "price": 65.0,
+    "servings": 60,
+    "dosePerServing": "100mg BioResponse DIM",
+    "form": "BioResponse capsule",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Supplement"
+    ],
+    "keyBenefit": "BioResponse form — most studied DIM preparation for hormonal health",
+    "imageEmoji": "⚖️",
+    "imageUrl": "https://m.media-amazon.com/images/I/71Ov4whgnwL._AC_SL300_.jpg"
+  },
+  {
+    "id": "gaia-vitex",
+    "supplementName": "Vitex",
+    "brand": "Gaia Herbs PRO",
+    "productName": "Vitex PRO 60ct",
+    "asin": "B01HUIS6C8",
+    "affiliateTag": "suppvis-20",
+    "price": 24.95,
+    "servings": 30,
+    "dosePerServing": "Organic chaste tree berry extract",
+    "form": "Liquid phyto-cap",
+    "tier": "premium",
+    "thirdPartyTested": false,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Herb"
+    ],
+    "keyBenefit": "Organic chaste tree for PMS, cycle regularity, and progesterone support",
+    "imageEmoji": "🌸",
+    "imageUrl": "https://m.media-amazon.com/images/I/717ObFTe+YL._AC_SL300_.jpg"
+  },
+  {
+    "id": "now-vitex",
+    "supplementName": "Vitex",
+    "brand": "NOW Foods",
+    "productName": "Chaste Berry Vitex 300mg 90ct",
+    "asin": "B001F0R6EW",
+    "affiliateTag": "suppvis-20",
+    "price": 12.7,
+    "servings": 90,
+    "dosePerServing": "300mg + Dong Quai",
+    "form": "Capsule",
+    "tier": "value",
+    "thirdPartyTested": false,
+    "noProprietaryBlend": false,
+    "categories": [
+      "Herb"
+    ],
+    "keyBenefit": "Vitex + Dong Quai combo for comprehensive cycle support",
+    "imageEmoji": "🌸",
+    "imageUrl": "https://m.media-amazon.com/images/I/71owgeygQqL._AC_SL300_.jpg"
+  },
+  {
+    "id": "pure-encapsulations-vitex",
+    "supplementName": "Vitex",
+    "brand": "Pure Encapsulations",
+    "productName": "Chaste Tree (Vitex) 120ct",
+    "asin": "B0017T8X16",
+    "affiliateTag": "suppvis-20",
+    "price": 31.0,
+    "servings": 120,
+    "dosePerServing": "Vitex extract",
+    "form": "Capsule",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Herb"
+    ],
+    "keyBenefit": "Hypoallergenic Vitex for menstrual cycle regularity",
+    "imageEmoji": "🌸",
+    "imageUrl": "https://m.media-amazon.com/images/I/71jlw6S2uCL._AC_SL300_.jpg"
+  },
+  {
+    "id": "pure-encapsulations-biotin",
+    "supplementName": "Biotin",
+    "brand": "Pure Encapsulations",
+    "productName": "Biotin 8mg 60ct",
+    "asin": "B0017L7GE4",
+    "affiliateTag": "suppvis-20",
+    "price": 15.0,
+    "servings": 60,
+    "dosePerServing": "8mg",
+    "form": "Capsule",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Vitamin"
+    ],
+    "keyBenefit": "High potency biotin for hair growth and nail strength",
+    "imageEmoji": "✨",
+    "imageUrl": "https://m.media-amazon.com/images/I/71s0duMsfeL._AC_SL300_.jpg"
+  },
+  {
+    "id": "thorne-biotin",
+    "supplementName": "Biotin",
+    "brand": "Thorne",
+    "productName": "Biotin 60ct",
+    "asin": "B0797CG5R8",
+    "affiliateTag": "suppvis-20",
+    "price": 28.0,
+    "servings": 60,
+    "dosePerServing": "B7 Vitamin",
+    "form": "Capsule",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Vitamin"
+    ],
+    "keyBenefit": "Third-party certified biotin for hair, nails, skin, and metabolism",
+    "imageEmoji": "✨",
+    "imageUrl": "https://m.media-amazon.com/images/I/71sPExeyrtL._AC_SL300_.jpg"
+  },
+  {
+    "id": "life-extension-hair-skin-nails",
+    "supplementName": "Biotin",
+    "brand": "Life Extension",
+    "productName": "Hair, Skin & Nails Collagen Plus 120ct",
+    "asin": "B07RL1J9BW",
+    "affiliateTag": "suppvis-20",
+    "price": 33.0,
+    "servings": 60,
+    "dosePerServing": "Biotin + Collagen + Vitamins",
+    "form": "Tablet blend",
+    "tier": "value",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": false,
+    "categories": [
+      "Vitamin"
+    ],
+    "keyBenefit": "All-in-one beauty supplement — biotin, collagen, and vitamin support",
+    "imageEmoji": "✨",
+    "imageUrl": "https://m.media-amazon.com/images/I/71mA2WJmnrL._AC_SL300_.jpg"
+  },
+  {
+    "id": "now-biotin-10000",
+    "supplementName": "Biotin",
+    "brand": "NOW Foods",
+    "productName": "Biotin 10,000mcg 200ct",
+    "asin": "B0BTRKYR8J",
+    "affiliateTag": "suppvis-20",
+    "price": 24.97,
+    "servings": 200,
+    "dosePerServing": "10,000mcg",
+    "form": "Capsule",
+    "tier": "value",
+    "thirdPartyTested": false,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Vitamin"
+    ],
+    "keyBenefit": "Maximum strength biotin at excellent value per serving",
+    "imageEmoji": "✨",
+    "imageUrl": "https://m.media-amazon.com/images/I/715YBu+t9HL._AC_SL300_.jpg"
+  },
+  {
+    "id": "pure-encapsulations-hyaluronic",
+    "supplementName": "Hyaluronic Acid",
+    "brand": "Pure Encapsulations",
+    "productName": "Hyaluronic Acid 60ct",
+    "asin": "B0015X5LSM",
+    "affiliateTag": "suppvis-20",
+    "price": 45.5,
+    "servings": 60,
+    "dosePerServing": "Low molecular weight HA",
+    "form": "Capsule",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Supplement"
+    ],
+    "keyBenefit": "Low molecular weight for joint lubrication and skin hydration",
+    "imageEmoji": "💧",
+    "imageUrl": "https://m.media-amazon.com/images/I/71l0PZ0UqtL._AC_SL300_.jpg"
+  },
+  {
+    "id": "now-hyaluronic-acid",
+    "supplementName": "Hyaluronic Acid",
+    "brand": "NOW Foods",
+    "productName": "Hyaluronic Acid 100mg 120ct",
+    "asin": "B00663G8WO",
+    "affiliateTag": "suppvis-20",
+    "price": 23.08,
+    "servings": 120,
+    "dosePerServing": "100mg double strength",
+    "form": "Capsule blend",
+    "tier": "value",
+    "thirdPartyTested": false,
+    "noProprietaryBlend": false,
+    "categories": [
+      "Supplement"
+    ],
+    "keyBenefit": "Double strength with alpha lipoic acid and grape seed — best value",
+    "imageEmoji": "💧",
+    "imageUrl": "https://m.media-amazon.com/images/I/71f-xcw41cL._AC_SL300_.jpg"
+  },
+  {
+    "id": "now-silica",
+    "supplementName": "Silica",
+    "brand": "NOW Foods",
+    "productName": "Silica Complex 180ct",
+    "asin": "B00028M04Y",
+    "affiliateTag": "suppvis-20",
+    "price": 20.2,
+    "servings": 180,
+    "dosePerServing": "Silica with horsetail extract",
+    "form": "Tablet",
+    "tier": "value",
+    "thirdPartyTested": false,
+    "noProprietaryBlend": false,
+    "categories": [
+      "Supplement"
+    ],
+    "keyBenefit": "Structural mineral for hair strength, skin elasticity, and bone density",
+    "imageEmoji": "✨",
+    "imageUrl": "https://m.media-amazon.com/images/I/71bRw-TcFyL._AC_SL300_.jpg"
+  },
+  {
+    "id": "life-extension-tart-cherry",
+    "supplementName": "Tart Cherry",
+    "brand": "Life Extension",
+    "productName": "Tart Cherry CherryPURE 60ct",
+    "asin": "B01I16M7YQ",
+    "affiliateTag": "suppvis-20",
+    "price": 21.0,
+    "servings": 60,
+    "dosePerServing": "CherryPURE concentrated",
+    "form": "Capsule",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Supplement"
+    ],
+    "keyBenefit": "CherryPURE — most concentrated tart cherry for sleep and recovery",
+    "imageEmoji": "🍒",
+    "imageUrl": "https://m.media-amazon.com/images/I/71V2Bv3bZML._AC_SL300_.jpg"
+  },
+  {
+    "id": "now-tart-cherry",
+    "supplementName": "Tart Cherry",
+    "brand": "NOW Foods",
+    "productName": "Tart Cherry 500mg 90ct",
+    "asin": "B07KXTCNLD",
+    "affiliateTag": "suppvis-20",
+    "price": 15.6,
+    "servings": 90,
+    "dosePerServing": "500mg 50:1 concentrate",
+    "form": "Capsule",
+    "tier": "value",
+    "thirdPartyTested": false,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Supplement"
+    ],
+    "keyBenefit": "Natural melatonin and anthocyanins for sleep and post-workout recovery",
+    "imageEmoji": "🍒",
+    "imageUrl": "https://m.media-amazon.com/images/I/71rzZo-GhWL._AC_SL300_.jpg"
+  },
+  {
+    "id": "thorne-boswellia",
+    "supplementName": "Boswellia",
+    "brand": "Thorne",
+    "productName": "Boswellia Phytosome 60ct",
+    "asin": "B0797KV92C",
+    "affiliateTag": "suppvis-20",
+    "price": 59.0,
+    "servings": 60,
+    "dosePerServing": "Phytosome Boswellia",
+    "form": "Phytosome capsule",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Herb"
+    ],
+    "keyBenefit": "Phytosome form for superior absorption — 5-LOX inhibitor",
+    "imageEmoji": "🌿",
+    "imageUrl": "https://m.media-amazon.com/images/I/61Mvt+v9+dL._AC_SL300_.jpg"
+  },
+  {
+    "id": "now-msm",
+    "supplementName": "MSM",
+    "brand": "NOW Foods",
+    "productName": "MSM 1000mg 400ct",
+    "asin": "B07HPD6SLX",
+    "affiliateTag": "suppvis-20",
+    "price": 32.99,
+    "servings": 200,
+    "dosePerServing": "2000mg (2 caps)",
+    "form": "Vegan capsule",
+    "tier": "value",
+    "thirdPartyTested": false,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Supplement"
+    ],
+    "keyBenefit": "Organic sulfur for joints, skin collagen, and inflammation",
+    "imageEmoji": "💪",
+    "imageUrl": "https://m.media-amazon.com/images/I/71ij8xqSuPL._AC_SL300_.jpg"
+  },
+  {
+    "id": "pure-encapsulations-msm",
+    "supplementName": "MSM",
+    "brand": "Pure Encapsulations",
+    "productName": "MSM 360ct",
+    "asin": "B00FTU731K",
+    "affiliateTag": "suppvis-20",
+    "price": 79.5,
+    "servings": 180,
+    "dosePerServing": "1000mg",
+    "form": "Capsule",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Supplement"
+    ],
+    "keyBenefit": "Hypoallergenic MSM for joint, immune, and connective tissue support",
+    "imageEmoji": "💪",
+    "imageUrl": "https://m.media-amazon.com/images/I/71nYF1VCH7L._AC_SL300_.jpg"
+  },
+  {
+    "id": "thorne-glucosamine-chondroitin",
+    "supplementName": "Glucosamine",
+    "brand": "Thorne",
+    "productName": "Glucosamine & Chondroitin 90ct",
+    "asin": "B000FH12OG",
+    "affiliateTag": "suppvis-20",
+    "price": 40.0,
+    "servings": 45,
+    "dosePerServing": "Glucosamine + Chondroitin",
+    "form": "Capsule",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Supplement"
+    ],
+    "keyBenefit": "NSF Certified joint cartilage support — the foundational joint supplement",
+    "imageEmoji": "💪",
+    "imageUrl": "https://m.media-amazon.com/images/I/61jD4Ow6S3L._AC_SL300_.jpg"
+  },
+  {
+    "id": "thorne-joint-support",
+    "supplementName": "Joint Support",
+    "brand": "Thorne",
+    "productName": "Joint Support Nutrients 240ct",
+    "asin": "B0797J1SNY",
+    "affiliateTag": "suppvis-20",
+    "price": 60.0,
+    "servings": 60,
+    "dosePerServing": "Glucosamine + MSM + Curcumin + Boswellia",
+    "form": "Comprehensive blend",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": false,
+    "categories": [
+      "Supplement"
+    ],
+    "keyBenefit": "All-in-one joint formula — glucosamine, MSM, curcumin, and boswellia",
+    "imageEmoji": "💪",
+    "imageUrl": "https://m.media-amazon.com/images/I/71fjznwQ-4L._AC_SL300_.jpg"
+  },
+  {
+    "id": "pure-encapsulations-gluc-chond-msm",
+    "supplementName": "Joint Support",
+    "brand": "Pure Encapsulations",
+    "productName": "Glucosamine Chondroitin + MSM 120ct",
+    "asin": "B003BHZ860",
+    "affiliateTag": "suppvis-20",
+    "price": 75.0,
+    "servings": 30,
+    "dosePerServing": "Glucosamine + Chondroitin + MSM",
+    "form": "Triple combination",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": false,
+    "categories": [
+      "Supplement"
+    ],
+    "keyBenefit": "Hypoallergenic triple joint formula — comprehensive cartilage support",
+    "imageEmoji": "💪",
+    "imageUrl": "https://m.media-amazon.com/images/I/7154RSGtdjL._AC_SL300_.jpg"
+  },
+  {
+    "id": "jarrow-same",
+    "supplementName": "SAMe",
+    "brand": "Jarrow Formulas",
+    "productName": "SAMe 400mg 60ct",
+    "asin": "B00V3M9CYY",
+    "affiliateTag": "suppvis-20",
+    "price": 54.94,
+    "servings": 60,
+    "dosePerServing": "400mg S,S-SAMe",
+    "form": "Enteric-coated tablet",
+    "tier": "premium",
+    "thirdPartyTested": false,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Supplement"
+    ],
+    "keyBenefit": "Active S,S form for mood, joint health, and liver function",
+    "imageEmoji": "😊",
+    "imageUrl": "https://m.media-amazon.com/images/I/71LmfirQxxL._AC_SL300_.jpg",
+    "formNote": "Must be stored in a cool dry place — SAMe is unstable and degrades with heat"
+  },
+  {
+    "id": "pure-encapsulations-one-multi-120",
+    "supplementName": "Multivitamin",
+    "brand": "Pure Encapsulations",
+    "productName": "O.N.E. Multivitamin 120ct",
+    "asin": "B01BGZVXC6",
+    "affiliateTag": "suppvis-20",
+    "price": 92.0,
+    "servings": 120,
+    "dosePerServing": "Once daily with CoQ10 + Lutein",
+    "form": "Capsule",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Vitamin"
+    ],
+    "keyBenefit": "Comprehensive once-daily with CoQ10, Metafolin, and lutein",
+    "imageEmoji": "💊",
+    "imageUrl": "https://m.media-amazon.com/images/I/71k7N73V8EL._AC_SL300_.jpg"
+  },
+  {
+    "id": "thorne-basic-nutrients-2day",
+    "supplementName": "Multivitamin",
+    "brand": "Thorne",
+    "productName": "Basic Nutrients 2/Day 60ct",
+    "asin": "B00FOTMGTU",
+    "affiliateTag": "suppvis-20",
+    "price": 36.0,
+    "servings": 30,
+    "dosePerServing": "Comprehensive 2-per-day formula",
+    "form": "Capsule",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Vitamin"
+    ],
+    "keyBenefit": "NSF Certified comprehensive multivitamin with optimal bioavailability",
+    "imageEmoji": "💊",
+    "imageUrl": "https://m.media-amazon.com/images/I/61Joko0-svL._AC_SL300_.jpg"
+  },
+  {
+    "id": "life-extension-two-per-day",
+    "supplementName": "Multivitamin",
+    "brand": "Life Extension",
+    "productName": "Two-Per-Day 120ct",
+    "asin": "B07KCZ6CDW",
+    "affiliateTag": "suppvis-20",
+    "price": 18.39,
+    "servings": 60,
+    "dosePerServing": "High potency 2-per-day",
+    "form": "Tablet",
+    "tier": "value",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Vitamin"
+    ],
+    "keyBenefit": "Best value high-potency multivitamin from a trusted brand",
+    "imageEmoji": "💊",
+    "imageUrl": "https://m.media-amazon.com/images/I/71owMb26MnL._AC_SL300_.jpg"
+  },
+  {
+    "id": "pure-encapsulations-one-multi-60",
+    "supplementName": "Multivitamin",
+    "brand": "Pure Encapsulations",
+    "productName": "O.N.E. Multivitamin 60ct",
+    "asin": "B00CBYG1L0",
+    "affiliateTag": "suppvis-20",
+    "price": 48.5,
+    "servings": 60,
+    "dosePerServing": "Once daily multivitamin",
+    "form": "Capsule",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Vitamin"
+    ],
+    "keyBenefit": "Trial size — try before committing to 120ct",
+    "imageEmoji": "💊",
+    "imageUrl": "https://m.media-amazon.com/images/I/71RNL27j5fL._AC_SL300_.jpg"
+  },
+  {
+    "id": "pure-encapsulations-iron-c",
+    "supplementName": "Iron",
+    "brand": "Pure Encapsulations",
+    "productName": "Iron-C 15mg 60ct",
+    "asin": "B0017HQDVK",
+    "affiliateTag": "suppvis-20",
+    "price": 14.5,
+    "servings": 60,
+    "dosePerServing": "15mg iron + Vitamin C",
+    "form": "With Vitamin C",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Mineral"
+    ],
+    "keyBenefit": "Vitamin C increases iron absorption 3x — smart combination",
+    "imageEmoji": "⚡",
+    "imageUrl": "https://m.media-amazon.com/images/I/71QLPNTQjwL._AC_SL300_.jpg",
+    "formNote": "Never take iron without Vitamin C — it nearly doubles absorption"
+  },
+  {
+    "id": "thorne-advanced-iron",
+    "supplementName": "Iron",
+    "brand": "Thorne",
+    "productName": "Advanced Iron Complex 60ct",
+    "asin": "B0797PJQMT",
+    "affiliateTag": "suppvis-20",
+    "price": 26.0,
+    "servings": 60,
+    "dosePerServing": "Elemental iron + folate + B12 + C",
+    "form": "Complete blood support",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": false,
+    "categories": [
+      "Mineral"
+    ],
+    "keyBenefit": "Iron + all cofactors for optimal blood health — no separate supplements needed",
+    "imageEmoji": "⚡",
+    "imageUrl": "https://m.media-amazon.com/images/I/61MyKoEhV5L._AC_SL300_.jpg"
+  },
+  {
+    "id": "now-iron-18",
+    "supplementName": "Iron",
+    "brand": "NOW Foods",
+    "productName": "Iron 18mg 120ct",
+    "asin": "B000WQDD2O",
+    "affiliateTag": "suppvis-20",
+    "price": 14.99,
+    "servings": 120,
+    "dosePerServing": "18mg non-constipating",
+    "form": "Non-constipating capsule",
+    "tier": "value",
+    "thirdPartyTested": false,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Mineral"
+    ],
+    "keyBenefit": "Non-constipating formula — gentle daily iron supplement",
+    "imageEmoji": "⚡",
+    "imageUrl": "https://m.media-amazon.com/images/I/71+a-IgrwML._AC_SL300_.jpg"
+  },
+  {
+    "id": "pure-encapsulations-folate",
+    "supplementName": "Folate",
+    "brand": "Pure Encapsulations",
+    "productName": "Folate 400 90ct",
+    "asin": "B0063X0J86",
+    "affiliateTag": "suppvis-20",
+    "price": 22.0,
+    "servings": 90,
+    "dosePerServing": "400mcg Metafolin L-5-MTHF",
+    "form": "Active methylfolate",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Vitamin"
+    ],
+    "keyBenefit": "Active L-5-MTHF — the form your body actually uses, bypasses MTHFR",
+    "imageEmoji": "💊",
+    "imageUrl": "https://m.media-amazon.com/images/I/718fsAQtVRL._AC_SL300_.jpg",
+    "formNote": "Folic acid is synthetic and many people cannot convert it — methylfolate is the active form"
+  },
+  {
+    "id": "thorne-5mthf-1mg",
+    "supplementName": "Folate",
+    "brand": "Thorne",
+    "productName": "5-MTHF 1mg Methylfolate 60ct",
+    "asin": "B00FY8IQ7C",
+    "affiliateTag": "suppvis-20",
+    "price": 24.0,
+    "servings": 60,
+    "dosePerServing": "1mg 5-MTHF",
+    "form": "Active methylfolate",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Vitamin"
+    ],
+    "keyBenefit": "Third-party certified active folate for cardiovascular and fetal health",
+    "imageEmoji": "💊",
+    "imageUrl": "https://m.media-amazon.com/images/I/71wLckVqoTL._AC_SL300_.jpg"
+  },
+  {
+    "id": "thorne-methyl-guard-plus",
+    "supplementName": "Folate",
+    "brand": "Thorne",
+    "productName": "Methyl-Guard Plus 90ct",
+    "asin": "B00O5AHC4S",
+    "affiliateTag": "suppvis-20",
+    "price": 62.0,
+    "servings": 90,
+    "dosePerServing": "5-MTHF + B2 + B6 + B12 + Betaine",
+    "form": "Methylation complex",
+    "tier": "premium",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": false,
+    "categories": [
+      "Vitamin"
+    ],
+    "keyBenefit": "Complete methylation support — essential if you have elevated homocysteine",
+    "imageEmoji": "💊",
+    "imageUrl": "https://m.media-amazon.com/images/I/61BtsSBpN9L._AC_SL300_.jpg"
+  },
+  {
+    "id": "now-methyl-folate",
+    "supplementName": "Folate",
+    "brand": "NOW Foods",
+    "productName": "Methyl Folate 1000mcg 90ct",
+    "asin": "B01G5EQEWC",
+    "affiliateTag": "suppvis-20",
+    "price": 12.7,
+    "servings": 90,
+    "dosePerServing": "1000mcg active folate",
+    "form": "Active methylfolate",
+    "tier": "value",
+    "thirdPartyTested": false,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Vitamin"
+    ],
+    "keyBenefit": "Best value active methylfolate — metabolically active from the start",
+    "imageEmoji": "💊",
+    "imageUrl": "https://m.media-amazon.com/images/I/71l4wI7t3fL._AC_SL300_.jpg"
+  },
+  {
+    "id": "life-extension-optimized-folate",
+    "supplementName": "Folate",
+    "brand": "Life Extension",
+    "productName": "Optimized Folate 1700mcg DFE 100ct",
+    "asin": "B00UD0IPYU",
+    "affiliateTag": "suppvis-20",
+    "price": 11.25,
+    "servings": 100,
+    "dosePerServing": "1700mcg DFE L-methylfolate",
+    "form": "L-methylfolate tablet",
+    "tier": "value",
+    "thirdPartyTested": true,
+    "noProprietaryBlend": true,
+    "categories": [
+      "Vitamin"
+    ],
+    "keyBenefit": "High dose active folate for heart, brain, and homocysteine support",
+    "imageEmoji": "💊",
+    "imageUrl": "https://m.media-amazon.com/images/I/71vf+u6dkiL._AC_SL300_.jpg"
+  }
+];
+
+const html = document.documentElement;
+const saved = localStorage.getItem('sv-theme');
+html.setAttribute('data-theme', saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'));
+document.getElementById('themeToggle').addEventListener('click', () => {
+    const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next); localStorage.setItem('sv-theme', next);
+});
+const header = document.getElementById('header');
+window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 50));
+document.getElementById('mobileMenuToggle').addEventListener('click', () => alert('Mobile menu coming soon!'));
+
+let currentFilter = 'all', currentTier = 'all', currentSearch = '';
+let eduOpen = {};
+
+function getAmazonUrl(asin, tag) {
+    return `https://www.amazon.com/dp/${asin}/?tag=${tag}`;
+}
+
+function getBadgeClass(tier) {
+    if (tier === 'premium') return 'badge-premium';
+    if (tier === 'value') return 'badge-value';
+    return 'badge-budget';
+}
+
+function getTierLabel(tier) {
+    if (tier === 'premium') return '&#11088; Premium';
+    if (tier === 'value') return '&#10004; Value';
+    return '&#128176; Budget';
+}
+
+function renderProducts() {
+    let filtered = PRODUCTS.filter(p => {
+        const matchCat = currentFilter === 'all' || p.categories.includes(currentFilter);
+        const matchTier = currentTier === 'all' || p.tier === currentTier;
+        const q = currentSearch.toLowerCase();
+        const matchSearch = !q || p.supplementName.toLowerCase().includes(q) || p.brand.toLowerCase().includes(q) || p.productName.toLowerCase().includes(q) || (p.keyBenefit && p.keyBenefit.toLowerCase().includes(q));
+        return matchCat && matchTier && matchSearch;
+    });
+
+    document.getElementById('resultsCount').textContent = `${filtered.length} product${filtered.length !== 1 ? 's' : ''}`;
+
+    const content = document.getElementById('shopContent');
+    if (filtered.length === 0) {
+        content.innerHTML = `<div class="no-results"><h3>No products found</h3><p>Try a different filter or search term.</p></div>`;
+        return;
+    }
+
+    // Group by supplementName
+    const groups = {};
+    filtered.forEach(p => {
+        if (!groups[p.supplementName]) groups[p.supplementName] = [];
+        groups[p.supplementName].push(p);
+    });
+
+    let html = '';
+    Object.entries(groups).forEach(([suppName, products]) => {
+        html += `<div class="section-label"><h2>${products[0].imageEmoji} ${suppName}</h2><div class="section-line"></div><span class="section-count">${products.length} product${products.length !== 1 ? 's' : ''}</span></div>`;
+        html += `<div class="product-grid">`;
+        products.forEach(p => {
+            const aUrl = getAmazonUrl(p.asin, p.affiliateTag);
+            const imgHtml = p.imageUrl && !p.useSearchFallback
+                ? `<img src="${p.imageUrl}" alt="${p.productName}" onerror="this.style.display='none';this.parentElement.innerHTML='${p.imageEmoji}'">`
+                : p.imageEmoji;
+            const tpBadge = p.thirdPartyTested ? `<span class="badge badge-verified">&#10003; 3rd Party</span>` : '';
+            const formNoteHtml = p.formNote ? `<p><strong>Form note:</strong> ${p.formNote}</p>` : '';
+            html += `
+            <div class="product-card" data-id="${p.id}">
+                <div class="product-card-top">
+                    <div class="product-img">${imgHtml}</div>
+                    <div class="product-meta">
+                        <div class="product-supp-name">${p.supplementName}</div>
+                        <div class="product-name">${p.productName}</div>
+                        <div class="product-brand">${p.brand}</div>
+                        <div class="product-badges">
+                            <span class="badge ${getBadgeClass(p.tier)}">${getTierLabel(p.tier)}</span>
+                            ${tpBadge}
+                        </div>
+                    </div>
+                </div>
+                <div class="product-education" id="edu-${p.id}">
+                    <div class="edu-content">
+                        <p>${p.keyBenefit}</p>
+                        ${formNoteHtml}
+                    </div>
+                    <div class="key-facts">
+                        ${p.dosePerServing ? `<span class="key-fact">${p.dosePerServing}</span>` : ''}
+                        ${p.servings ? `<span class="key-fact">${p.servings} servings</span>` : ''}
+                        ${p.form ? `<span class="key-fact">${p.form}</span>` : ''}
+                        ${p.thirdPartyTested ? `<span class="key-fact">3rd Party Tested</span>` : ''}
+                        ${p.noProprietaryBlend ? `<span class="key-fact">No Prop Blend</span>` : ''}
+                    </div>
+                </div>
+                <div class="product-card-footer">
+                    <div style="display:flex;justify-content:space-between;align-items:center">
+                        <span class="product-price">$${p.price ? p.price.toFixed(2) : '—'}</span>
+                        <button class="learn-toggle" onclick="toggleEdu('${p.id}', this)">
+                            <span>Learn more</span> <span class="learn-arrow">&#9660;</span>
+                        </button>
+                    </div>
+                    <a href="${aUrl}" target="_blank" rel="noopener" class="buy-btn">
+                        View on Amazon
+                        <svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M10 3L9 4L14 9H3V11H14L9 16L10 17L17 10L10 3Z" fill="currentColor"/></svg>
+                    </a>
+                    <div class="amazon-note">via Amazon &middot; ${p.affiliateTag}</div>
+                </div>
+            </div>`;
+        });
+        html += `</div>`;
+    });
+
+    content.innerHTML = html;
+}
+
+function toggleEdu(id, btn) {
+    const panel = document.getElementById('edu-' + id);
+    const isOpen = panel.classList.contains('open');
+    panel.classList.toggle('open', !isOpen);
+    btn.classList.toggle('open', !isOpen);
+    btn.querySelector('span').textContent = isOpen ? 'Learn more' : 'Hide details';
+}
+
+document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentFilter = btn.dataset.filter;
+        renderProducts();
+    });
+});
+
+document.querySelectorAll('.tier-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('.tier-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentTier = btn.dataset.tier;
+        renderProducts();
+    });
+});
+
+let searchTimer;
+document.getElementById('searchInput').addEventListener('input', e => {
+    clearTimeout(searchTimer);
+    searchTimer = setTimeout(() => { currentSearch = e.target.value; renderProducts(); }, 250);
+});
+
+renderProducts();
+</script>
 </body>
 </html>
