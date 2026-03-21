@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How It Works - SuppVis</title>
+    <meta name="description" content="See how SuppVis turns supplement guesswork into a precision-driven system, from building your profile to tracking results over time.">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --on-teal:              #0A1628;
+            --bg-primary:           #0A1628;
+            --text-primary:         #F5F1E8;
+            --text-slate:           #94A3B8;
+            --text-muted:           #64748B;
+            --header-bg:            rgba(10,22,40,0.9);
+            --header-bg-scrolled:   rgba(10,22,40,0.97);
+            --header-shadow:        0 4px 20px rgba(0,0,0,0.3);
+            --card-bg:              rgba(255,255,255,0.04);
+            --card-border:          rgba(255,255,255,0.07);
+            --footer-bg:            rgba(10,22,40,0.95);
+        }
+        [data-theme="light"] {
+            --bg-primary:           #EEF2F7;
+            --text-primary:         #0F172A;
+            --text-slate:           #475569;
+            --text-muted:           #64748B;
+            --header-bg:            rgba(238,242,247,0.92);
+            --header-bg-scrolled:   rgba(238,242,247,0.98);
+            --header-shadow:        0 4px 20px rgba(0,0,0,0.1);
+            --card-bg:              rgba(255,255,255,0.7);
+            --card-border:          rgba(0,0,0,0.08);
+            --footer-bg:            rgba(238,242,247,0.98);
+        }
+        [data-theme="light"] .animated-gradient {
+            background: linear-gradient(-45deg, #EEF2F7, #F0F4F8, #EEF2F7, #E8EEF5) !important;
+        }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: background 0.35s, color 0.35s;
+        }
+
+        /* Animated Background */
+        .animated-gradient {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(-45deg, #0A1628, #0F2744, #0A1628, #142B48);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            z-index: 0;
+        }
+        @keyframes gradientShift {
+            0%   { background-position: 0% 50%; }
+            50%  { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Floating Pills */
+        .floating-pills { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; overflow: hidden; }
+        .pill {
+            position: absolute; width: 60px; height: 30px;
+            background: linear-gradient(135deg, rgba(45,212,191,0.08), rgba(20,184,166,0.08));
+            border-radius: 30px; border: 1px solid rgba(45,212,191,0.15);
+            animation: float 8s ease-in-out infinite; opacity: 0.3;
+        }
+        @keyframes float {
+            0%,100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+            25%  { transform: translateY(-20px) translateX(10px) rotate(5deg); }
+            50%  { transform: translateY(-10px) translateX(-10px) rotate(-5deg); }
+            75%  { transform: translateY(-20px) translateX(5px) rotate(3deg); }
+        }
+        .pill:nth-child(1) { top:10%; left:10%; animation-delay:0s; }
+        .pill:nth-child(2) { top:60%; left:80%; width:80px; height:40px; animation-delay:2s; }
+        .pill:nth-child(3) { top:80%; left:20%; width:50px; height:25px; animation-delay:4s; }
+        .pill:nth-child(4) { top:30%; left:70%; animation-delay:3s; }
+        .pill:nth-child(5) { top:50%; left:15%; width:70px; height:35px; animation-delay:1s; }
+
+        .container { position: relative; z-index: 10; }
+
+        /* Scroll Progress */
+        .scroll-progress {
+            position: fixed; top: 0; left: 0; height: 3px; width: 0%;
+            background: linear-gradient(90deg, #2DD4BF, #14B8A6);
+            z-index: 9999; transition: width 0.1s linear;
+        }
+
+        /* Header */
+        header {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            padding: 20px 48px;
+            background: var(--header-bg);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(45,212,191,0.1);
+            transition: all 0.3s;
+        }
+        header.scrolled {
+            padding: 12px 48px;
+            background: var(--header-bg-scrolled);
+            box-shadow: var(--header-shadow);
+        }
+        nav {
+            max-width: 1400px; margin: 0 auto;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .logo {
+            display: flex; align-items: center; gap: 12px;
+            font-size: 24px; font-weight: 700; color: var(--text-primary);
+            text-decoration: none; transition: transform 0.3s;
+            font-family: 'Syne', sans-serif;
+        }
+        .logo:hover { transform: scale(1.05); }
+        .logo-icon {
+            --logo-detail: #0A1628;
+            width: 40px; height: 40px; flex-shrink: 0;
+        }
+        [data-theme="light"] .logo-icon { --logo-detail: #EEF2F7; }
+        .nav-links { display: flex; gap: 40px; list-style: none; align-items: center; }
+        .nav-links a {
+            color: var(--text-slate); text-decoration: none; font-size: 16px;
+            font-weight: 500; transition: color 0.3s; position: relative;
+        }
+        .nav-links a::after {
+            content: ''; position: absolute; bottom: -4px; left: 0;
+            width: 0; height: 2px; background: #2DD4BF; transition: width 0.3s;
+        }
+        .nav-links a:hover { color: #2DD4BF; }
+        .nav-links a:hover::after { width: 100%; }
+        .nav-links a.active { color: #2DD4BF; }
+        .nav-links a.active::after { width: 100%; }
+        .nav-cta {
+            background: linear-gradient(135deg, #2DD4BF, #14B8A6);
+            color: #0A1628; padding: 12px 28px; border-radius: 8px;
+            text-decoration: none; font-weight: 600; font-size: 15px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: inline-flex; align-items: center; gap: 8px;
+            border: none; cursor: pointer; font-family: inherit;
+        }
+        .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 0 20px rgba(45,212,191,0.4); }
+        .mobile-menu-toggle {
+            display: none; background: none; border: none;
+            color: #2DD4BF; font-size: 28px; cursor: pointer; padding: 8px;
+        }
+
+        /* Main Content */
+        .main-content { padding-top: 88px; min-height: 100vh; }
+        .content-wrapper { max-width: 1100px; margin: 0 auto; padding: 0 24px 80px; }
+
+        /* Hero */
+        .page-hero {
+            text-align: center;
+            padding: 72px 0 80px;
+            animation: fadeInUp 0.8s ease-out;
+            position: relative;
+        }
+        .page-hero::after {
+            content: '';
+            position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+            width: 600px; height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(45,212,191,0.2), transparent);
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .page-hero .eyebrow {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: rgba(45,212,191,0.08); border: 1px solid rgba(45,212,191,0.2);
+            border-radius: 40px; padding: 6px 18px; margin-bottom: 24px;
+            font-size: 12px; color: #2DD4BF; font-weight: 600;
+            letter-spacing: 0.8px; text-transform: uppercase; font-family: 'Syne', sans-serif;
+        }
+        .page-hero h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(38px, 5.5vw, 60px);
+            font-weight: 800; line-height: 1.1; letter-spacing: -0.02em;
+            margin-bottom: 28px;
+            background: linear-gradient(135deg, #F5F1E8 0%, #2DD4BF 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .page-hero .subtitle {
+            font-size: clamp(17px, 2vw, 21px); color: #94A3B8;
+            max-width: 780px; margin: 0 auto; line-height: 1.75;
+        }
+
+        /* Steps */
+        .steps-list { display: flex; flex-direction: column; gap: 0; margin-top: 72px; }
+
+        .step {
+            display: grid;
+            grid-template-columns: 72px 1fr;
+            gap: 0 40px;
+            padding-bottom: 64px;
+            position: relative;
+            animation: fadeInUp 0.7s ease-out both;
+        }
+        .step:nth-child(1) { animation-delay: 0.05s; }
+        .step:nth-child(2) { animation-delay: 0.15s; }
+        .step:nth-child(3) { animation-delay: 0.25s; }
+        .step:nth-child(4) { animation-delay: 0.35s; }
+        .step:nth-child(5) { animation-delay: 0.45s; }
+        .step:nth-child(6) { animation-delay: 0.55s; }
+
+        /* Connector line between steps */
+        .step:not(:last-child) .step-number-col::after {
+            content: '';
+            position: absolute;
+            left: 35px;
+            top: 72px;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, rgba(45,212,191,0.3), rgba(45,212,191,0.05));
+        }
+
+        .step-number-col {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .step-number {
+            width: 56px; height: 56px;
+            background: linear-gradient(135deg, rgba(45,212,191,0.15), rgba(20,184,166,0.08));
+            border: 1.5px solid rgba(45,212,191,0.35);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Syne', sans-serif;
+            font-size: 20px; font-weight: 800;
+            color: #2DD4BF;
+            flex-shrink: 0;
+            transition: all 0.3s;
+        }
+
+        .step:hover .step-number {
+            background: linear-gradient(135deg, rgba(45,212,191,0.25), rgba(20,184,166,0.15));
+            border-color: rgba(45,212,191,0.6);
+            box-shadow: 0 0 20px rgba(45,212,191,0.2);
+        }
+
+        .step-body {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(45,212,191,0.12);
+            border-radius: 20px;
+            padding: 36px 40px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .step-body::before {
+            content: '';
+            position: absolute; top: 0; left: 0; right: 0; height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(45,212,191,0.3), transparent);
+            opacity: 0; transition: opacity 0.3s;
+        }
+        .step:hover .step-body {
+            background: rgba(45,212,191,0.04);
+            border-color: rgba(45,212,191,0.28);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(45,212,191,0.08);
+        }
+        .step:hover .step-body::before { opacity: 1; }
+
+        .step-icon { font-size: 32px; margin-bottom: 14px; display: block; }
+
+        .step-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 22px; font-weight: 700;
+            color: #F5F1E8; margin-bottom: 14px;
+            letter-spacing: -0.01em;
+        }
+
+        .step-text {
+            font-size: 16px; color: #94A3B8;
+            line-height: 1.8; max-width: 780px;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center; padding: 72px 48px;
+            background: rgba(45,212,191,0.04);
+            border: 1px solid rgba(45,212,191,0.18);
+            border-radius: 24px; margin-top: 24px; margin-bottom: 80px;
+            position: relative; overflow: hidden;
+        }
+        .cta-section::before {
+            content: ''; position: absolute; top: -100px; left: 50%; transform: translateX(-50%);
+            width: 500px; height: 300px;
+            background: radial-gradient(ellipse, rgba(45,212,191,0.07), transparent 70%);
+            pointer-events: none;
+        }
+        .cta-section h2 {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(26px, 3vw, 40px); font-weight: 700;
+            color: #F5F1E8; margin-bottom: 14px;
+        }
+        .cta-section p {
+            font-size: 18px; color: #94A3B8; margin-bottom: 40px; line-height: 1.7;
+            max-width: 520px; margin-left: auto; margin-right: auto;
+        }
+        .cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+        .btn-primary {
+            background: linear-gradient(135deg, #2DD4BF, #14B8A6); color: #0A1628;
+            padding: 16px 36px; border-radius: 12px; text-decoration: none;
+            font-weight: 600; font-size: 17px; display: inline-flex; align-items: center; gap: 10px;
+            transition: transform 0.2s, box-shadow 0.2s; font-family: 'Syne', sans-serif;
+        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 30px rgba(45,212,191,0.45); }
+        .btn-secondary {
+            background: transparent; color: #2DD4BF; border: 2px solid #2DD4BF;
+            padding: 14px 34px; border-radius: 12px; text-decoration: none;
+            font-weight: 600; font-size: 17px; display: inline-flex; align-items: center; gap: 10px;
+            transition: all 0.2s; font-family: 'Syne', sans-serif;
+        }
+        .btn-secondary:hover { background: rgba(45,212,191,0.1); box-shadow: 0 0 20px rgba(45,212,191,0.3); }
+
+        /* Footer */
+        footer {
+            position: relative; z-index: 10;
+            padding: 32px 24px;
+            background: var(--footer-bg);
+            border-top: 1px solid rgba(45,212,191,0.12);
+        }
+        .footer-bottom { text-align: center; color: var(--text-muted); font-size: 13px; max-width: 1400px; margin: 0 auto; }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 50%;
+            width: 38px; height: 38px;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; color: #94A3B8;
+            transition: color 0.3s, border-color 0.3s, background 0.35s;
+            flex-shrink: 0;
+        }
+        .theme-toggle:hover { color: #2DD4BF; border-color: rgba(45,212,191,0.35); }
+        .theme-toggle svg { width: 17px; height: 17px; transition: transform 0.4s; }
+        .theme-toggle:hover svg { transform: rotate(20deg); }
+        .theme-toggle .icon-sun  { display: none; }
+        .theme-toggle .icon-moon { display: block; }
+        [data-theme="light"] .theme-toggle .icon-sun  { display: block; }
+        [data-theme="light"] .theme-toggle .icon-moon { display: none; }
+        [data-theme="light"] .theme-toggle { background: rgba(0,0,0,0.04); border-color: rgba(0,0,0,0.12); color: #475569; }
+
+        /* Light mode overrides */
+        [data-theme="light"] .page-hero h1 {
+            background: linear-gradient(135deg, #0F172A 0%, #0D9488 100%) !important;
+            -webkit-background-clip: text !important; background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
+        }
+        [data-theme="light"] .page-hero .subtitle { color: var(--text-slate) !important; }
+        [data-theme="light"] .step-title { color: var(--text-primary) !important; }
+        [data-theme="light"] .step-text { color: var(--text-slate) !important; }
+        [data-theme="light"] .step-body { background: rgba(255,255,255,0.6) !important; border-color: rgba(0,0,0,0.08) !important; }
+        [data-theme="light"] .step:hover .step-body { background: rgba(255,255,255,0.9) !important; }
+        [data-theme="light"] .cta-section h2 { color: var(--text-primary) !important; }
+        [data-theme="light"] .cta-section p { color: var(--text-slate) !important; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header { padding: 16px 20px; }
+            .nav-links { display: none; }
+            .mobile-menu-toggle { display: block; }
+            .page-hero h1 { font-size: 36px; }
+            .page-hero .subtitle { font-size: 17px; }
+            .content-wrapper { padding: 0 16px 60px; }
+            .step { grid-template-columns: 48px 1fr; gap: 0 20px; }
+            .step-body { padding: 24px 22px; }
+            .step-title { font-size: 19px; }
+            .step-text { font-size: 15px; }
+            .cta-section { padding: 40px 24px; }
+            .cta-buttons { flex-direction: column; }
+            .btn-primary, .btn-secondary { width: 100%; justify-content: center; }
+            .step:not(:last-child) .step-number-col::after { left: 23px; }
+            .step-number { width: 46px; height: 46px; font-size: 17px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="scroll-progress" id="scrollProgress"></div>
+    <div class="animated-gradient"></div>
+    <div class="floating-pills">
+        <div class="pill"></div><div class="pill"></div><div class="pill"></div>
+        <div class="pill"></div><div class="pill"></div>
+    </div>
+
+    <!-- Header -->
+    <header id="header">
+        <nav>
+            <a href="index.html" class="logo">
+                <svg class="logo-icon" viewBox="0 0 2048 1963" xmlns="http://www.w3.org/2000/svg"><path transform="translate(778,178)" d="m0 0h41l33 2 29 3 39 7 36 8 26 8 25 9 18 8 5 1 29-12 25-9 28-8 39-8 38-6 36-3h42l34 2 37 5 31 6 26 7 36 12 31 13 25 12 23 12 19 12 36 25 11 9 14 12 12 11 8 7 16 16 9 11 12 14 11 13 12 17 15 24 13 22 8 15 12 27 10 27 9 27 8 29 6 24 18 13 14 11 11 9 15 14 10 10 7 8 15 15 11 14 14 18 16 23 12 20 13 24 15 33 11 28 7 19 7 26 5 25 3 20 3 38v68l-2 27-4 30-7 37-9 31-12 32-12 27-10 19-7 13-10 16-12 17-10 13-13 16-9 10-22 22-8 7-7 7-11 9-19 14-12 8-14 9-10 40-9 29-10 28-11 27-15 33-8 16-12 19-10 15-10 13-11 13-12 14-14 15-7 7-8 7-7 7-11 9-14 12-18 13-15 10-17 12-16 9-15 8-23 11-32 14-18 7-30 9-27 7-36 7-36 4-30 2h-32l-40-3-35-5-38-8-26-7-26-9-23-10-4-2h-6l-23 10-30 10-33 9-35 7-29 4-29 3-16 1h-30l-41-3-30-4-36-7-28-7-33-11-30-13-25-12-22-11-19-12-16-11-20-14-14-11-11-9-15-13-7-7-6-5v-2h-2l-7-8-9-9-9-11-11-13-15-20-13-21-12-20-9-17-10-23-12-31-13-36-8-28-6-27-5-5-35-24-11-9-14-12-10-10-8-7-10-9-9-10-13-17-12-15-17-26-12-21-13-27-11-25-10-28-7-25-6-27-6-35-3-30-1-19v-22l2-35 4-38 5-26 7-30 9-29 8-22 18-39 12-22 10-17 10-15 16-21 12-16 9-10 31-31 8-7 13-11 19-13 15-11 3-2 5-24 7-26 11-32 13-34 14-34 8-17 13-21 10-16 16-21 8-10 12-14 16-17 9-9 8-7 7-7 11-9 15-12 18-13 27-18 17-10 28-14 27-12 24-9 25-8 36-9 48-8zm250 129-10 7-18 12-23 16-13 11-10 9-11 9-11 10-11 9-8 8-8 7-13 12-11 9-16 13-15 12-16 11-20 13-24 14-21 12-15 8-28 12-20 8-42 15-43 14-102 28-37 11-36 12-28 10-21 9-17 9 2 35 4 33 8 45 9 39 16 59 7 30 6 37 2 18 2 35v51l-2 30-4 33-7 36-8 32-15 55-8 34-7 41-3 27-1 14v19l10 6 21 10 30 11 36 12 40 12 70 19 31 9 43 14 41 16 24 10 28 13 19 10 28 17 18 11 14 10 15 11 14 11 17 14 15 13 12 11 10 10 8 7 16 15 8 7 15 14 11 9 21 16 17 12 12 9 4 1 11-8 12-8 18-13 19-14 13-12 8-7 13-12 8-7 10-9 18-18 8-7 13-11 14-11 14-12 15-11 15-10 19-12 26-15 18-10 22-10 36-15 37-14 29-10 25-8 67-19 62-18 43-14 33-13 19-9 6-4v-17l-2-29-5-35-8-42-16-58-8-31-6-27-4-26-3-27-2-33v-34l2-37 3-28 7-42 6-27 18-69 8-36 7-43 4-37 1-12v-11l-5-4-16-8-21-9-23-8-36-12-33-10-82-22-35-10-40-13-41-15-37-15-23-11-22-12-26-15-25-16-26-20-16-13-11-9-24-22-8-8-11-9-16-15-14-12-9-8-18-13-19-13-13-9z" fill="currentColor"/><path transform="translate(1008,615)" d="m0 0h33l25 2 25 4 25 7 21 8 23 12 20 12 14 11 18 18 18 22 10 18 10 25 5 19 2 11v5l-25 5-66 11h-3l-9-26-8-16-7-10-8-10-8-7-12-9-16-9-15-6-23-5-20-2h-23l-24 3-23 6-19 9-13 9-10 9-8 9-8 14-5 12-3 14-1 9v9l3 17 5 13 7 13 9 10 10 9 13 8 16 8 24 9 36 12 29 9 53 15 36 12 20 8 21 10 16 10 19 14 11 9 8 8 10 13 12 19 10 21 6 19 4 22 2 23v14l-2 19-6 29-7 21-12 25-9 14-10 13-9 10-11 11-13 10-17 12-17 9-29 12-24 7-31 6-27 3-31 1-27-2-30-4-34-8-26-9-21-10-19-12-21-16-13-11-11-12-10-14-10-15-9-16-8-17-7-21-6-25-1-12 80-16 19-3 7 28 7 19 9 17 12 16 9 10 10 10 13 9 17 9 22 8 27 6 23 2h16l25-3 22-5 15-5 17-8 12-8 10-9 8-10 8-13 5-10 4-13 2-11v-30l-4-18-8-16-9-12-13-13-15-10-25-12-36-12-56-16-52-15-35-12-18-8-16-8-17-11-16-12-13-11-9-10-9-13-9-16-7-18-5-18-3-20-1-16v-14l2-25 5-25 7-21 9-20 12-18 12-14 16-16 13-10 15-10 22-12 16-7 21-7 27-6 22-3z" fill="currentColor"/><g fill="var(--logo-detail)"><path transform="translate(198,850)" d="m0 0 9 2 27 8 74 23 41 12 5 2 2 6 4 25 2 20v14h-27l-96-3-21-1-41-1-3-2 3-28 6-29 7-25z"/><path transform="translate(1850,1016)" d="m0 0h35l1 1v10l-3 31-6 31-8 30-3 7-10-2-48-15-71-20-30-8-3-9-3-26-1-11v-13l11-1 79-3z"/><path transform="translate(174,1018)" d="m0 0h30l109 3 49 2 1 4-3 32-3 19-2 5-25 6-63 14-64 16-10 2-6-18-6-25-5-30-2-18z"/><path transform="translate(1859,850)" d="m0 0 3 3 10 30 7 28 5 29 1 13-3 1-107 4-44 2h-30v-11l3-30 4-22 10-4 41-12 48-15 42-13z"/><path transform="translate(597,301)" d="m0 0 4 2 15 28 10 19 9 19 10 19 11 22 12 22 13 27-1 4-15 6-36 12-14 5-4-1-12-17-26-39-10-14-23-34-14-21-4-7 14-12 13-10 12-8 19-12z"/><path transform="translate(1443,1493)" d="m0 0 5 5 10 13 13 18 14 21 13 18 12 17 26 38-1 4-11 10-16 12-26 17-16 10-5 2-9-15-14-25-8-16-15-28-12-21-17-32-10-20 1-4 20-8z"/><path transform="translate(1455,300)" d="m0 0 4 1 22 13 27 18 14 10 12 10-2 4-14 21-12 17-12 16-8 12-10 14-14 22-20 26-5-1-31-10-27-10-5-3 10-23 20-39 18-34 8-17 10-19 9-17z"/><path transform="translate(612,1492)" d="m0 0 11 3 36 12 20 8 1 3-11 23-16 30-12 22-18 35-8 16-14 24-5 9-4-1-26-16-15-11-11-8-11-9-8-8 2-4 8-11 13-19 12-17 8-11 12-17 23-34 10-15z"/><path transform="translate(1315,1547)" d="m0 0h2l11 19 15 29 13 23 12 23 12 21 10 20 12 22v3l-34 11-38 9-12 2-9-17-13-28-14-31-12-26-15-31-3-8 8-7 18-13 22-13z"/><path transform="translate(1316,253)" d="m0 0 9 1 25 5 31 9 16 6-2 5-12 23-8 17-12 22-17 33-11 22-7 16-10 19-3 3-25-14-19-12-12-9-6-5 1-7 12-28 12-24 24-54 13-27z"/><path transform="translate(732,254)" d="m0 0h5l5 8 20 40 11 25 19 42 11 24-1 3-19 14-17 11-14 8-12 6-8-13-11-22-11-23-15-28-37-74 5-3 35-11 28-6z"/><path transform="translate(738,1546)" d="m0 0 5 1 19 10 15 10 12 9 11 9-9 20-11 24-12 26-14 32-8 16-9 20-2 5-10-1-28-7-42-14 1-5 10-19 12-23 10-19 13-25 13-23 15-30z"/><path transform="translate(1582,399)" d="m0 0 5 5 10 11 9 11 10 13 13 22 12 22 8 15 11 26 7 21 1 7-9-2-41-15-30-10-71-19-8-3 2-5 12-17 13-19 11-15 13-18 14-19z"/><path transform="translate(475,400)" d="m0 0 5 5 13 18 11 16 16 23 24 34 5 9-16 5-43 11-36 11-35 12-25 10h-2l2-10 7-21 11-26 14-27 14-24 9-14 8-11 11-13z"/><path transform="translate(393,1425)" d="m0 0 33 11 20 7 28 9 32 9 28 7 13 4-2 5-10 15-12 17-10 14-7 10-12 17-14 19-5 8-4-2-11-13-12-16-10-16-12-21-12-22-13-31-7-23z"/><path transform="translate(1661,1426)" d="m0 0h3l-3 11-9 27-13 30-16 31-10 18-10 13-11 13-8 8-4-4-11-16-12-17-14-19-9-13-13-18-10-16v-2l19-6 41-11 42-13 36-12z"/><path transform="translate(336,1151)" d="m0 0h2l-1 9-13 53-7 33-5 36-2 16-4-2-10-9-8-7-20-20-13-17-10-14-10-15-10-17-8-16v-3l27-6 56-13z"/><path transform="translate(1723,1150)" d="m0 0 8 1 36 10 64 18 11 4-1 5-12 22-8 12-20 28-9 11-16 16-8 7-8 8-8 7h-2l-3-27-5-33-10-47-9-41z"/><path transform="translate(850,1629)" d="m0 0 4 2 11 9 10 9 11 9 7 7 8 7 11 10 14 11 18 14 7 5v2l-15 5-28 7-36 6-24 3-21 1h-22l-4-2 13-28 15-33 16-34z"/><path transform="translate(308,684)" d="m0 0 2 4 6 39 8 43 13 55-1 2-11-3-48-15-45-13-9-3 1-4 9-17 8-11 8-12 12-17 14-17 15-15 11-9z"/><path transform="translate(1751,684)" d="m0 0 5 3v2l4 2 9 9 3 2v2l4 2 15 16 13 17 12 18 14 24 5 10v2l-26 8-45 13-37 11h-2l5-26 9-40 8-47 3-26z"/><path transform="translate(1201,1631)" d="m0 0 3 2 8 18 14 28 12 26 12 28v3h-23l-35-2-26-3-29-6-27-9-4-2v-2l13-9 10-8 16-13 12-11 8-8 8-7 14-12 13-12z"/><path transform="translate(806,248)" d="m0 0h29l33 4 31 6 31 8 21 7-4 4-10 7-17 13-11 10-11 9-10 9-11 9-15 14-7 5-3-4-13-28-9-19-15-33z"/><path transform="translate(1245,247)" d="m0 0h2l-1 5-12 27-11 24-12 26-9 21h-4l-11-11-11-9-12-11-8-7-11-10-14-11-19-14-6-4 2-2 24-7 28-7 35-6 29-3z"/></g></svg>
+                <span>SuppVis</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="suppvis-about.html">About</a></li>
+                <li><a href="suppvis-how-it-works.html" class="active">How It Works</a></li>
+                <li><a href="suppvis-ai-chat.html">SuppVis AI</a></li>
+                <li><a href="suppvis-shop.html">Shop</a></li>
+                <li><a href="suppvis-blog.html">Blog</a></li>
+                <li><a href="suppvis-waitlist.html">Waitlist</a></li>
+            </ul>
+            <div style="display:flex;align-items:center;gap:12px;">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark theme">
+                    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                    </svg>
+                    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"/>
+                        <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                        <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                    </svg>
+                </button>
+                <a href="index.html#waitlist" class="nav-cta">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 17H2a3 3 0 0 0 3-3V9a7 7 0 0 1 14 0v5a3 3 0 0 0 3 3z"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                    Join the Waitlist
+                </a>
+            </div>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">&#9776;</button>
+        </nav>
+    </header>
+
+    <div class="container">
+        <main class="main-content">
+            <div class="content-wrapper">
+
+                <!-- Hero -->
+                <section class="page-hero">
+                    <div class="eyebrow">The SuppVis Journey</div>
+                    <h1>From Guesswork to Precision</h1>
+                    <p class="subtitle">SuppVis is built around a single idea: your supplement routine should be as individual as you are. Here is exactly how the platform works, from your first session to long term results.</p>
+                </section>
+
+                <!-- Steps -->
+                <div class="steps-list">
+
+                    <!-- Step 1 -->
+                    <div class="step">
+                        <div class="step-number-col">
+                            <div class="step-number">1</div>
+                        </div>
+                        <div class="step-body">
+                            <span class="step-icon">🧬</span>
+                            <h2 class="step-title">Build Your Profile</h2>
+                            <p class="step-text">Your supplement journey starts with understanding you. SuppVis onboarding collects the data that makes everything else possible. Your health goals, current supplements, diet, lifestyle, budget, and any conditions or medications you are managing. The more we know upfront, the smarter every recommendation becomes. This is the foundation the entire platform is built on, and it gets more accurate the more you share.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="step">
+                        <div class="step-number-col">
+                            <div class="step-number">2</div>
+                        </div>
+                        <div class="step-body">
+                            <span class="step-icon">⚗️</span>
+                            <h2 class="step-title">Refine Your Stack</h2>
+                            <p class="step-text">Whether you are brand new to supplements or have been taking them for years, SuppVis meets you where you are. We look at your full picture. Your goals, your constraints, your budget, and everything you are already taking. Then we build a stack that actually fits your life. We do not just suggest more. We analyze what you are doing and cut what is not pulling its weight, so you stop spending money on things with negligible effects and start feeling the ones that actually matter.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="step">
+                        <div class="step-number-col">
+                            <div class="step-number">3</div>
+                        </div>
+                        <div class="step-body">
+                            <span class="step-icon">🛒</span>
+                            <h2 class="step-title">Shop With Confidence</h2>
+                            <p class="step-text">The SuppVis shop is not a generic storefront. Every product you see is already filtered through your profile, so what you are browsing is personalized to you before you even search. SuppVis AI is embedded throughout to flag potential interactions, highlight what fits your goals, and surface the best option for your budget. You will always know why something is being recommended before you buy it.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="step">
+                        <div class="step-number-col">
+                            <div class="step-number">4</div>
+                        </div>
+                        <div class="step-body">
+                            <span class="step-icon">🧠</span>
+                            <h2 class="step-title">Ask SuppVis AI Anything</h2>
+                            <p class="step-text">SuppVis AI understands your physiology, knows your stack, and has been trained on tens of thousands of peer reviewed research articles. Ask it anything from basic questions about a supplement to complex questions about interactions, timing, and dosing for your specific situation. Every answer is grounded in research, not marketing. The more you use it, the more useful it becomes.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 5 -->
+                    <div class="step">
+                        <div class="step-number-col">
+                            <div class="step-number">5</div>
+                        </div>
+                        <div class="step-body">
+                            <span class="step-icon">📖</span>
+                            <h2 class="step-title">Read the Blog</h2>
+                            <p class="step-text">Supplements are one of the most marketing driven industries on the planet. Fads move fast and the science rarely keeps up with the hype. The SuppVis Journal cuts through the noise with short, research backed reads that help you understand not just what to take but why it works and how to think critically about your own health. For anyone who wants to go deeper, the blog is where to start.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 6 -->
+                    <div class="step">
+                        <div class="step-number-col">
+                            <div class="step-number">6</div>
+                        </div>
+                        <div class="step-body">
+                            <span class="step-icon">📈</span>
+                            <h2 class="step-title">Track and Refine Over Time</h2>
+                            <p class="step-text">Supplements work through consistency. The benefits build over weeks and months, not days. SuppVis gives you a tracking system to stay accountable to your stack, monitor how you feel over time, and conduct real research on your own body. The longer you track, the clearer the picture becomes and the better we can help you dial things in.</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- CTA -->
+                <div class="cta-section">
+                    <h2>Ready to build your stack?</h2>
+                    <p>Start with a conversation or join the waitlist for full access when we launch.</p>
+                    <div class="cta-buttons">
+                        <a href="suppvis-ai-chat.html" class="btn-primary">
+                            Try SuppVis AI
+                            <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M10 3L9 4L14 9H3V11H14L9 16L10 17L17 10L10 3Z" fill="currentColor"/></svg>
+                        </a>
+                        <a href="suppvis-waitlist.html" class="btn-secondary">
+                            Join the Waitlist
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 17H2a3 3 0 0 0 3-3V9a7 7 0 0 1 14 0v5a3 3 0 0 0 3 3z"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-bottom">
+            <p>&copy; 2026 SuppVis. All rights reserved. Not medical advice. Consult your healthcare provider.</p>
+        </div>
+    </footer>
+
+    <script>
+        // ── THEME TOGGLE ──
+        const html = document.documentElement;
+        const themeToggle = document.getElementById('themeToggle');
+        const savedTheme = localStorage.getItem('sv-theme');
+        const initTheme = savedTheme || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+        html.setAttribute('data-theme', initTheme);
+        themeToggle.addEventListener('click', () => {
+            const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', next);
+            localStorage.setItem('sv-theme', next);
+        });
+
+        const header = document.getElementById('header');
+        const scrollProgress = document.getElementById('scrollProgress');
+        window.addEventListener('scroll', () => {
+            header.classList.toggle('scrolled', window.scrollY > 50);
+            const pct = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            scrollProgress.style.width = pct + '%';
+        });
+        document.getElementById('mobileMenuToggle').addEventListener('click', () => {
+            alert('Mobile menu coming soon!');
+        });
+    </script>
+</body>
+</html>
