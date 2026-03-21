@@ -69,7 +69,7 @@
             background: var(--bg-primary);
             color: var(--text-primary);
             min-height: 100vh;
-            overflow-x: hidden;
+            overflow-x: clip;
             transition: background 0.35s, color 0.35s;
         }
 
@@ -451,7 +451,9 @@
         .ticker-wrapper {
             position: relative;
             left: 50%;
-            transform: translateX(-50%);
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
             width: 100vw;
             overflow: hidden;
             border-top: 1px solid var(--ticker-border);
