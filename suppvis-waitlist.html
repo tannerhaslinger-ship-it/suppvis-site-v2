@@ -449,7 +449,10 @@
 
         /* ── TICKER ── */
         .ticker-wrapper {
-            width: 100vw; margin-left: calc(-50vw + 50%);
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100vw;
             overflow: hidden;
             border-top: 1px solid var(--ticker-border);
             border-bottom: 1px solid var(--ticker-border);
@@ -460,18 +463,26 @@
             transition: background 0.35s, border-color 0.35s;
         }
         .ticker-track {
-            display: flex; white-space: nowrap;
-            animation: ticker 32s linear infinite; width: max-content;
+            display: flex;
+            flex-wrap: nowrap;
+            width: max-content;
+            animation: ticker-scroll 32s linear infinite;
         }
         .ticker-set {
-            display: flex; gap: 56px; padding-right: 56px; flex-shrink: 0;
+            display: flex;
+            flex-shrink: 0;
+            gap: 56px;
+            padding-right: 56px;
         }
-        @keyframes ticker { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+        @keyframes ticker-scroll {
+            from { transform: translateX(0); }
+            to   { transform: translateX(-50%); }
+        }
         .ticker-item {
             font-family: 'DM Mono', monospace; font-size: 11px;
             color: var(--text-muted); letter-spacing: 0.3px;
             display: flex; align-items: center; gap: 10px;
-            transition: color 0.35s;
+            transition: color 0.35s; white-space: nowrap;
         }
         .ticker-item::before { content: '◆'; color: rgba(45,212,191,0.3); font-size: 7px; }
 
@@ -704,6 +715,11 @@
                     <span class="ticker-item">L-Theanine + Caffeine Stack</span>
                     <span class="ticker-item">Zinc Timing & Bioavailability</span>
                     <span class="ticker-item">Lion's Mane Neuroplasticity Data</span>
+                    <span class="ticker-item">Bacopa Monnieri Memory Research</span>
+                    <span class="ticker-item">Vitamin K2 MK-7 Bone Health</span>
+                    <span class="ticker-item">CoQ10 Mitochondrial Support</span>
+                    <span class="ticker-item">Berberine Metabolic Research</span>
+                    <span class="ticker-item">Rhodiola Rosea Stress Adaptation</span>
                 </div>
                 <div class="ticker-set" aria-hidden="true">
                     <span class="ticker-item">Magnesium Glycinate for Sleep</span>
@@ -716,6 +732,11 @@
                     <span class="ticker-item">L-Theanine + Caffeine Stack</span>
                     <span class="ticker-item">Zinc Timing & Bioavailability</span>
                     <span class="ticker-item">Lion's Mane Neuroplasticity Data</span>
+                    <span class="ticker-item">Bacopa Monnieri Memory Research</span>
+                    <span class="ticker-item">Vitamin K2 MK-7 Bone Health</span>
+                    <span class="ticker-item">CoQ10 Mitochondrial Support</span>
+                    <span class="ticker-item">Berberine Metabolic Research</span>
+                    <span class="ticker-item">Rhodiola Rosea Stress Adaptation</span>
                 </div>
             </div>
         </div>
