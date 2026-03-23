@@ -404,6 +404,9 @@
             border: 1px solid rgba(16,185,129,0.2); border-radius: 6px; padding: 6px 16px;
         }
         .form-disclaimer { font-size: 12px; color: var(--placeholder-color); margin-top: 14px; line-height: 1.5; text-align: center; transition: color 0.35s; }
+        .form-msg { font-size: 13px; min-height: 18px; margin: 0 0 8px; text-align: center; }
+        .form-msg.error { color: #F87171; }
+        .form-msg.info  { color: #2DD4BF; }
 
         /* ── DIVIDER ── */
         .section-divider {
@@ -739,6 +742,7 @@
                         <option value="general">General Wellness</option>
                     </select>
                 </div>
+                <p id="formMsg" class="form-msg"></p>
                 <button type="submit" class="submit-btn" id="submitBtn">
                     I'm In. Lock My Spot.
                     <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M10 3L9 4L14 9H3V11H14L9 16L10 17L17 10L10 3Z" fill="currentColor"/></svg>
@@ -958,20 +962,58 @@
         const form = document.getElementById('waitlistForm');
         const successState = document.getElementById('successState');
         const submitBtn = document.getElementById('submitBtn');
+        const formMsg = document.getElementById('formMsg');
 
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
-            submitBtn.innerHTML = 'Securing your spot...';
+
+            const email = form.querySelector('input[name="email"]').value.trim();
+            if (!email) {
+                formMsg.textContent = 'Please enter your email address.';
+                formMsg.className = 'form-msg error';
+                return;
+            }
+            formMsg.textContent = '';
+            formMsg.className = 'form-msg';
+
+            const originalHTML = submitBtn.innerHTML;
+            submitBtn.textContent = 'Submitting...';
             submitBtn.disabled = true;
+
             try {
-                const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } });
-                if (!res.ok) throw new Error();
-            } catch {}
-            claimed++;
-            updateSpots();
-            form.style.display = 'none';
-            successState.classList.add('visible');
-            document.getElementById('successNumber').textContent = `Founding Member #${claimed}`;
+                const res = await fetch('https://suppvis-platform.vercel.app/api/waitlist', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                    body: JSON.stringify({
+                        name: form.querySelector('input[name="name"]').value.trim(),
+                        email: email,
+                        goal: form.querySelector('select[name="goal"]').value
+                    })
+                });
+
+                if (res.ok) {
+                    claimed++;
+                    updateSpots();
+                    form.style.display = 'none';
+                    document.querySelector('.form-wrapper > p.try-free-link').style.display = 'none';
+                    document.querySelector('.form-wrapper > p.form-disclaimer').style.display = 'none';
+                    successState.querySelector('p').textContent = 'You are on the list. We will be in touch soon.';
+                    successState.classList.add('visible');
+                    document.getElementById('successNumber').textContent = `Founding Member #${claimed}`;
+                } else if (res.status === 409) {
+                    formMsg.textContent = 'You are already on the list.';
+                    formMsg.className = 'form-msg info';
+                    submitBtn.innerHTML = originalHTML;
+                    submitBtn.disabled = false;
+                } else {
+                    throw new Error();
+                }
+            } catch {
+                formMsg.textContent = 'Something went wrong. Please try again.';
+                formMsg.className = 'form-msg error';
+                submitBtn.innerHTML = originalHTML;
+                submitBtn.disabled = false;
+            }
         });
 
         document.getElementById('mobileMenuToggle').addEventListener('click', () => alert('Mobile menu coming soon!'));
