@@ -357,7 +357,10 @@
         [data-theme="light"] .section-content p[style*="94A3B8"] { color: var(--text-slate) !important; }
         [data-theme="light"] .section-content p[style*="E2E8F0"] { color: var(--text-primary) !important; }
         .founder-card p { color: #F5F1E8 !important; }
-        [data-theme="light"] .founder-card p { color: #0F172A !important; }
+        html[data-theme="light"] .founder-card p,
+        html[data-theme="light"] .founder-card blockquote,
+        html[data-theme="light"] .founder-card blockquote p,
+        html[data-theme="light"] .founder-card div p { color: #0F172A !important; }
 
         /* Responsive */
         @media (max-width: 1024px) {
