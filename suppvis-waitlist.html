@@ -62,7 +62,7 @@
         }
 
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
+        html { scroll-behavior: smooth; scrollbar-gutter: stable; }
 
         body {
             font-family: 'DM Sans', sans-serif;
@@ -114,7 +114,7 @@
             background: var(--header-bg-scrolled);
             box-shadow: var(--header-shadow);
         }
-        nav { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        nav { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
         .logo {
             display: flex; align-items: center; gap: 12px;
             font-family: 'Syne', sans-serif; font-size: 24px; font-weight: 700;
@@ -680,6 +680,7 @@
 
         </style>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <script>!function(){var t=localStorage.getItem("sv-theme")||((window.matchMedia&&window.matchMedia("(prefers-color-scheme: light)").matches)?"light":"dark");document.documentElement.setAttribute("data-theme",t)}();</script>
 </head>
 <body>
 

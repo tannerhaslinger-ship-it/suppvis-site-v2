@@ -10,10 +10,11 @@
         *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
         :root{--navy:#0A1628;--teal:#2DD4BF;--teal-dark:#14B8A6;--cream:#F5F1E8;--slate:#94A3B8;--slate-dark:#64748B;--teal-10:rgba(45,212,191,0.1);--teal-20:rgba(45,212,191,0.2);--teal-30:rgba(45,212,191,0.3);--header-bg:rgba(10,22,40,0.9);--header-bg-scrolled:rgba(10,22,40,0.95);--card-bg:rgba(255,255,255,0.04)}
         [data-theme="light"]{--navy:#EEF2F7;--cream:#0F172A;--slate:#475569;--slate-dark:#64748B;--header-bg:rgba(238,242,247,0.92);--header-bg-scrolled:rgba(238,242,247,0.98);--card-bg:rgba(255,255,255,0.8)}
-        body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--cream);line-height:1.7;transition:background .35s,color .35s}
+        html{scroll-behavior:smooth;scrollbar-gutter:stable}
+        body{overflow-x:hidden;font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--cream);line-height:1.7;transition:background .35s,color .35s}
         header{position:fixed;top:0;left:0;right:0;z-index:1000;padding:20px 48px;background:var(--header-bg);backdrop-filter:blur(20px);border-bottom:1px solid rgba(45,212,191,0.1);transition:all .3s}
         header.scrolled{padding:12px 48px;background:var(--header-bg-scrolled);box-shadow:0 4px 20px rgba(0,0,0,0.3)}
-        nav{max-width:1400px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+        nav{max-width:1400px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap}
         .logo{display:flex;align-items:center;gap:12px;font-family:'Syne',sans-serif;font-size:24px;font-weight:700;color:var(--cream);text-decoration:none;transition:transform .3s}
         .logo:hover{transform:scale(1.05)}
         .logo-icon{--logo-detail:#0A1628;width:40px;height:40px;flex-shrink:0;color:#2DD4BF}
@@ -185,6 +186,7 @@
 
         </style>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <script>!function(){var t=localStorage.getItem("sv-theme")||((window.matchMedia&&window.matchMedia("(prefers-color-scheme: light)").matches)?"light":"dark");document.documentElement.setAttribute("data-theme",t)}();</script>
 </head>
 <body>
 <header id="header">
