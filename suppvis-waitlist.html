@@ -576,6 +576,71 @@
             .trust-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
             .founder-note { flex-direction: column; text-align: center; }
             .spots-footer { flex-direction: column; align-items: flex-start; gap: 6px; }
+
+            .sv-footer {
+                margin-top: 0;
+            }
+
+            .sv-footer-main {
+                display: flex !important;
+                flex-direction: column-reverse !important;
+                padding: 40px 0 24px;
+                gap: 0;
+            }
+
+            .sv-footer-divider {
+                display: none;
+            }
+
+            .sv-footer-right {
+                padding: 0 0 32px;
+                gap: 6px;
+                border-bottom: 1px solid rgba(255,255,255,0.06);
+                margin-bottom: 28px;
+            }
+
+            .sv-footer-powered,
+            .sv-footer-privacy,
+            .sv-footer-form {
+                display: none;
+            }
+
+            .sv-footer-tagline {
+                font-size: 13px;
+                max-width: 100%;
+            }
+
+            .sv-footer-left {
+                display: grid !important;
+                grid-template-columns: repeat(3, 1fr) !important;
+                gap: 0 12px;
+                padding: 0;
+            }
+
+            .sv-footer-col h4 {
+                font-size: 11px !important;
+                margin-bottom: 10px !important;
+            }
+
+            .sv-footer-col ul {
+                gap: 10px !important;
+            }
+
+            .sv-footer-col ul li a {
+                font-size: 12px !important;
+            }
+
+            .sv-footer-strip {
+                flex-direction: column;
+                gap: 4px;
+                text-align: center;
+                padding: 20px 0;
+                font-size: 11px;
+            }
+
+            .legal-footer-inner {
+                padding: 28px 20px;
+            }
         }
     
         /* Lucide icon sizing */
@@ -587,14 +652,12 @@
         
         /* ── SITE FOOTER ── */
         .sv-footer { background: #060E1A; font-family: 'DM Sans', sans-serif; margin-top: 80px; }
-        [data-theme="light"] .sv-footer { background: rgba(238,242,247,0.98) !important; }
         .sv-footer-inner { max-width: 1200px; margin: 0 auto; padding: 0 56px; }
         .sv-footer-main {
             display: flex;
             padding: 72px 0 64px;
             border-bottom: 1px solid rgba(255,255,255,0.05);
         }
-        /* Left: 60% — three link columns */
         .sv-footer-left {
             flex: 0 0 60%;
             display: grid;
@@ -611,14 +674,12 @@
         .sv-footer-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 14px; }
         .sv-footer-col ul li a { font-size: 14px; color: #64748B; text-decoration: none; transition: color 0.2s; line-height: 1.4; }
         .sv-footer-col ul li a:hover { color: #2DD4BF; }
-        /* Vertical divider */
         .sv-footer-divider {
             flex-shrink: 0;
             width: 1px;
             background: rgba(255,255,255,0.06);
             align-self: stretch;
         }
-        /* Right: 40% — brand + signup */
         .sv-footer-right {
             flex: 0 0 40%;
             padding-left: 60px;
@@ -627,7 +688,8 @@
             justify-content: center;
         }
         .sv-footer-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
-        .sv-footer-logo span { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 700; color: #2DD4BF; }
+        .sv-footer-logo span { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 700; color: #ffffff; }
+        [data-theme="light"] .sv-footer-logo span { color: #000000; }
         .sv-footer-tagline { font-size: 15px; color: #F5F1E8; margin: 0 0 8px; font-weight: 600; }
         [data-theme="light"] .sv-footer-tagline { color: #0F172A; }
         .sv-footer-powered { font-size: 12px; color: #475569; margin: 0 0 24px; }
@@ -1124,6 +1186,7 @@
 </script>
 
 <script>document.addEventListener("DOMContentLoaded",function(){if(window.lucide)lucide.createIcons();});</script>
+
 
 <!-- Legal Footer -->
 <style>
