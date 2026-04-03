@@ -575,6 +575,9 @@
             .countdown-sep { font-size: 28px; }
             .countdown { gap: 8px; }
             .trust-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+            .trust-card { aspect-ratio: unset; padding: 16px 14px; text-align: center; }
+            .trust-card-value { font-size: 15px; }
+            .trust-card-label { font-size: 12px; }
             .founder-note { flex-direction: column; text-align: center; }
             .spots-footer { flex-direction: column; align-items: flex-start; gap: 6px; }
 
@@ -746,7 +749,11 @@
             .sv-footer-strip { flex-direction: column; gap: 8px; text-align: center; padding: 20px 0; }
         }
 
-        </style>
+        @media (max-width: 480px) {
+            .trust-grid { grid-template-columns: 1fr; gap: 8px; }
+            .trust-card { text-align: center; }
+        }
+    </style>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
         <script>(function(){document.documentElement.setAttribute('data-theme',window.matchMedia('(prefers-color-scheme:light)').matches?'light':'dark');})();</script>
 </head>
