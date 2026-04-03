@@ -4649,11 +4649,10 @@ const PRODUCTS = [
 
 const html = document.documentElement;
 const applyTheme = () => {
-            html.setAttribute('data-theme', window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
-        };
-        applyTheme();
-        window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', applyTheme);
-});
+    html.setAttribute('data-theme', window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+};
+applyTheme();
+window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', applyTheme);
 const header = document.getElementById('header');
 window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 50));
         // Mobile menu toggle
