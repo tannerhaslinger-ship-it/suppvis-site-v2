@@ -1782,20 +1782,18 @@
         [data-theme="light"] .sv-footer-col ul li a:hover { color: #0D9488; }
         [data-theme="light"] .sv-footer-form input { background: rgba(0,0,0,0.06); border-color: rgba(0,0,0,0.15); color: #0F172A; }
         [data-theme="light"] .sv-footer-bottom { border-top-color: rgba(0,0,0,0.1); color: #64748B; }
+        @media (max-width: 900px) {
+            .sv-footer-main { flex-direction: column; gap: 0; padding: 56px 0 48px; }
+            .sv-footer-left { flex: none; padding-right: 0; padding-bottom: 48px; }
+            .sv-footer-divider { width: 100%; height: 1px; align-self: auto; margin-bottom: 48px; }
+            .sv-footer-right { flex: none; padding-left: 0; }
+        }
+        @media (max-width: 600px) {
+            .sv-footer-inner { padding: 0 24px; }
+            .sv-footer-left { grid-template-columns: 1fr; gap: 36px; }
+            .sv-footer-strip { flex-direction: column; gap: 8px; text-align: center; padding: 20px 0; }
+        }
 </style>
-<div class="legal-footer">
-  <div class="legal-footer-inner">
-    <div class="legal-footer-links">
-      <a href="/suppvis-terms.html">Terms of Service</a>
-      <span class="legal-sep">|</span>
-      <a href="/suppvis-privacy.html">Privacy Policy</a>
-      <span class="legal-sep">|</span>
-      <!--email_off--><a href="mailto:hello@suppvis.health">Contact</a><!--/email_off-->
-    </div>
-    <p class="legal-footer-disclosure">As an Amazon Associate, I earn from qualifying purchases. SuppVis participates in the Amazon Services LLC Associates Program, an affiliate advertising program designed to provide a means for sites to earn advertising fees by advertising and linking to Amazon.com.</p>
-    <p class="legal-footer-copy">&copy; 2026 SuppVis. All rights reserved.</p>
-  </div>
-</div>
 
 </body>
 </html>
