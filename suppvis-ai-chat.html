@@ -57,8 +57,7 @@
         .chat-page-wrapper {
             display: flex;
             flex-direction: column;
-            height: 100vh;
-            overflow: hidden;
+            min-height: 100vh;
         }
 
         .chat-nav { flex-shrink: 0; }
@@ -499,7 +498,7 @@
         .team-member-icon .lucide { width: 36px; height: 36px; }
         
         /* ── SITE FOOTER ── */
-        .sv-footer { background: #060E1A; font-family: 'DM Sans', sans-serif; margin-top: 80px; }
+        .sv-footer { background: #060E1A; font-family: 'DM Sans', sans-serif; margin-top: 80px; position: relative; z-index: 2; }
         [data-theme="light"] .sv-footer { background: rgba(238,242,247,0.98) !important; }
         .sv-footer-inner { max-width: 1200px; margin: 0 auto; padding: 0 56px; }
         .sv-footer-main {
