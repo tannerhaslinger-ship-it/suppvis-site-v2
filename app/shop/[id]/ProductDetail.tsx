@@ -32,7 +32,7 @@ export default function ProductDetail({
       {/* Product header */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 mb-16">
         {/* Image — static display, no link */}
-        <div className="aspect-square bg-bg-secondary rounded-2xl p-8 flex items-center justify-center">
+        <div className="aspect-square bg-white rounded-2xl p-8 md:p-12 flex items-center justify-center overflow-hidden">
           <ProductImage
             src={product.imageUrl}
             alt={product.productName}
