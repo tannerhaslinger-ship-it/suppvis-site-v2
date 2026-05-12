@@ -96,6 +96,11 @@ export default function Footer() {
                   Medical Disclaimer
                 </a>
               </li>
+              <li>
+                <a href="/sources" className="text-sm text-text-muted hover:text-text-secondary transition-colors">
+                  Sources
+                </a>
+              </li>
             </ul>
           </div>
 
