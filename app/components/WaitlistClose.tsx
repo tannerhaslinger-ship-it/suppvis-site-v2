@@ -103,6 +103,9 @@ export default function WaitlistClose() {
                 ))}
               </select>
             </div>
+            <p className="text-text-muted text-xs text-center">
+              Email is the only thing we need. The rest helps us tailor early access.
+            </p>
             <button
               type="submit"
               disabled={loading}

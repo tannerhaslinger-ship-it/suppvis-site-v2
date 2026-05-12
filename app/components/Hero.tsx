@@ -12,23 +12,21 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center px-6 pt-20">
+    <section className="relative min-h-[75vh] flex flex-col items-center justify-center px-6 pt-20">
       <div className="max-w-[1200px] mx-auto text-center">
         <h1
           className="font-headline font-extrabold text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight text-text-primary animate-fade-in-up"
         >
-          Your stack, scored.
-          <br />
-          Your biology, decoded.
+          Prove your stack.
         </h1>
 
         <p
           className="mt-6 max-w-[600px] mx-auto text-lg sm:text-xl text-text-secondary animate-fade-in"
           style={{ animationDelay: "0.15s" }}
         >
-          SuppVis tracks your supplements, goals, and daily data to show you
-          exactly what&rsquo;s moving the needle. Evidence-based. Brand-agnostic.
-          Built for people who take their health seriously.
+          Stop guessing whether your stack is working. SuppVis correlates your
+          supplements against how you feel, every day, and shows you the verdict
+          in weeks.
         </p>
 
         <div
@@ -48,13 +46,13 @@ export default function Hero() {
           className="mt-12 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-sm text-text-muted animate-fade-in"
           style={{ animationDelay: "0.45s" }}
         >
-          <span>Brand-Agnostic</span>
-          <span className="hidden sm:inline text-text-muted/40">&middot;</span>
-          <span>Evidence-Based</span>
-          <span className="hidden sm:inline text-text-muted/40">&middot;</span>
-          <span>600+ Supplements</span>
-          <span className="hidden sm:inline text-text-muted/40">&middot;</span>
-          <span>60,000+ Studies</span>
+          <span className="whitespace-nowrap">Brand-Agnostic</span>
+          <span className="text-text-muted/40">&middot;</span>
+          <span className="whitespace-nowrap">Evidence-Based</span>
+          <span className="text-text-muted/40">&middot;</span>
+          <span className="whitespace-nowrap">24,500+ Studies on Supplements</span>
+          <span className="text-text-muted/40">&middot;</span>
+          <span className="whitespace-nowrap">2,300+ Drug-Supplement Interactions</span>
         </div>
       </div>
 
