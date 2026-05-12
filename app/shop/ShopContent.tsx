@@ -377,7 +377,7 @@ function ProductCard({
       style={{ animationDelay: `${(index % PAGE_SIZE) * 0.03}s` }}
     >
       {/* Image area — navigates to detail page (same as card) */}
-      <div className="relative aspect-square bg-white p-6 flex items-center justify-center">
+      <div className="relative aspect-square bg-white p-3 sm:p-6 flex items-center justify-center overflow-hidden">
         <TierBadge tier={product.tier} />
         {product.thirdPartyTested && <TestedBadge />}
         <ProductImage
@@ -389,7 +389,7 @@ function ProductCard({
       </div>
 
       {/* Info */}
-      <div className="p-5 flex flex-col flex-1">
+      <div className="p-3 sm:p-5 flex flex-col flex-1">
         <p className="text-[11px] text-text-muted font-normal mb-1 uppercase tracking-wide">
           {product.brand}
         </p>
