@@ -21,7 +21,8 @@ const founders = [
     name: "Connor Haslinger",
     title: "COO / Co-Founder",
     paragraphs: [
-      "I started in food science and left frustrated. The answers I was being taught were built around convenience, not truth. That restlessness led me to naturopathic medicine, where I found a philosophy that matched how I see the world: find the root cause, don\u2019t just manage the symptom.",
+      "I started in food science at Cal Poly San Luis Obispo, where I earned my BS in 2024. I left frustrated. The curriculum kept telling me the only way to feed people was with stripped and enriched processed foods, sprayed with pesticides and herbicides to make the system work. The answers were built around convenience, not truth.",
+      "That restlessness led me to naturopathic medicine. I\u2019m currently at Bastyr University, class of 2028, training in a philosophy that matched how I see the world: find the root cause, don\u2019t just manage the symptom.",
       'In naturopathic medicine, \u201cVis\u201d refers to the body\u2019s vital force. The biological intelligence that governs the balance between resilience and vulnerability. It\u2019s the force that either sets your limits or shatters them.',
       "That\u2019s where SuppVis gets its name. And its purpose.",
       "The deeper I get into clinical training, the more I see how wide the gap is between what science actually knows and what people can access. People are left sorting through contradictory supplement advice with no way to know what\u2019s actually working for them. SuppVis closes that gap.",
