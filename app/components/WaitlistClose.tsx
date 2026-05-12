@@ -3,16 +3,6 @@
 import { useState, FormEvent } from "react";
 import { useScrollReveal } from "../hooks/useScrollReveal";
 
-const healthGoals = [
-  "Energy & Focus",
-  "Sleep Optimization",
-  "Athletic Performance",
-  "Longevity & Vitality",
-  "Stress & Recovery",
-  "Body Composition",
-  "General Wellness",
-];
-
 export default function WaitlistClose() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -59,18 +49,6 @@ export default function WaitlistClose() {
         ) : (
           <form onSubmit={handleSubmit} className="space-y-4 text-left">
             <div>
-              <label htmlFor="name" className="sr-only">
-                First Name
-              </label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                placeholder="First Name"
-                className="w-full rounded-xl bg-bg-secondary border border-white/10 px-5 py-3.5 text-text-primary placeholder:text-text-muted focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/30 transition-colors"
-              />
-            </div>
-            <div>
               <label htmlFor="email" className="sr-only">
                 Email Address
               </label>
@@ -83,29 +61,6 @@ export default function WaitlistClose() {
                 className="w-full rounded-xl bg-bg-secondary border border-white/10 px-5 py-3.5 text-text-primary placeholder:text-text-muted focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/30 transition-colors"
               />
             </div>
-            <div>
-              <label htmlFor="goal" className="sr-only">
-                Primary Health Goal
-              </label>
-              <select
-                id="goal"
-                name="goal"
-                defaultValue=""
-                className="w-full rounded-xl bg-bg-secondary border border-white/10 px-5 py-3.5 text-text-muted focus:text-text-primary focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/30 transition-colors appearance-none"
-              >
-                <option value="" disabled>
-                  Select a goal...
-                </option>
-                {healthGoals.map((goal) => (
-                  <option key={goal} value={goal} className="text-text-primary">
-                    {goal}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <p className="text-text-muted text-xs text-center">
-              Email is the only thing we need. The rest helps us tailor early access.
-            </p>
             <button
               type="submit"
               disabled={loading}
