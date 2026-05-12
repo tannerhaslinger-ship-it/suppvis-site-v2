@@ -14,7 +14,16 @@ export default function Origin() {
 
         <div className="space-y-6 text-[16px] md:text-[17px] text-text-secondary leading-[1.7]">
           <p>
-            The supplement industry generates over $70 billion a year. Most of
+            The supplement industry generated{" "}
+            <a
+              href="https://www.nutraceuticalsworld.com/exclusives/the-state-of-supplements-u-s-market-approaches-70-billion/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline decoration-transparent hover:decoration-accent transition-colors"
+            >
+              $69.3 billion in 2024
+            </a>
+            . Most of
             that money is spent on trust. Trust in a brand. Trust in an
             influencer. Trust in a label that says &ldquo;clinically
             studied&rdquo; without telling you what that actually means.
@@ -32,6 +41,12 @@ export default function Origin() {
             truth about what was working.
           </p>
           <p>So we built one.</p>
+          <p>
+            SuppVis tracks your supplements daily, correlates them against how
+            you feel, and grounds every insight in 24,500+ peer-reviewed
+            studies. It&rsquo;s an iOS app, brand-agnostic, and built for
+            skeptics.
+          </p>
           <p>
             SuppVis is not a supplement brand. We don&rsquo;t sell pills. We
             don&rsquo;t take money from brands to promote their products. We

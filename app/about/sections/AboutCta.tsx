@@ -9,10 +9,10 @@ export default function AboutCta() {
     <section className="py-[120px] md:py-[160px] px-6">
       <div ref={ref} className="scroll-reveal max-w-[600px] mx-auto text-center">
         <h2 className="font-headline font-extrabold text-3xl sm:text-4xl md:text-5xl text-text-primary mb-6 leading-tight">
-          Built by people who take this personally.
+          This is the tool we wanted. Now it&rsquo;s yours.
         </h2>
         <p className="text-text-secondary text-lg mb-10">
-          Join the beta and get a direct line to the team building it.
+          Join the beta. Talk directly to us. Help us prove your stack.
         </p>
 
         <a
