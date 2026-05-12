@@ -25,26 +25,20 @@ export default function CallToAction() {
           ref={headRef}
           className="scroll-reveal font-headline font-bold text-3xl sm:text-4xl md:text-5xl text-text-primary leading-tight mb-6"
         >
-          Your biology is unique.
-          <br />
-          <span className="text-text-secondary">
-            Your supplement strategy should be too.
-          </span>
+          Prove your stack.
         </h2>
 
+        <p className="text-text-secondary text-lg leading-relaxed">
+          Join the beta. Find out what&apos;s working in weeks, not years.
+        </p>
+
         <div ref={ctaRef} className="scroll-reveal">
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-10">
+          <div className="flex items-center justify-center mt-10">
             <Link
-              href="/suppvis-waitlist"
+              href="/#waitlist"
               className="inline-flex items-center justify-center px-8 py-3.5 rounded-full bg-accent hover:bg-accent-hover text-white font-medium text-base transition-colors duration-200"
             >
-              Join the Beta Waitlist
-            </Link>
-            <Link
-              href="/suppvis-ai-chat"
-              className="inline-flex items-center justify-center px-8 py-3.5 rounded-full border border-white/[0.12] hover:border-accent/40 text-text-primary font-medium text-base transition-colors duration-200"
-            >
-              Try SuppVis AI
+              Get Early Access
             </Link>
           </div>
 

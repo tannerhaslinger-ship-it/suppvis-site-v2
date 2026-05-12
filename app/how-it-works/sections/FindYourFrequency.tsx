@@ -9,10 +9,18 @@ const featureHighlights = [
   {
     icon: (
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="12" cy="12" r="10" /><path d="M8 12h8" /><path d="M12 8v8" />
+      </svg>
+    ),
+    text: "22 health dimensions in your personalized model",
+  },
+  {
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <path d="M12 20V10" /><path d="M18 20V4" /><path d="M6 20v-4" />
       </svg>
     ),
-    text: "9 wellness dimensions tracked daily",
+    text: "9 daily-tracked goals with subjective scoring",
   },
   {
     icon: (
@@ -38,14 +46,6 @@ const featureHighlights = [
       </svg>
     ),
     text: "Streak tracking with smart reminders",
-  },
-  {
-    icon: (
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-      </svg>
-    ),
-    text: "Condition-aware safety monitoring",
   },
   {
     icon: (

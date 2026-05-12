@@ -40,25 +40,22 @@ export default function Hero() {
               ref={headlineRef}
               className="scroll-reveal font-headline font-extrabold text-4xl sm:text-5xl md:text-6xl text-text-primary leading-[1.08] tracking-tight"
             >
-              Prove What Works.
-              <br />
-              <span className="text-accent">Drop What Doesn&apos;t.</span>
+              The system that ends supplement guesswork.
             </h1>
             <p
               ref={subRef}
               className="scroll-reveal mt-6 text-lg md:text-xl text-text-secondary leading-relaxed max-w-[520px]"
             >
-              Most people guess whether their supplements help. SuppVis replaces
-              guesswork with personal data. Track how you feel, see what
-              correlates, and know (not hope) that your stack is working.
+              Most people guess whether their supplements are working. SuppVis
+              proves what does, and what doesn&apos;t.
             </p>
             <p
               ref={descRef}
               className="scroll-reveal mt-4 text-base text-accent/80 leading-relaxed max-w-[480px]"
             >
-              The first platform that lets you run real experiments on your own
-              biology. Daily tracking, correlation analysis, and AI grounded in
-              25,000+ peer-reviewed studies.
+              Track how you feel each day. SuppVis correlates your scores
+              against your stack and shows you what&apos;s actually moving the
+              needle, all grounded in 24,500+ peer-reviewed supplement studies.
             </p>
           </div>
 
