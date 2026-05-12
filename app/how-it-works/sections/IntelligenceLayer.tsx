@@ -7,11 +7,13 @@ function IntelCard({
   description,
   icon,
   delay,
+  link,
 }: {
   title: string;
   description: string;
   icon: React.ReactNode;
   delay: number;
+  link?: { href: string; label: string };
 }) {
   const ref = useScrollReveal(delay);
 
@@ -29,6 +31,14 @@ function IntelCard({
       <p className="text-text-secondary text-[15px] leading-relaxed">
         {description}
       </p>
+      {link && (
+        <a
+          href={link.href}
+          className="mt-4 inline-block text-sm text-accent hover:underline underline-offset-4 transition-colors"
+        >
+          {link.label}
+        </a>
+      )}
     </div>
   );
 }
@@ -86,6 +96,7 @@ export default function IntelligenceLayer() {
             delay={0.2}
             title="Research Transparency"
             description="Every recommendation traces back to peer-reviewed research. Studies indexed from PubMed and Semantic Scholar, classified by evidence tier, with the source and the strength visible. No black boxes."
+            link={{ href: "/sources", label: "See our research sources \u2192" }}
             icon={
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
