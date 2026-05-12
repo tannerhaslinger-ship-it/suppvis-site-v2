@@ -48,13 +48,20 @@ export default function ResearchFoundation() {
         <div className="max-w-[720px] mx-auto text-center">
           <p
             ref={copyRef}
-            className="scroll-reveal text-text-secondary text-base md:text-lg leading-relaxed mb-10"
+            className="scroll-reveal text-text-secondary text-base md:text-lg leading-relaxed mb-4"
           >
             Every recommendation traces back to peer-reviewed research. We index
             studies from PubMed and Semantic Scholar, classify by study type and
             evidence quality, and use them to power your personalized insights.
             The science is the product.
           </p>
+
+          <a
+            href="/sources"
+            className="scroll-reveal block mt-4 mb-10 text-sm text-accent hover:text-accent-hover hover:underline underline-offset-4 transition-colors"
+          >
+            See our research sources →
+          </a>
 
           {/* Evidence tier visual */}
           <div ref={tiersRef} className="scroll-reveal inline-flex flex-wrap justify-center gap-3">

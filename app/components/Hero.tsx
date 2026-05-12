@@ -48,7 +48,7 @@ export default function Hero() {
         >
           <span className="whitespace-nowrap">Brand-Agnostic</span>
           <span className="text-text-muted/40">&middot;</span>
-          <span className="whitespace-nowrap">Evidence-Based</span>
+          <a href="/sources" className="whitespace-nowrap hover:text-accent hover:underline underline-offset-4 transition-colors">Evidence-Based</a>
           <span className="text-text-muted/40">&middot;</span>
           <span className="whitespace-nowrap">24,500+ Studies on Supplements</span>
           <span className="text-text-muted/40">&middot;</span>
