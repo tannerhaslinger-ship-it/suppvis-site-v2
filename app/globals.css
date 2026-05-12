@@ -1,0 +1,217 @@
+@import "tailwindcss";
+@source "../app/**/*.{ts,tsx}";
+
+@theme {
+  --color-bg-primary: #0A0F14;
+  --color-bg-secondary: #0D1117;
+  --color-text-primary: #F0F4F8;
+  --color-text-secondary: #9BAFBF;
+  --color-text-muted: #5A7089;
+  --color-accent: #14B8A6;
+  --color-accent-hover: #0EA593;
+  --color-warning: #FF8C42;
+  --color-error: #FF6B6B;
+
+  --font-headline: "Outfit", sans-serif;
+  --font-body: "DM Sans", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Stagger animation keyframes */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes bounceDown {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(20, 184, 166, 0.4); }
+  50% { box-shadow: 0 0 24px 4px rgba(20, 184, 166, 0.15); }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease forwards;
+  opacity: 0;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.8s ease forwards;
+  opacity: 0;
+}
+
+.animate-bounce-down {
+  animation: bounceDown 2s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 2s ease-in-out infinite;
+}
+
+/* Scroll-triggered animation base */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.scroll-reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.scroll-reveal-scale {
+  opacity: 0;
+  transform: scale(0.98);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.scroll-reveal-scale.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Hide scrollbar but keep scroll */
+.scrollbar-hide {
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Article prose styling */
+.article-content {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.article-content p {
+  font-family: "DM Sans", sans-serif;
+  font-size: 17px;
+  line-height: 1.8;
+  color: #9BAFBF;
+  margin-bottom: 24px;
+}
+
+.article-content h2 {
+  font-family: "Outfit", sans-serif;
+  font-weight: 700;
+  font-size: 28px;
+  color: #F0F4F8;
+  margin-top: 48px;
+  margin-bottom: 16px;
+}
+
+.article-content h3 {
+  font-family: "Outfit", sans-serif;
+  font-weight: 600;
+  font-size: 22px;
+  color: #F0F4F8;
+  margin-top: 36px;
+  margin-bottom: 12px;
+}
+
+.article-content strong {
+  color: #D0DAE4;
+  font-weight: 600;
+}
+
+.article-content ul,
+.article-content ol {
+  margin-bottom: 24px;
+  padding-left: 24px;
+  color: #9BAFBF;
+}
+
+.article-content ol {
+  list-style-type: decimal;
+}
+
+.article-content ul {
+  list-style-type: disc;
+}
+
+.article-content li {
+  margin-bottom: 8px;
+  line-height: 1.7;
+  font-size: 16px;
+}
+
+.article-content blockquote {
+  border-left: 3px solid #14B8A6;
+  padding-left: 20px;
+  margin: 32px 0;
+  font-style: italic;
+  color: #7B90A5;
+}
+
+.article-content a {
+  color: #14B8A6;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.article-content code {
+  background: rgba(255, 255, 255, 0.06);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 15px;
+}
+
+/* How It Works hero viz animations */
+@keyframes hiwPolygonPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes hiwDotPulse {
+  0%, 100% { r: 4; opacity: 1; }
+  50% { r: 5.5; opacity: 0.6; }
+}
+
+.hiw-polygon-pulse {
+  animation: hiwPolygonPulse 4s ease-in-out infinite;
+}
+
+.hiw-dot-pulse {
+  animation: hiwDotPulse 3s ease-in-out infinite;
+}
+
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .scroll-reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
